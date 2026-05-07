@@ -1,0 +1,3174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Incline Financial — Financial reporting & advisory for growing UK businesses</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+/* =========================================================
+   Incline Financial — Design Tokens
+   Uber-inspired: stark monochrome, pill-shaped UI, geometric type
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ---------- Color: Primary ---------- */
+  --incline-black: #000000;
+  --incline-white: #ffffff;
+
+  /* ---------- Color: Accent (deep gold) ---------- */
+  --accent: #b8893a;
+  --accent-deep: #8d6724;
+  --accent-soft: #e8d6a8;
+  --accent-bg: #f6efdc;
+
+  /* ---------- Color: Interactive / Hover ---------- */
+  --hover-gray: #e2e2e2;
+  --hover-light: #f3f3f3;
+  --chip-gray: #efefef;
+
+  /* ---------- Color: Text ---------- */
+  --body-gray: #4b4b4b;
+  --muted-gray: #afafaf;
+
+  /* ---------- Color: Borders ---------- */
+  --border-black: #000000;
+  --border-subtle: #e2e2e2;
+
+  /* ---------- Color: Shadows ---------- */
+  --shadow-light: rgba(0, 0, 0, 0.12);
+  --shadow-medium: rgba(0, 0, 0, 0.16);
+  --shadow-press: rgba(0, 0, 0, 0.08);
+
+  /* ---------- Color: Links ---------- */
+  --link-blue: #0000ee;
+  --link-white: #ffffff;
+  --link-black: #000000;
+
+  /* ---------- Semantic foreground/background ---------- */
+  --fg-1: #000000;          /* Primary text */
+  --fg-2: #4b4b4b;          /* Secondary text */
+  --fg-3: #afafaf;          /* Tertiary / muted */
+  --fg-inverse: #ffffff;    /* On dark surfaces */
+
+  --bg-1: #ffffff;          /* Page surface */
+  --bg-2: #f3f3f3;          /* Subtle surface */
+  --bg-3: #efefef;          /* Chip surface */
+  --bg-inverse: #000000;    /* Footer, hero on black */
+
+  /* ---------- Typography: Families ---------- */
+  /* NOTE: UberMove is proprietary. Inter is used as the closest
+     geometric sans-serif substitute available on Google Fonts. */
+  --font-display: 'Inter', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'Inter', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- Typography: Sizes ---------- */
+  --fs-display: 52px;       /* Hero billboard */
+  --fs-h1: 36px;            /* Section heading */
+  --fs-h2: 32px;            /* Card title */
+  --fs-h3: 24px;            /* Sub-heading */
+  --fs-h4: 20px;            /* Small heading */
+  --fs-nav: 18px;           /* Nav / UI Large */
+  --fs-body: 16px;          /* Body / button */
+  --fs-caption: 14px;       /* Caption */
+  --fs-micro: 12px;         /* Fine print */
+
+  /* ---------- Typography: Line heights ---------- */
+  --lh-display: 1.23;
+  --lh-h1: 1.22;
+  --lh-h2: 1.25;
+  --lh-h3: 1.33;
+  --lh-h4: 1.40;
+  --lh-body: 1.50;
+  --lh-tight: 1.25;
+  --lh-relaxed: 1.67;
+
+  /* ---------- Typography: Weights ---------- */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* ---------- Spacing (8px base) ---------- */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 18px;
+  --space-9: 20px;
+  --space-10: 24px;
+  --space-11: 32px;
+  --space-12: 48px;
+  --space-13: 64px;
+  --space-14: 96px;
+
+  /* ---------- Radii ---------- */
+  --radius-sharp: 0px;
+  --radius-card: 8px;
+  --radius-card-lg: 12px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* ---------- Shadows / Elevation ---------- */
+  --elev-0: none;
+  --elev-1: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --elev-2: 0 4px 16px rgba(0, 0, 0, 0.16);
+  --elev-3: 0 2px 8px rgba(0, 0, 0, 0.16);
+  --elev-press: inset 0 0 0 999px rgba(0, 0, 0, 0.08);
+  --focus-ring: inset 0 0 0 2px rgb(255, 255, 255);
+
+  /* ---------- Layout ---------- */
+  --container-max: 1136px;
+  --nav-height: 64px;
+
+  /* ---------- Motion ---------- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+}
+
+/* =========================================================
+   Base typography reset
+   ========================================================= */
+html, body {
+  font-family: var(--font-body);
+  color: var(--fg-1);
+  background: var(--bg-1);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   Semantic type roles
+   ========================================================= */
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-display);
+  letter-spacing: -0.02em;
+  color: var(--fg-1);
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h1);
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h2);
+  letter-spacing: -0.01em;
+  color: var(--fg-1);
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h3);
+  color: var(--fg-1);
+}
+
+.t-h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h4);
+  color: var(--fg-1);
+}
+
+.t-nav {
+  font-family: var(--font-body);
+  font-size: var(--fs-nav);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+  color: var(--fg-1);
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--fg-1);
+}
+
+.t-body-medium {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  color: var(--fg-1);
+}
+
+.t-caption {
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-regular);
+  line-height: 1.43;
+  color: var(--fg-2);
+}
+
+.t-micro {
+  font-family: var(--font-body);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-2);
+}
+
+/* =========================================================
+   Reusable pill button base
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--incline-black);
+  color: var(--incline-white);
+  padding: 14px 20px;
+}
+.btn-primary:hover { background: #1a1a1a; }
+.btn-primary:active { box-shadow: var(--elev-press); }
+
+.btn-secondary {
+  background: var(--incline-white);
+  color: var(--incline-black);
+  padding: 14px 20px;
+  box-shadow: inset 0 0 0 1px var(--incline-black);
+}
+.btn-secondary:hover { background: var(--hover-gray); }
+
+.btn-chip {
+  background: var(--chip-gray);
+  color: var(--incline-black);
+  padding: 14px 16px;
+  font-size: var(--fs-caption);
+}
+.btn-chip:hover { background: var(--hover-gray); }
+.btn-chip[aria-pressed="true"],
+.btn-chip.is-active {
+  background: var(--incline-black);
+  color: var(--incline-white);
+}
+
+  </style>
+  <style>
+/* =========================================================
+   Incline Financial — Site styles (full spec rebuild)
+   ========================================================= */
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #ececec;
+  color: #000;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+button { font: inherit; }
+h1, h2, h3, h4, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.container { max-width: 1136px; margin: 0 auto; padding: 0 32px; }
+
+/* =========================================================
+   Topbar (above sticky nav)
+   ========================================================= */
+.topbar {
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.topbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.topbar-tag { color: rgba(255,255,255,0.7); letter-spacing: 0.01em; }
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
+.topbar-phone {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #fff; text-decoration: none; font-weight: 600;
+}
+.topbar-phone:hover { color: rgba(255,255,255,0.85); }
+@media (max-width: 720px) {
+  .topbar-tag { display: none; }
+  .topbar-inner { justify-content: center; }
+}
+
+/* =========================================================
+   Page shell + sticky nav
+   ========================================================= */
+.page-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #f5f5f5;
+}
+
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  gap: 24px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
+}
+.nav-sticky.scrolled {
+  background: rgba(245,245,245,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: rgba(0,0,0,0.06);
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #000; font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+.nav-brand .brand-mark { width: 32px; height: 32px; background: #000; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.nav-brand .brand-mark svg path { fill: #fff; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link { padding: 8px 14px; font-size: 14px; font-weight: 500; color: #4b4b4b; text-decoration: none; border-radius: 999px; }
+.nav-link:hover { color: #000; }
+.nav-link.active { color: #000; font-weight: 600; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-phone { font-size: 13px; color: #4b4b4b; text-decoration: none; padding: 8px 12px; border-radius: 999px; font-weight: 500; }
+.nav-phone:hover { color: #000; background: rgba(0,0,0,0.04); }
+
+@media (max-width: 980px) {
+  .nav-links { display: none; }
+  .nav-phone { display: none; }
+}
+
+/* =========================================================
+   Mobile sticky bar
+   ========================================================= */
+.mobile-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 60;
+  background: #fff;
+  border-top: 1px solid #e2e2e2;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  gap: 10px;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+}
+.mobile-sticky .ms-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ms-call { background: #f3f3f3; color: #000; flex: 0 0 auto; padding: 14px 18px; }
+.ms-book { background: #000; color: #fff; }
+@media (max-width: 720px) {
+  .mobile-sticky { display: flex; }
+  body { padding-bottom: 72px; }
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 150ms ease, color 150ms ease, box-shadow 150ms ease;
+  padding: 12px 18px;
+  font-size: 14px;
+  line-height: 1;
+}
+.btn.lg { padding: 16px 24px; font-size: 15px; font-weight: 600; }
+.btn-primary { background: #000; color: #fff; }
+.btn-primary:hover { background: #1a1a1a; }
+.btn-primary:active { box-shadow: inset 0 0 0 999px rgba(255,255,255,0.06); }
+.btn-secondary { background: transparent; color: #000; box-shadow: inset 0 0 0 1px #000; }
+.btn-secondary:hover { background: rgba(0,0,0,0.04); }
+.btn-on-dark { background: #fff; color: #000; }
+.btn-on-dark:hover { background: #e2e2e2; }
+.btn-ghost-on-dark { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4); }
+.btn-ghost-on-dark:hover { background: rgba(255,255,255,0.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7); }
+.btn-ghost { background: transparent; color: #000; padding: 10px 14px; font-size: 14px; }
+.btn-ghost:hover { background: rgba(0,0,0,0.05); }
+
+/* =========================================================
+   Type primitives
+   ========================================================= */
+.h1 {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+.lead { font-size: 16px; line-height: 1.6; color: #4b4b4b; }
+.lead-emph { color: #000; font-weight: 500; }
+.muted { color: #4b4b4b; }
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.eyebrow.dot::before {
+  content: ""; display: inline-block;
+  width: 6px; height: 6px;
+  background: #000; border-radius: 50%;
+  margin-right: 8px; vertical-align: middle;
+}
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.section-head .h1 { margin-top: 14px; }
+.section-head .lead { margin-top: 18px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+/* =========================================================
+   HERO (home, about, services, contact)
+   ========================================================= */
+.hero-big { padding: 32px 24px 0; }
+.hb-card {
+  background: #e5e5e5;
+  border-radius: 28px;
+  padding: 64px 56px;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 48px;
+  position: relative;
+  overflow: hidden;
+  max-width: 1232px;
+  margin: 0 auto;
+  min-height: 580px;
+  align-items: center;
+}
+.hb-text { position: relative; z-index: 1; max-width: 540px; }
+.hb-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b4b4b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hb-title {
+  font-size: clamp(40px, 5.4vw, 76px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+  text-wrap: balance;
+}
+.hb-title-emph { color: #000; }
+.hb-title-emph::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  background: #000;
+  border-radius: 999px;
+  margin-left: 0.1em;
+  vertical-align: 0.05em;
+  transform: translateY(0.05em);
+}
+.hb-lead {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4b4b4b;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+.hb-cta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.hb-trust {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  font-size: 13px;
+  color: #4b4b4b;
+}
+.hb-trust-dots { display: inline-flex; }
+.hb-trust-dots span {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px #f5f5f5, 0 0 0 1px #d4d4d4;
+}
+.hb-trust-dots span:nth-child(1) { background: #000; }
+.hb-trust-dots span:nth-child(2) { background: #4b4b4b; margin-left: -8px; }
+.hb-trust-dots span:nth-child(3) { background: #afafaf; margin-left: -8px; }
+
+/* Hero mocks */
+.hb-mocks {
+  position: relative;
+  height: 480px;
+  width: 100%;
+}
+.hb-mock {
+  position: absolute;
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.18), 0 4px 16px rgba(0,0,0,0.08);
+  padding: 18px;
+  font-family: 'Inter', sans-serif;
+  width: 280px;
+}
+.hb-m1 {
+  background: #fff;
+  top: 20px; left: 0;
+  transform: rotate(-3deg);
+  z-index: 1;
+}
+.hb-m2 {
+  background: #000; color: #fff;
+  top: 80px; right: 0;
+  transform: rotate(3deg);
+  z-index: 2;
+}
+.hbm-head { display: flex; justify-content: space-between; align-items: center; }
+.hbm-title { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.hbm-bell {
+  width: 24px; height: 24px;
+  border-radius: 50%; background: #f3f3f3;
+  display: flex; align-items: center; justify-content: center;
+}
+.hbm-search {
+  background: #f3f3f3; border-radius: 999px;
+  padding: 8px 12px; font-size: 11px;
+  color: #4b4b4b; margin-top: 12px;
+}
+.hbm-tabs { display: flex; gap: 4px; margin-top: 12px; font-size: 10px; color: #4b4b4b; }
+.hbm-tab { padding: 4px 8px; border-radius: 999px; font-weight: 500; }
+.hbm-tab.active { background: #000; color: #fff; font-weight: 700; }
+.hbm-eyebrow {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; color: #afafaf;
+  margin: 14px 0 6px;
+}
+.hbm-feat {
+  background: #f3f3f3; border-radius: 12px;
+  padding: 12px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 8px;
+}
+.hbm-feat-title { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+.hbm-feat-sub { font-size: 9px; color: #4b4b4b; margin-top: 2px; }
+.hbm-feat-tag {
+  display: inline-block; background: #000; color: #fff;
+  border-radius: 999px; padding: 2px 6px;
+  font-size: 9px; font-weight: 700; margin-top: 6px;
+}
+.hbm-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+.hbm-row-mark { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; }
+.hbm-row-mark.dark { background: #000; }
+.hbm-row-mark.light { background: #f3f3f3; box-shadow: inset 0 0 0 1px #d4d4d4; }
+.hbm-row-t { font-size: 11px; font-weight: 600; }
+.hbm-row-s { font-size: 9px; color: #afafaf; }
+
+.hbm2-head { display: flex; justify-content: space-between; align-items: center; }
+.hbm2-co { font-size: 13px; font-weight: 700; letter-spacing: -0.015em; }
+.hbm2-tag { font-size: 9px; color: #afafaf; letter-spacing: 0.1em; margin-top: 2px; font-weight: 600; }
+.hbm2-amt { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; margin-top: 14px; }
+.hbm2-delta {
+  font-size: 11px; color: #fff;
+  background: #1a1a1a; border-radius: 999px;
+  padding: 2px 6px; vertical-align: middle; margin-left: 4px;
+}
+.hbm2-chart { margin-top: 12px; height: 70px; }
+.hbm2-chart svg { width: 100%; height: 100%; }
+.hbm2-tabs { display: flex; justify-content: space-between; font-size: 10px; color: #afafaf; margin-top: 8px; font-weight: 500; }
+.hbm2-tabs .active { color: #fff; font-weight: 700; }
+.hbm2-rows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+.hbm2-r { font-size: 12px; font-weight: 700; }
+.hbm2-r-l { font-size: 9px; color: #afafaf; font-weight: 500; margin-top: 2px; }
+.hbm2-actions { display: flex; gap: 6px; margin-top: 14px; }
+.hbm2-act { flex: 1; text-align: center; padding: 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.hbm2-act.review { background: #1a1a1a; color: #fff; }
+.hbm2-act.export { background: #fff; color: #000; }
+
+/* Page hero (about, services, contact) — uses .hb-card style implicitly via .page-hero */
+.page-hero {
+  padding: 32px 24px 0;
+}
+.page-hero .container {
+  max-width: 1232px;
+  background: #e5e5e5;
+  border-radius: 28px;
+  padding: 64px 56px 72px;
+}
+.page-h1 {
+  font-size: clamp(40px, 5.2vw, 72px) !important;
+  margin-bottom: 24px !important;
+}
+.page-hero .lead { max-width: 600px; font-size: 16px; }
+
+/* =========================================================
+   Social proof bar
+   ========================================================= */
+.proof-bar {
+  background: transparent;
+  padding: 32px 0 16px;
+  overflow: hidden;
+}
+.proof-track {
+  display: flex;
+  gap: 48px;
+  animation: proofMarquee 40s linear infinite;
+  white-space: nowrap;
+  width: max-content;
+}
+.proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b4b4b;
+}
+.proof-item svg { color: #000; }
+@keyframes proofMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* =========================================================
+   What we do (3 pillars)
+   ========================================================= */
+.wwd-section { padding: 80px 24px; }
+.wwd-head { text-align: center; max-width: 740px; margin: 0 auto 56px; }
+.wwd-head .eyebrow { margin-bottom: 14px; }
+.wwd-head .h1 { margin-bottom: 18px; }
+.wwd-head .lead { margin: 0 auto; max-width: 580px; }
+.wwd-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.wwd-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 320px;
+}
+.wwd-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: #afafaf;
+  letter-spacing: 0.1em;
+}
+.wwd-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+.wwd-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b4b4b;
+  flex: 1;
+}
+
+/* =========================================================
+   Who it is for (3 profiles)
+   ========================================================= */
+.who-section { padding: 64px 24px 80px; }
+.who-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.who-head .eyebrow { margin-bottom: 14px; }
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.who-card {
+  background: #000;
+  color: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 380px;
+}
+.who-card:nth-child(2) { background: #fff; color: #000; box-shadow: inset 0 0 0 1px #e2e2e2; }
+.who-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.who-card:nth-child(2) .who-tag { background: #efefef; color: #000; }
+.who-headline {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.who-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.16);
+  margin: 4px 0;
+}
+.who-card:nth-child(2) .who-divider { background: #e2e2e2; }
+.who-stat {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.who-detail {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  margin-top: -4px;
+}
+.who-card:nth-child(2) .who-detail { color: #4b4b4b; }
+
+/* =========================================================
+   Tier overview cards (home)
+   ========================================================= */
+.tiers-section { padding: 64px 24px 80px; }
+.tiers-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
+.tiers-head .eyebrow { margin-bottom: 14px; }
+.tiers-head .lead { margin: 18px auto 0; max-width: 540px; }
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+.tier-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+.tier-card.is-featured {
+  background: #000;
+  color: #fff;
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.18);
+}
+.tier-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+}
+.tier-card.is-featured .tier-eyebrow { color: rgba(255,255,255,0.7); }
+.tier-name {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.tier-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e2e2e2;
+}
+.tier-card.is-featured .tier-price-row { border-bottom-color: rgba(255,255,255,0.16); }
+.tier-from { font-size: 13px; color: #4b4b4b; }
+.tier-card.is-featured .tier-from { color: rgba(255,255,255,0.7); }
+.tier-price { font-size: 36px; font-weight: 700; letter-spacing: -0.03em; }
+.tier-period { font-size: 13px; color: #4b4b4b; font-weight: 500; }
+.tier-card.is-featured .tier-period { color: rgba(255,255,255,0.7); }
+.tier-pitch { font-size: 14px; line-height: 1.55; color: #4b4b4b; }
+.tier-card.is-featured .tier-pitch { color: rgba(255,255,255,0.85); }
+.tier-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  margin-bottom: 8px;
+}
+.tier-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.tier-list li svg { flex-shrink: 0; color: #000; margin-top: 2px; }
+.tier-card.is-featured .tier-list li svg { color: #fff; }
+.tier-cta { width: 100%; padding: 14px 18px; }
+
+/* =========================================================
+   Vs Accountant comparison
+   ========================================================= */
+.vs-section { padding: 64px 24px 80px; }
+.vs-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+.vs-head .eyebrow { margin-bottom: 14px; }
+.vs-head .lead { margin: 18px auto 0; max-width: 580px; }
+.vs-table {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.vs-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.4fr 1.4fr;
+  border-top: 1px solid #e2e2e2;
+}
+.vs-row:first-child { border-top: none; }
+.vs-row-head .vs-col {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding: 18px 24px;
+  background: #f3f3f3;
+}
+.vs-row-head .vs-col-incline {
+  background: #000;
+  color: #fff;
+}
+.vs-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: -7px;
+}
+.vs-col {
+  padding: 22px 24px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.vs-topic {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 14px;
+}
+.vs-acc { color: #4b4b4b; }
+.vs-inc { background: #fafafa; font-weight: 500; color: #000; }
+.vs-row:not(.vs-row-head) { transition: background 150ms ease; }
+.vs-row:not(.vs-row-head):hover { background: #fafafa; }
+
+/* =========================================================
+   Testimonials
+   ========================================================= */
+.test-section { padding: 64px 24px 80px; }
+.test-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.test-head .eyebrow { margin-bottom: 14px; }
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.test-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.test-stars {
+  display: flex;
+  gap: 2px;
+  color: #000;
+}
+.test-quote {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: #000;
+  flex: 1;
+  text-wrap: pretty;
+}
+.test-attribution {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e2e2;
+}
+.test-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #000; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.test-meta { display: flex; flex-direction: column; gap: 2px; }
+.test-name { font-size: 13px; font-weight: 700; }
+.test-role { font-size: 12px; color: #4b4b4b; }
+
+/* =========================================================
+   Final CTA (dark grid)
+   ========================================================= */
+.final-cta-section { padding: 32px 24px 32px; }
+.final-cta {
+  background: #000; color: #fff;
+  border-radius: 28px;
+  padding: 88px 56px;
+  position: relative;
+  overflow: hidden;
+  max-width: 1232px;
+  margin: 0 auto;
+  text-align: center;
+}
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+.final-cta::after {
+  content: "";
+  position: absolute;
+  bottom: -180px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 360px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+}
+.final-cta > * { position: relative; z-index: 1; }
+.fc-eyebrow {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.fc-title {
+  font-size: clamp(36px, 4.4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 16px auto 0;
+  max-width: 720px;
+  text-wrap: balance;
+}
+.fc-lead {
+  color: rgba(255,255,255,0.7);
+  max-width: 540px;
+  margin: 22px auto 36px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.fc-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.fc-phone {
+  color: rgba(255,255,255,0.85);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.fc-phone:hover { color: #fff; }
+
+/* =========================================================
+   ABOUT — Why Incline
+   ========================================================= */
+.why-section { padding: 80px 24px; }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  max-width: 1136px;
+  margin: 0 auto;
+  align-items: start;
+}
+.why-text .eyebrow { margin-bottom: 14px; }
+.why-body { display: flex; flex-direction: column; gap: 18px; }
+.why-body .lead { font-size: 16px; line-height: 1.65; }
+
+/* ABOUT — Values 4-up grid */
+.values-section { padding: 64px 24px 80px; }
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.value-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 240px;
+}
+.value-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #afafaf;
+}
+.value-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+.value-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b4b4b;
+}
+
+/* ABOUT — How we work */
+.how-section { padding: 64px 24px 80px; }
+.how-list {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.how-row {
+  display: grid;
+  grid-template-columns: 80px 280px 1fr;
+  gap: 32px;
+  padding: 32px 36px;
+  border-top: 1px solid #e2e2e2;
+  align-items: start;
+}
+.how-row:first-child { border-top: none; }
+.how-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #afafaf;
+  padding-top: 4px;
+}
+.how-step-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+.how-step-body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #4b4b4b;
+}
+
+/* =========================================================
+   SERVICES — Every tier includes
+   ========================================================= */
+.every-tier-section { padding: 80px 24px 64px; }
+.every-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 1136px;
+  margin: 0 auto;
+}
+.every-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.every-num {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; color: #afafaf;
+}
+.every-title {
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.2;
+}
+.every-body {
+  font-size: 14px; line-height: 1.6; color: #4b4b4b;
+}
+
+/* SERVICES — Tier detail rows */
+.tier-detail {
+  padding: 64px 24px;
+}
+.tier-detail.tier-dark {
+  margin: 32px 24px;
+  padding: 64px 32px;
+  background: #000;
+  color: #fff;
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.tier-detail.tier-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+.tier-detail.tier-dark .container { position: relative; z-index: 1; max-width: 1136px; margin: 0 auto; padding: 0 24px; }
+.td-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 1136px;
+  margin: 0 auto;
+  align-items: start;
+}
+.tier-reverse .td-grid {
+  grid-template-areas: "right left";
+}
+.tier-reverse .td-left { grid-area: left; }
+.tier-reverse .td-right { grid-area: right; }
+
+.td-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: #efefef;
+  color: #000;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.tier-detail.tier-dark .td-badge { background: rgba(255,255,255,0.12); color: #fff; }
+.td-name {
+  font-size: clamp(40px, 4.4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.td-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 24px;
+}
+.tier-detail.tier-dark .td-price-row { border-bottom-color: rgba(255,255,255,0.16); }
+.td-from { font-size: 14px; color: #4b4b4b; }
+.tier-detail.tier-dark .td-from { color: rgba(255,255,255,0.7); }
+.td-price { font-size: 44px; font-weight: 700; letter-spacing: -0.03em; }
+.td-period { font-size: 14px; color: #4b4b4b; font-weight: 500; }
+.tier-detail.tier-dark .td-period { color: rgba(255,255,255,0.7); }
+.td-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #4b4b4b;
+  margin-bottom: 24px;
+}
+.tier-detail.tier-dark .td-desc { color: rgba(255,255,255,0.85); }
+.td-best {
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+}
+.tier-detail.tier-dark .td-best { background: rgba(255,255,255,0.06); }
+.td-best-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  margin-bottom: 6px;
+}
+.tier-detail.tier-dark .td-best-label { color: rgba(255,255,255,0.7); }
+.td-best-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #000;
+  font-weight: 500;
+}
+.tier-detail.tier-dark .td-best-body { color: #fff; }
+
+.td-includes-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #afafaf;
+  margin-bottom: 18px;
+}
+.td-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.td-includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.td-check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #000; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.tier-detail.tier-dark .td-check { background: #fff; color: #000; }
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-section { padding: 80px 24px; }
+.faq {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.faq-row {
+  border-top: 1px solid #e2e2e2;
+  padding: 26px 32px;
+  display: grid;
+  grid-template-columns: 60px 1fr 32px;
+  gap: 16px;
+  align-items: start;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+.faq-row:first-child { border-top: none; }
+.faq-row:hover { background: #fafafa; }
+.faq-num { font-size: 13px; color: #afafaf; padding-top: 2px; font-weight: 600; letter-spacing: 0.05em; }
+.faq-q { font-size: 17px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; padding-top: 0; }
+.faq-a { font-size: 14px; color: #4b4b4b; line-height: 1.65; margin-top: 14px; max-width: 640px; }
+.faq-toggle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: #f3f3f3;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 400;
+  transition: transform 200ms ease, background 200ms ease;
+  margin-top: 0;
+}
+.faq-row.open .faq-toggle { transform: rotate(45deg); background: #000; color: #fff; }
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.contact-section { padding: 64px 24px 80px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 56px;
+  max-width: 1136px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.contact-intro {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #4b4b4b;
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.contact-methods li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.cm-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #e2e2e2;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cm-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  margin-bottom: 4px;
+}
+.cm-val {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  color: #000;
+  display: block;
+}
+.cm-val:hover { text-decoration: underline; }
+.cm-meta { font-size: 13px; color: #4b4b4b; margin-top: 4px; }
+
+.expect-panel {
+  background: #000;
+  color: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.expect-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+.expect-panel > * { position: relative; z-index: 1; }
+.expect-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+.expect-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.expect-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.85);
+}
+.expect-list li strong { color: #fff; font-weight: 700; }
+.expect-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5);
+  flex-shrink: 0;
+  padding-top: 2px;
+  width: 24px;
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+}
+.form-heading {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  margin-bottom: 8px;
+}
+.form-sub {
+  font-size: 14px;
+  color: #4b4b4b;
+  margin-bottom: 28px;
+}
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form .full { grid-column: span 2; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b4b4b;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d4d4d4;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #000;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field .err { font-size: 12px; color: #000; margin-top: 6px; font-weight: 600; }
+.field.error input,
+.field.error select,
+.field.error textarea {
+  border-color: #000;
+  box-shadow: 0 0 0 2px #000 inset;
+}
+.form-submit {
+  width: 100%;
+  padding: 18px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.form-divider {
+  margin: 28px 0 18px;
+  text-align: center;
+  position: relative;
+  font-size: 12px;
+  color: #afafaf;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.form-divider::before,
+.form-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 60px);
+  height: 1px;
+  background: #e2e2e2;
+}
+.form-divider::before { left: 0; }
+.form-divider::after { right: 0; }
+.form-call {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  transition: background 150ms ease;
+}
+.form-call:hover { background: #e2e2e2; }
+.form-call strong { font-weight: 700; }
+.form-foot {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #afafaf;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* CONTACT — success state */
+.success-section { padding: 32px 24px 80px; }
+.success-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 56px 56px 64px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.success-check {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.success-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+.success-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #4b4b4b;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+.success-body strong { color: #000; font-weight: 600; }
+.success-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+.success-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.success-meta-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+}
+.success-meta-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+}
+.success-meta-val:hover { text-decoration: underline; }
+.success-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer { padding: 80px 32px 32px; background: #000; color: #fff; }
+.footer-inner { max-width: 1232px; margin: 0 auto; padding: 0 24px; }
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(4, 1fr);
+  gap: 48px;
+}
+.footer-brand .nav-brand { color: #fff; margin-bottom: 18px; font-size: 19px; }
+.footer-brand .nav-brand .brand-mark { background: #fff; }
+.footer-brand .nav-brand .brand-mark svg path { fill: #000; }
+.footer-tag {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+  max-width: 280px;
+}
+.footer-cols h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.footer-cols ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-cols a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.footer-cols a:hover { color: #fff; }
+.footer-bot {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 24px;
+  margin-top: 56px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.footer-social a:hover { background: rgba(255,255,255,0.16); }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 980px) {
+  .container { padding: 0 24px; }
+  .hb-card { grid-template-columns: 1fr; padding: 48px 32px 56px; gap: 32px; min-height: 0; }
+  .hb-mocks { height: 460px; max-width: 580px; margin: 0 auto; }
+  .page-hero .container { padding: 48px 32px 56px; }
+
+  .wwd-grid,
+  .who-grid,
+  .tiers-grid,
+  .test-grid,
+  .every-grid { grid-template-columns: 1fr; }
+
+  .tier-card.is-featured { transform: none; }
+
+  .vs-row { grid-template-columns: 1fr; }
+  .vs-row .vs-col { padding: 16px 20px; border-top: 1px solid #f3f3f3; }
+  .vs-row-head .vs-col { padding: 14px 20px; }
+  .vs-row-head { display: none; }
+  .vs-row .vs-topic { background: #f3f3f3; font-weight: 700; padding: 12px 20px; }
+  .vs-row .vs-acc::before {
+    content: "Standard accountant: ";
+    font-weight: 700;
+    color: #000;
+  }
+  .vs-row .vs-inc::before {
+    content: "Incline: ";
+    font-weight: 700;
+  }
+
+  .why-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  .values-grid { grid-template-columns: 1fr; }
+
+  .how-row { grid-template-columns: 1fr; gap: 12px; padding: 28px; }
+
+  .td-grid { grid-template-columns: 1fr; gap: 32px; }
+  .tier-reverse .td-grid { grid-template-areas: "left" "right"; }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .form { grid-template-columns: 1fr; }
+  .form .full { grid-column: span 1; }
+
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-brand { grid-column: span 2; }
+
+  .success-card { padding: 40px 24px 48px; }
+
+  .final-cta { padding: 64px 32px; }
+  .tier-detail.tier-dark { margin: 24px 16px; padding: 56px 24px; }
+}
+
+@media (max-width: 640px) {
+  .hero-big, .page-hero { padding: 16px 12px 0; }
+  .hb-card { padding: 40px 24px 48px; border-radius: 24px; }
+  .page-hero .container { padding: 40px 24px 48px; border-radius: 24px; }
+  .hb-cta-row .btn { width: 100%; }
+
+  .form-card, .success-card, .expect-panel { padding: 28px 24px; }
+  .footer-cols { grid-template-columns: 1fr; }
+  .footer-brand { grid-column: span 1; }
+
+  .faq-row { grid-template-columns: 36px 1fr 28px; padding: 22px 20px; }
+  .faq-num { font-size: 12px; }
+  .faq-q { font-size: 16px; }
+}
+
+/* =========================================================
+   ACCENT OVERRIDE — deep gold (#b8893a)
+   Applied to: primary CTAs, active nav, bullet dots,
+   key highlights, hover states, key icons.
+   Everything else stays monochrome.
+   ========================================================= */
+
+/* --- Primary buttons --- */
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-deep); }
+.form-submit:hover { background: var(--accent-deep) !important; }
+
+/* --- Nav: active state + hover --- */
+.nav-link.active { color: var(--accent-deep); font-weight: 600; }
+.nav-link.active::after {
+  content: ""; display: block;
+  width: 18px; height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 2px auto 0;
+}
+.nav-link:hover { color: var(--accent-deep); }
+.nav-phone:hover { color: var(--accent-deep); }
+
+/* --- Eyebrow bullet dots: GOLD --- */
+.eyebrow.dot::before { background: var(--accent) !important; }
+.hb-trust-dots span { background: var(--accent) !important; }
+
+/* --- Hero: emphasised line --- */
+.hb-title-emph { color: var(--accent-deep); }
+.hb-eyebrow {
+  color: var(--accent-deep) !important;
+  background: var(--accent-bg) !important;
+  border-color: var(--accent-soft) !important;
+}
+
+/* --- Numerical step markers --- */
+.wwd-num,
+.value-num,
+.how-num,
+.principle-num,
+.every-num,
+.expect-num,
+.tier-eyebrow {
+  color: var(--accent-deep) !important;
+}
+
+/* --- Tier featured card uses accent rim glow --- */
+.tier-card.is-featured {
+  background: #000;
+  box-shadow: 0 24px 60px rgba(184,137,58,0.28), 0 0 0 1px var(--accent) inset;
+}
+.tier-card.is-featured .tier-eyebrow { color: var(--accent-soft) !important; }
+.tier-card.is-featured .tier-list li svg { color: var(--accent); }
+
+/* --- Inline check icons in lists --- */
+.proof-item svg,
+.tier-list li svg,
+.expect-list strong + *,
+.success-check {
+  color: var(--accent-deep);
+}
+.tier-list li svg { color: var(--accent-deep); }
+
+/* --- Service tier-detail circular check pill --- */
+.td-check { background: var(--accent); color: #fff; }
+.tier-detail.tier-dark .td-check { background: var(--accent); color: #fff; }
+
+/* --- vs-table Incline column header --- */
+.vs-col-incline { color: var(--accent-deep); }
+.vs-mark { background: var(--accent) !important; }
+.vs-row .vs-inc { color: #1a1a1a; }
+.vs-row .vs-inc::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
+
+/* --- Testimonial stars --- */
+.test-stars { color: var(--accent); }
+
+/* --- Links / hover affordances --- */
+.moc-link:hover,
+.adv-cta:hover,
+a:hover .accent-on-hover { color: var(--accent-deep); }
+
+/* --- Success state: accent check circle --- */
+.success-check {
+  background: var(--accent) !important;
+  color: #fff !important;
+}
+
+/* --- FAQ open row: gold accent on number --- */
+.faq-row.open .faq-num { color: var(--accent-deep); font-weight: 700; }
+.faq-row.open .faq-q { color: var(--accent-deep); }
+
+/* --- Topbar phone number --- */
+.topbar-phone { color: var(--accent-soft); }
+.topbar-phone:hover { color: var(--accent); }
+
+/* --- Final CTA accent eyebrow --- */
+.fc-eyebrow { color: var(--accent) !important; }
+.fc-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* --- Mobile sticky bar primary action --- */
+.ms-book { background: var(--accent) !important; }
+.ms-book:hover { background: var(--accent-deep) !important; }
+
+/* --- "Best for" panel in tier detail --- */
+.td-best { border-left: 2px solid var(--accent) !important; }
+.td-best-label { color: var(--accent-deep) !important; }
+
+/* --- Form focus rings --- */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(184,137,58,0.16);
+}
+
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+/* Shared atomic components: nav, footer, marquee, icons, brand */
+
+const Mark = ({ size = 26, color = "#000" }) => (
+  <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden="true">
+    <path d="M8 52 L40 16 L40 52 Z" fill={color} />
+    <path d="M44 52 L44 32 L56 32 L56 52 Z" fill={color} opacity=".55" />
+  </svg>
+);
+
+const Brand = () => (
+  <a className="nav-brand" href="#/" onClick={(e) => { e.preventDefault(); window.navigate('/'); }}>
+    <span className="brand-mark"><Mark size={20} color="#fff" /></span>
+    <span>Incline.</span>
+  </a>
+);
+
+const Icon = ({ name, size = 20, stroke = 1.5 }) => {
+  const paths = {
+    arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
+    'arrow-up-right': <path d="M7 17 17 7M7 7h10v10" />,
+    'arrow-right': <path d="M5 12h14M13 6l6 6-6 6" />,
+    plus: <path d="M12 5v14M5 12h14" />,
+    check: <path d="M5 12l5 5L20 7" />,
+    eye: <><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></>,
+    chart: <path d="M3 17l6-6 4 4 8-8M14 7h7v7" />,
+    layers: <><path d="m12 2 10 5-10 5L2 7l10-5z" /><path d="m2 17 10 5 10-5M2 12l10 5 10-5" /></>,
+    target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></>,
+    phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />,
+    download: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5M12 15V3" /></>,
+    send: <><path d="M22 2 11 13" /><path d="m22 2-7 20-4-9-9-4z" /></>,
+    chevron: <path d="M9 18l6-6-6-6" />,
+    'arrow-down': <path d="M12 5v14M6 13l6 6 6-6" />,
+    search: <><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></>,
+    bell: <><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10 21a2 2 0 0 0 4 0" /></>,
+    sparkles: <><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" /></>,
+    'help-circle': <><circle cx="12" cy="12" r="10" /><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4" /><path d="M12 17h.01" /></>,
+    'pound-sterling': <path d="M18 7a4 4 0 0 0-8 0v4H6m0 4h12M9 11v3a4 4 0 0 1-3 4h12" />,
+    'check-circle': <><circle cx="12" cy="12" r="10" /><path d="m8 12 3 3 5-6" /></>,
+  };
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">
+      {paths[name]}
+    </svg>
+  );
+};
+
+function TopBar() {
+  return (
+    <div className="topbar">
+      <div className="topbar-inner">
+        <span className="topbar-tag">Monthly financial reporting &amp; advisory · for ambitious UK businesses</span>
+        <div className="topbar-actions">
+          <a href="tel:02081377039" className="topbar-phone">
+            <Icon name="phone" size={12} stroke={2} /> 0208 137 7039
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Nav({ current }) {
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ];
+  return (
+    <nav className={"nav nav-sticky" + (scrolled ? " scrolled" : "")}>
+      <Brand />
+      <div className="nav-links">
+        {links.map(l => (
+          <a key={l.href}
+             className={"nav-link" + (current === l.href ? " active" : "")}
+             href={"#" + l.href}
+             onClick={(e) => { e.preventDefault(); window.navigate(l.href); }}>
+            {l.label}
+          </a>
+        ))}
+      </div>
+      <div className="nav-actions">
+        <a className="nav-phone" href="tel:02081377039">0208 137 7039</a>
+        <a className="btn btn-primary" href="#/contact"
+           onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+          Book a free discovery call
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function MobileStickyBar() {
+  return (
+    <div className="mobile-sticky">
+      <a href="tel:02081377039" className="ms-btn ms-call">
+        <Icon name="phone" size={14} stroke={2} /> Call
+      </a>
+      <a href="#/contact" className="ms-btn ms-book"
+         onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+        Book a free call <Icon name="arrow-right" size={14} stroke={2} />
+      </a>
+    </div>
+  );
+}
+
+function CTABanner() {
+  const [email, setEmail] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  const submit = (e) => {
+    e.preventDefault();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      window.navigate('/contact');
+    }
+  };
+  return (
+    <section className="cta-section">
+      <div className="cta-banner">
+        <h2>Take control of your<br/>financial future today.</h2>
+        <p className="lead">Empower your business with monthly insight and a senior advisor relationship designed to help you make confident decisions.</p>
+        <form className="form-row" onSubmit={submit}>
+          <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <button type="submit" className="btn btn-primary">Get started</button>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  const cols = [
+    { h: 'Navigate', links: [['Home','/'], ['About','/about'], ['Services','/services'], ['Contact','/contact']] },
+    { h: 'Services', links: [['Foundation — £450/mo','/services'], ['Clarity — £950/mo','/services'], ['Command — £1,800/mo','/services']] },
+    { h: 'Contact', links: [['0208 137 7039','tel:02081377039'], ['hello@incline.financial','mailto:hello@incline.financial'], ['Book a free discovery call','/contact']] },
+    { h: 'Legal', links: [['Privacy policy','#'], ['Terms','#'], ['Company no. 11842090','#']] },
+  ];
+  return (
+    <footer className="footer">
+      <div className="footer-inner">
+        <div className="footer-cols">
+          <div className="footer-brand">
+            <Brand />
+            <p className="footer-tag">Financial reporting and advisory for ambitious UK businesses. Monthly insight, a real advisor, no upsells.</p>
+          </div>
+          {cols.map(c => (
+            <div key={c.h}>
+              <h4>{c.h}</h4>
+              <ul>
+                {c.links.map(([l, h]) => (
+                  <li key={l}>
+                    <a href={h.startsWith('/') ? "#" + h : h} onClick={(e) => { if (h.startsWith('/')) { e.preventDefault(); window.navigate(h); } }}>{l}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="footer-bot">
+          <span>© 2026 Incline Financial Ltd. All rights reserved.</span>
+          <div className="footer-social">
+            <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18H5.7v-8.5h2.6V18zM7 8.4c-.8 0-1.5-.7-1.5-1.5S6.2 5.4 7 5.4s1.5.7 1.5 1.5S7.8 8.4 7 8.4zM18.3 18h-2.6v-4.6c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.7V18H10s0-7.5 0-8.5h2.6v1.2c.4-.6 1-1.4 2.5-1.4 1.8 0 3.2 1.2 3.2 3.7V18z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.5-2.4.6.9-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-1.6-1.7-4.2-1.7-5.8-.1-1 1-1.5 2.5-1.2 4-3.3-.2-6.4-1.7-8.4-4.3-1.1 1.9-.5 4.3 1.3 5.5-.6 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.8.1.5 1.7 2.1 2.8 3.8 2.9-1.6 1.2-3.6 1.8-5.6 1.6 1.8 1.1 3.9 1.7 6 1.7 7.2 0 11.2-6.1 11-11.5.8-.6 1.5-1.3 2-2.1z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.1 1.1 0 1.8.2 2.4.5.7.2 1.2.6 1.7 1.1s.9 1 1.1 1.7c.3.6.4 1.4.5 2.4 0 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 1-.2 1.8-.5 2.4-.3.7-.6 1.2-1.1 1.7s-1 .9-1.7 1.1c-.6.3-1.4.4-2.4.5-1.1 0-1.4.1-4.1.1s-3 0-4.1-.1c-1.1 0-1.8-.2-2.4-.5-.7-.2-1.2-.6-1.7-1.1s-.9-1-1.1-1.7c-.3-.6-.4-1.4-.5-2.4 0-1.1-.1-1.4-.1-4.1s0-3 .1-4.1c.1-1 .2-1.8.5-2.4.3-.7.6-1.2 1.1-1.7s1-.9 1.7-1.1c.6-.3 1.4-.4 2.4-.5C9 2 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.8a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+window.Mark = Mark;
+window.Brand = Brand;
+window.Icon = Icon;
+window.TopBar = TopBar;
+window.Nav = Nav;
+window.MobileStickyBar = MobileStickyBar;
+window.CTABanner = CTABanner;
+window.Footer = Footer;
+
+  </script>
+  <script type="text/babel">
+/* Home page — Incline Financial (per spec) */
+
+function HeroBigBlock() {
+  return (
+    <section className="hero-big">
+      <div className="hb-card">
+        <div className="hb-text">
+          <span className="hb-eyebrow">Financial reporting &amp; advisory</span>
+          <h1 className="hb-title">
+            Your accountant<br/>files the past.<br/>
+            <span className="hb-title-emph">We run<br/>the future.</span>
+          </h1>
+          <p className="hb-lead">
+            Incline gives ambitious UK business owners what a standard accountant doesn&rsquo;t — monthly management accounts, plain-English insight, and a senior advisor who knows your numbers as well as you do. Fixed monthly fee, no upsells.
+          </p>
+          <div className="hb-cta-row">
+            <a className="btn btn-primary lg" href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+            </a>
+            <a className="btn btn-secondary lg" href="#/services"
+               onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
+              See the services
+            </a>
+          </div>
+          <div className="hb-trust">
+            <span className="hb-trust-dots"><span></span><span></span><span></span></span>
+            <span>Senior advisor on every account · Fixed monthly fees</span>
+          </div>
+        </div>
+        <div className="hb-mocks">
+          <div className="hb-mock hb-m1">
+            <div className="hbm-head">
+              <span className="hbm-title">March board pack</span>
+              <span className="hbm-bell"><Icon name="check" size={12} stroke={2.5} /></span>
+            </div>
+            <div className="hbm-search">Period: 1 – 31 March 2026 · 14 pages</div>
+            <div className="hbm-tabs">
+              <span className="hbm-tab active">P&amp;L</span>
+              <span className="hbm-tab">Cash</span>
+              <span className="hbm-tab">KPIs</span>
+              <span className="hbm-tab">Notes</span>
+            </div>
+            <div className="hbm-eyebrow">P&amp;L SUMMARY · MARCH</div>
+            <div className="hbm-feat">
+              <div className="hbm-feat-l">
+                <div className="hbm-feat-title">Revenue £312,840</div>
+                <div className="hbm-feat-sub">EBITDA £64,210 · Net £41,880</div>
+                <div className="hbm-feat-tag">+6.2% MoM</div>
+              </div>
+              <div className="hbm-feat-r">
+                <svg viewBox="0 0 60 30" width="60" height="30">
+                  <path d="M0 22 L10 18 L20 20 L30 12 L40 14 L50 6 L60 8" fill="none" stroke="#000" strokeWidth="1.5" />
+                </svg>
+              </div>
+            </div>
+            <div className="hbm-eyebrow">COMMENTARY · ADVISOR NOTE</div>
+            <div className="hbm-row">
+              <div className="hbm-row-mark dark"></div>
+              <div className="hbm-row-text">
+                <div className="hbm-row-t">Gross margin held at 42.4%</div>
+                <div className="hbm-row-s">Up 1.1pts vs Feb despite Q1 input prices</div>
+              </div>
+            </div>
+            <div className="hbm-row">
+              <div className="hbm-row-mark light"></div>
+              <div className="hbm-row-text">
+                <div className="hbm-row-t">Cash inflow £58,420 in March</div>
+                <div className="hbm-row-s">DSO improved to 31 days from 38</div>
+              </div>
+            </div>
+          </div>
+          <div className="hb-mock hb-m2">
+            <div className="hbm2-head">
+              <div>
+                <div className="hbm2-co">Cash &amp; KPI snapshot</div>
+                <div className="hbm2-tag">12-MONTH ROLLING</div>
+              </div>
+              <span className="hbm-bell" style={{background:'#1a1a1a', color:'#fff'}}>
+                <Icon name="chart" size={12} stroke={2} />
+              </span>
+            </div>
+            <div className="hbm2-amt">£642K <span className="hbm2-delta">cash on hand</span></div>
+            <div className="hbm2-chart">
+              <svg viewBox="0 0 220 80" preserveAspectRatio="none">
+                <path d="M0 60 L20 50 L40 56 L60 40 L80 44 L100 30 L120 36 L140 22 L160 28 L180 14 L200 18 L220 8"
+                      fill="none" stroke="#fff" strokeWidth="1.5" />
+                <path d="M0 60 L20 50 L40 56 L60 40 L80 44 L100 30 L120 36 L140 22 L160 28 L180 14 L200 18 L220 8 L220 80 L0 80 Z"
+                      fill="rgba(255,255,255,0.08)" />
+                <circle cx="220" cy="8" r="4" fill="#fff" />
+              </svg>
+            </div>
+            <div className="hbm2-tabs">
+              <span>1M</span><span>3M</span><span className="active">6M</span><span>YTD</span><span>1Y</span>
+            </div>
+            <div className="hbm2-rows">
+              <div className="hbm2-r">
+                <div>42.4%</div>
+                <div className="hbm2-r-l">Gross margin</div>
+              </div>
+              <div className="hbm2-r">
+                <div>14 mo.</div>
+                <div className="hbm2-r-l">Runway</div>
+              </div>
+              <div className="hbm2-r">
+                <div>31 days</div>
+                <div className="hbm2-r-l">DSO</div>
+              </div>
+            </div>
+            <div className="hbm2-actions">
+              <span className="hbm2-act review">Review pack</span>
+              <span className="hbm2-act export">Export</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SocialProof() {
+  const items = [
+    'No setup fee',
+    'No minimum contract',
+    'Senior advisor on every account',
+    'Fixed monthly fees',
+    'Reply within one working day',
+  ];
+  return (
+    <section className="proof-bar">
+      <div className="proof-track">
+        {items.map((t, i) => (
+          <span className="proof-item" key={i}>
+            <Icon name="check" size={14} stroke={2.5} /> {t}
+          </span>
+        ))}
+        {items.map((t, i) => (
+          <span className="proof-item" key={'b'+i} aria-hidden="true">
+            <Icon name="check" size={14} stroke={2.5} /> {t}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function WhatWeDo() {
+  const pillars = [
+    {
+      n: '01',
+      t: 'Clean financial records',
+      d: "We start with the books — properly maintained, properly reconciled, every month. You can't run a business off numbers you don't trust, so we make sure the foundation is right before anything else.",
+    },
+    {
+      n: '02',
+      t: 'Meaningful monthly reporting',
+      d: "Consistently, every month, you get a board-ready pack. P&L, balance sheet, cash flow, KPIs, and a written read on what changed and why. No spreadsheet exports. No raw data dumps.",
+    },
+    {
+      n: '03',
+      t: 'A real advisory relationship',
+      d: "One senior advisor — the same person every month. They know your business, your board, and what you're trying to do. Available between calls. Not a switchboard, not a junior, not a sales rep.",
+    },
+  ];
+  return (
+    <section className="wwd-section">
+      <div className="container">
+        <div className="wwd-head">
+          <span className="eyebrow dot">What we do</span>
+          <h2 className="h1">Three things, done well —<br/>not ten things, done in passing.</h2>
+          <p className="lead">Incline isn&rsquo;t a tax practice with reporting bolted on. We don&rsquo;t do payroll, VAT returns, or year-end as a side hustle. The whole firm is built around one cadence: monthly numbers, monthly insight, monthly conversation.</p>
+        </div>
+        <div className="wwd-grid">
+          {pillars.map(p => (
+            <article className="wwd-card" key={p.n}>
+              <div className="wwd-num">{p.n}</div>
+              <h3 className="wwd-title">{p.t}</h3>
+              <p className="wwd-body">{p.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhoItIsFor() {
+  const profiles = [
+    {
+      tag: 'Outgrown your accountant',
+      t: 'You signed up when the business was £400K. It&rsquo;s £2M now and your accountant is still emailing you a P&L six weeks after quarter end.',
+      stat: 'Most clients arrive here',
+      detail: "You don't need a bigger accountant. You need a different kind of relationship — one where the numbers arrive on time and someone explains them.",
+    },
+    {
+      tag: 'Flying without instruments',
+      t: "You're making real decisions — hiring, pricing, capital — without management accounts you trust. The numbers come once a year, late, and you&rsquo;re running the business on instinct.",
+      stat: 'Three weeks to your first pack',
+      detail: "We get clean monthly reporting standing within four working weeks. By month two you'll be making decisions with data, not guesswork.",
+    },
+    {
+      tag: 'Planning the next chapter',
+      t: 'Growth, fundraise, acquisition, exit. The next 18 months matter and your numbers need to stand up to a board, an investor, or a buyer&rsquo;s diligence team.',
+      stat: 'Investor-ready from day one',
+      detail: "Command tier exists for this. Three-statement models, scenario planning, board packs that survive serious external scrutiny.",
+    },
+  ];
+  return (
+    <section className="who-section">
+      <div className="container">
+        <div className="who-head">
+          <span className="eyebrow dot">Who it&rsquo;s for</span>
+          <h2 className="h1">If any of this sounds familiar,<br/>we should talk.</h2>
+        </div>
+        <div className="who-grid">
+          {profiles.map((p, i) => (
+            <article className="who-card" key={i}>
+              <div className="who-tag">{p.tag}</div>
+              <p className="who-headline" dangerouslySetInnerHTML={{__html: p.t}} />
+              <div className="who-divider"></div>
+              <div className="who-stat">{p.stat}</div>
+              <p className="who-detail">{p.detail}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TiersOverview({ featured }) {
+  const tiers = [
+    {
+      name: 'Foundation',
+      eyebrow: 'Tier one',
+      price: '£450',
+      pitch: 'A clean monthly baseline. Real management information for the first time.',
+      highlights: ['Monthly management accounts', 'Key financial metrics', 'Plain-English summary', 'Quarterly advisor call'],
+    },
+    {
+      name: 'Clarity',
+      eyebrow: 'Tier two · Most popular',
+      price: '£950',
+      pitch: 'Real insight plus a real advisory relationship. Where most growing UK businesses settle.',
+      highlights: ['Full board-ready pack', 'KPI dashboard', 'Cash flow and profitability', 'Monthly advisor call'],
+    },
+    {
+      name: 'Command',
+      eyebrow: 'Tier three',
+      price: '£1,800',
+      pitch: 'Embedded finance leadership. Built for owners planning growth, raise, or exit.',
+      highlights: ['Rolling forecasts &amp; scenarios', 'Investor reporting', 'Variance analysis', 'Unlimited advisor access'],
+    },
+  ];
+  return (
+    <section className="tiers-section">
+      <div className="container">
+        <div className="tiers-head">
+          <span className="eyebrow dot">Service tiers</span>
+          <h2 className="h1">Three tiers. One fixed monthly fee.<br/>No surprises.</h2>
+          <p className="lead">Pick the depth that matches where the business is right now. Move up or down at one month notice — we want you on the right tier, not the most expensive one.</p>
+        </div>
+        <div className="tiers-grid">
+          {tiers.map(t => (
+            <article key={t.name} className={"tier-card" + (t.name === featured ? ' is-featured' : '')}>
+              <div className="tier-eyebrow">{t.eyebrow}</div>
+              <div className="tier-name">{t.name}</div>
+              <div className="tier-price-row">
+                <span className="tier-from">From</span>
+                <span className="tier-price">{t.price}</span>
+                <span className="tier-period">/month</span>
+              </div>
+              <p className="tier-pitch">{t.pitch}</p>
+              <ul className="tier-list">
+                {t.highlights.map(h => (
+                  <li key={h}>
+                    <Icon name="check" size={14} stroke={2.5} />
+                    <span dangerouslySetInnerHTML={{__html: h}} />
+                  </li>
+                ))}
+              </ul>
+              <a className={"btn " + (t.name === featured ? "btn-on-dark" : "btn-secondary") + " tier-cta"}
+                 href="#/services"
+                 onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
+                See full tier detail <Icon name="arrow-right" size={12} stroke={2} />
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VsAccountant() {
+  const rows = [
+    { topic: 'Cadence', acc: 'Year-end. Maybe quarterly if you ask.', inc: 'Monthly. Consistently, every month. Without exception.' },
+    { topic: 'What you get', acc: 'A P&L. A balance sheet. Often a spreadsheet.', inc: 'A board-ready pack. P&L, cash flow, KPIs, written commentary.' },
+    { topic: 'Insight', acc: 'You read the numbers yourself.', inc: "We tell you what changed, why it matters, what to do." },
+    { topic: 'Relationship', acc: "You email when something's wrong. They reply when they can.", inc: 'A named senior advisor. Same one every month. Available in between.' },
+    { topic: 'Forecasting', acc: 'Not included. Hourly extra.', inc: 'Rolling 12-month forecast. Updated every month.' },
+    { topic: 'Pricing', acc: 'Hourly billing. Surprise invoices.', inc: 'Fixed monthly fee. Three transparent tiers. No upsells.' },
+    { topic: 'Software', acc: 'Whatever they use internally.', inc: 'Sits on your Xero, QuickBooks, or Sage. We adapt to you.' },
+    { topic: 'When you need them', acc: 'Months out. Booked in advance.', inc: 'Email or call. Same week. Often same day.' },
+  ];
+  return (
+    <section className="vs-section">
+      <div className="container">
+        <div className="vs-head">
+          <span className="eyebrow dot">Why Incline is different</span>
+          <h2 className="h1">A standard accountant is built for compliance.<br/>We&rsquo;re built for the running of the business.</h2>
+          <p className="lead">No shade — most accountants are good at what they do. But what they do is file the past, not run the future. Here&rsquo;s the honest comparison.</p>
+        </div>
+        <div className="vs-table">
+          <div className="vs-row vs-row-head">
+            <div className="vs-col"></div>
+            <div className="vs-col">Standard accountant</div>
+            <div className="vs-col vs-col-incline">
+              <span className="vs-mark"><Mark size={16} color="#fff"/></span>
+              Incline
+            </div>
+          </div>
+          {rows.map((r, i) => (
+            <div className="vs-row" key={i}>
+              <div className="vs-col vs-topic">{r.topic}</div>
+              <div className="vs-col vs-acc">{r.acc}</div>
+              <div className="vs-col vs-inc">{r.inc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const items = [
+    {
+      stars: 5,
+      quote: "Within four months we had monthly board packs that meant something. Within a year we&rsquo;d closed our Series A on numbers that didn&rsquo;t need a single revision in diligence.",
+      name: 'Eleanor H.',
+      role: 'Co-founder &amp; CEO',
+      biz: 'B2B SaaS founder',
+      i: 'EH',
+    },
+    {
+      stars: 5,
+      quote: "I&rsquo;d been making pricing and hiring decisions on instinct for two years. The first month with Incline I realised exactly which products were unprofitable. We changed the mix and added 12 points of margin.",
+      name: 'James O.',
+      role: 'Managing Director',
+      biz: 'Specialty manufacturing',
+      i: 'JO',
+    },
+    {
+      stars: 5,
+      quote: "Old accountant emailed accounts six weeks late and didn&rsquo;t answer the phone. Switched to Incline a year ago. Pack arrives on the 7th. Nadia knows my business better than my last FD did.",
+      name: 'Priya R.',
+      role: 'Founder',
+      biz: 'Premium consumer goods',
+      i: 'PR',
+    },
+  ];
+  return (
+    <section className="test-section">
+      <div className="container">
+        <div className="test-head">
+          <span className="eyebrow dot">Owners who switched</span>
+          <h2 className="h1">What clients say after making the switch.</h2>
+        </div>
+        <div className="test-grid">
+          {items.map((it, i) => (
+            <article className="test-card" key={i}>
+              <div className="test-stars">
+                {Array.from({length: it.stars}).map((_, s) => (
+                  <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="test-quote" dangerouslySetInnerHTML={{__html: '&ldquo;' + it.quote + '&rdquo;'}} />
+              <div className="test-attribution">
+                <div className="test-avatar">{it.i}</div>
+                <div className="test-meta">
+                  <div className="test-name">{it.name}</div>
+                  <div className="test-role"><span dangerouslySetInnerHTML={{__html: it.role}} /> · <span dangerouslySetInnerHTML={{__html: it.biz}} /></div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA() {
+  return (
+    <section className="final-cta-section">
+      <div className="final-cta">
+        <div className="fc-eyebrow">Ready when you are.</div>
+        <h2 className="fc-title">Thirty minutes.<br/>No pitch deck. No commitment.</h2>
+        <p className="fc-lead">A senior advisor will listen, ask a few questions, and tell you honestly whether Incline is the right fit. If we&rsquo;re not, we&rsquo;ll point you somewhere that is.</p>
+        <div className="fc-actions">
+          <a className="btn btn-on-dark lg" href="#/contact"
+             onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+            <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+          </a>
+          <a className="fc-phone" href="tel:02081377039">
+            <Icon name="phone" size={14} stroke={2} /> 0208 137 7039
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomePage() {
+  const featured = 'Clarity';
+  return (
+    <>
+      <HeroBigBlock />
+      <SocialProof />
+      <WhatWeDo />
+      <WhoItIsFor />
+      <TiersOverview featured={featured} />
+      <VsAccountant />
+      <Testimonials />
+      <FinalCTA />
+    </>
+  );
+}
+
+window.HomePage = HomePage;
+
+  </script>
+  <script type="text/babel">
+/* About page — Incline Financial (per spec) */
+
+function AboutPage() {
+  const values = [
+    {
+      n: '01',
+      h: 'Clarity over complexity.',
+      p: "If a number can't be explained in plain English, it shouldn't be in the pack. We strip out jargon, accountancy shorthand, and anything that exists to make finance look hard. The board pack is for the owner, not for another accountant.",
+    },
+    {
+      n: '02',
+      h: 'Proactive over reactive.',
+      p: "We don't wait for you to ask. If margin slips, if cash tightens, if a forecast breaks — you hear from us first. Reporting is the floor of the relationship, not the ceiling.",
+    },
+    {
+      n: '03',
+      h: 'Consistency over convenience.',
+      p: "The pack lands consistently, every month. The advisor call happens. The forecast updates. Every month, exactly the same. Rhythm is the most under-rated feature of a finance function.",
+    },
+    {
+      n: '04',
+      h: 'Transparency over ambiguity.',
+      p: 'Fixed monthly fees. Three tiers. No setup fee, no minimum contract, no hourly billing. If we recommend Foundation, that is what you need — even if Clarity pays us more.',
+    },
+  ];
+
+  const steps = [
+    {
+      n: '01',
+      h: 'Understand the business.',
+      p: "First call is a 30-minute conversation. What the business does, where it's heading, what's broken about your current finance setup, and what you actually want from monthly reporting.",
+    },
+    {
+      n: '02',
+      h: 'Set up clean records.',
+      p: 'We connect to your Xero, QuickBooks or Sage, audit the chart of accounts, and clean anything blocking real reporting. By end of week two we have a baseline you can trust.',
+    },
+    {
+      n: '03',
+      h: 'Produce meaningful reports.',
+      p: 'Consistently, every month, the pack lands. Management accounts, KPIs, cash flow, and a written read on what the numbers say — not just what they are.',
+    },
+    {
+      n: '04',
+      h: 'Explain what the numbers mean.',
+      p: "Every month, your senior advisor walks you through the pack. What changed, why, and what it implies for the next 90 days. This is where the value lives — not in the spreadsheet.",
+    },
+    {
+      n: '05',
+      h: 'Stay available between calls.',
+      p: "Pricing decision on Tuesday? Hiring question on Thursday? Email or call. Same advisor. Same week. Often same day. You're not a ticket in a queue.",
+    },
+  ];
+
+  return (
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="eyebrow dot">About Incline</span>
+          <h1 className="hb-title page-h1" style={{marginTop:20}}>
+            Built for the gap<br/>
+            <span className="hb-title-emph">between an accountant<br/>and a CFO.</span>
+          </h1>
+          <p className="lead">There&rsquo;s a level of financial support that growing UK businesses need — and that almost no firm provides. Incline exists to fill it.</p>
+        </div>
+      </section>
+
+      <section className="why-section">
+        <div className="container">
+          <div className="why-grid">
+            <div className="why-text">
+              <span className="eyebrow dot">Why Incline exists</span>
+              <h2 className="h1" style={{marginTop:14}}>The reporting most owners need<br/>doesn&rsquo;t come from either side.</h2>
+            </div>
+            <div className="why-body">
+              <p className="lead">A standard accountant is a compliance function. They file your year-end, run your VAT, settle your tax. They&rsquo;re reactive by design — and most of them are good at what they do. But they&rsquo;re not built for the day-to-day decisions of a growing business, and asking them to be is asking the wrong thing.</p>
+              <p className="lead">A full-time Finance Director is the other end of the scale. £120K-plus, a real hire, a real seat at the table. The right answer when the business is large enough to keep one busy. Most growing UK businesses aren&rsquo;t — and won&rsquo;t be for years.</p>
+              <p className="lead lead-emph">Incline sits between the two. We provide what neither does: monthly reporting that means something, written commentary that explains it, and a senior advisor on the other end of the phone. Not as cheap as a compliance accountant, not as expensive as a full FD, and built for exactly where most ambitious owners actually are.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="values-section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow dot">Four values</span>
+            <h2 className="h1">How we operate.<br/>And how to hold us to it.</h2>
+            <p className="lead">These are not posters on a wall. They&rsquo;re the rules we run the firm by — and the things you&rsquo;re entitled to expect of us.</p>
+          </div>
+          <div className="values-grid">
+            {values.map(v => (
+              <article className="value-card" key={v.n}>
+                <div className="value-num">{v.n}</div>
+                <h3 className="value-title">{v.h}</h3>
+                <p className="value-body">{v.p}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="how-section">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow dot">How we work</span>
+            <h2 className="h1">From first call<br/>to running cadence.</h2>
+            <p className="lead">No mystery. Here&rsquo;s exactly what working with Incline looks like, week by week.</p>
+          </div>
+          <div className="how-list">
+            {steps.map(s => (
+              <article className="how-row" key={s.n}>
+                <div className="how-num">{s.n}</div>
+                <div className="how-step-title">{s.h}</div>
+                <p className="how-step-body">{s.p}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="final-cta-section">
+        <div className="final-cta">
+          <div className="fc-eyebrow">Ready to talk?</div>
+          <h2 className="fc-title">Thirty minutes.<br/>No pitch deck. No commitment.</h2>
+          <p className="fc-lead">A senior advisor will listen first, recommend a tier, and give you a fixed price. If we&rsquo;re not the right fit, we&rsquo;ll say so.</p>
+          <div className="fc-actions">
+            <a className="btn btn-on-dark lg" href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+            </a>
+            <a className="btn btn-ghost-on-dark lg" href="#/services"
+               onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
+              See the services
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+window.AboutPage = AboutPage;
+
+  </script>
+  <script type="text/babel">
+/* Services page — Incline Financial (per spec) */
+
+function EveryTierIncludes() {
+  const items = [
+    {
+      n: '01',
+      t: 'Maintained bookkeeping',
+      d: "We make sure the ledger stands up before we report off it. Reconciled bank feeds, clean chart of accounts, accruals where they should be. The numbers in your pack are numbers you can trust.",
+    },
+    {
+      n: '02',
+      t: 'Consistent monthly reporting',
+      d: 'A pack consistently, every month. Same format, same cadence, every time. P&L, balance sheet, cash flow — at the depth the tier specifies.',
+    },
+    {
+      n: '03',
+      t: 'A dedicated advisory call',
+      d: "One named senior advisor — same person every month — who walks you through the numbers and answers the questions the pack provokes. Not a junior, not a switchboard.",
+    },
+  ];
+  return (
+    <section className="every-tier-section">
+      <div className="container">
+        <div className="section-head">
+          <span className="eyebrow dot">Every tier includes</span>
+          <h2 className="h1">Three things every Incline client gets,<br/>regardless of tier.</h2>
+          <p className="lead">Before we talk about what changes between Foundation, Clarity, and Command — here&rsquo;s the floor. The standard we apply to every business we work with.</p>
+        </div>
+        <div className="every-grid">
+          {items.map(it => (
+            <article className="every-card" key={it.n}>
+              <div className="every-num">{it.n}</div>
+              <h3 className="every-title">{it.t}</h3>
+              <p className="every-body">{it.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TierDetail({ tier, reverse, dark }) {
+  return (
+    <section className={"tier-detail" + (dark ? " tier-dark" : "") + (reverse ? " tier-reverse" : "")}>
+      <div className="container">
+        <div className="td-grid">
+          <div className="td-left">
+            <div className="td-badge">{tier.badge}</div>
+            <h2 className="td-name">{tier.name}</h2>
+            <div className="td-price-row">
+              <span className="td-from">From</span>
+              <span className="td-price">{tier.price}</span>
+              <span className="td-period">/month</span>
+            </div>
+            <p className="td-desc">{tier.desc}</p>
+            <div className="td-best">
+              <div className="td-best-label">Best for</div>
+              <p className="td-best-body">{tier.best}</p>
+            </div>
+            <a className={"btn " + (dark ? "btn-on-dark" : "btn-primary") + " lg"}
+               href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+            </a>
+          </div>
+          <div className="td-right">
+            <div className="td-includes-label">What&rsquo;s included</div>
+            <ul className="td-includes">
+              {tier.includes.map((c, i) => (
+                <li key={i}>
+                  <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  const items = [
+    {
+      q: 'How do I choose between the three tiers?',
+      a: "Start with revenue and decision velocity. Foundation suits businesses up to £500K with limited current reporting. Clarity is where most £500K–£2M businesses settle. Command is for £1M–£5M+ owners who are running a board, planning a raise, or modelling material decisions every month. The discovery call exists to make this recommendation properly — and we'll always recommend the lower tier when it fits.",
+    },
+    {
+      q: 'What happens to my existing accountant?',
+      a: "Often they stay for compliance — VAT returns, payroll, year-end filings — and Incline handles management reporting and advisory. Sometimes clients consolidate everything with us. Sometimes they switch entirely. There's no right answer; we'll tell you honestly which arrangement makes sense for your business.",
+    },
+    {
+      q: 'Is there a setup fee or minimum contract?',
+      a: 'No setup fee. No minimum contract. Onboarding (getting your data connected and the first pack produced) is included in your first month. You can give one month notice at any time — though most clients have been with us for over three years.',
+    },
+    {
+      q: 'What software do you work with?',
+      a: 'We sit on top of Xero, QuickBooks, and Sage — whichever you already use. We don&rsquo;t make you migrate. For non-finance data (KPIs, sales pipeline, headcount), we agree a lightweight monthly export from whatever system you use today.',
+    },
+    {
+      q: 'Can I change tier later?',
+      a: 'Yes — in either direction, with one month notice. Most businesses start on Clarity and move up to Command around the £3M revenue mark, or as a raise approaches. A few step down from Clarity to Foundation when the immediate strategic moves are behind them. Either is fine.',
+    },
+    {
+      q: 'How quickly does onboarding happen?',
+      a: 'Four working weeks from contract signed to first published pack. Week one: discovery and chart-of-accounts review. Week two: data connections and parallel reconciliation. Week three: draft pack and walkthrough. Week four: published pack and first advisor call.',
+    },
+  ];
+  const [open, setOpen] = React.useState(0);
+  return (
+    <section className="faq-section">
+      <div className="container">
+        <div className="section-head">
+          <span className="eyebrow dot">Common questions</span>
+          <h2 className="h1">The things owners ask<br/>before booking a call.</h2>
+        </div>
+        <div className="faq">
+          {items.map((it, i) => (
+            <div className={"faq-row" + (open === i ? ' open' : '')} key={i} onClick={() => setOpen(open === i ? -1 : i)}>
+              <div className="faq-num">0{i + 1}</div>
+              <div>
+                <div className="faq-q">{it.q}</div>
+                {open === i && <div className="faq-a">{it.a}</div>}
+              </div>
+              <div className="faq-toggle">+</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesPage() {
+  const foundation = {
+    badge: 'Tier one',
+    name: 'Foundation',
+    price: '£450',
+    desc: "If you've never had real management information, this is where it starts. A clean monthly baseline — properly reconciled, properly presented — so that for the first time, you actually understand your numbers month to month. No spreadsheets emailed at midnight, no quarterly mystery. Just the basics, done well, every month, on time.",
+    best: 'Businesses up to £500K turnover, currently receiving little or no real management information from their accountant.',
+    includes: [
+      'Maintained bookkeeping on Xero, QuickBooks, or Sage',
+      'Monthly management accounts (P&L and balance sheet)',
+      'Key financial metrics — revenue, gross margin, cash position',
+      'Plain-English summary of the month',
+      'One advisor call per quarter (60 minutes)',
+      'Email support, two business day response',
+      'Onboarding within four working weeks',
+    ],
+  };
+  const clarity = {
+    badge: 'Tier two · Most popular',
+    name: 'Clarity',
+    price: '£950',
+    desc: "When you're past the survival phase and into real decisions — pricing, hiring, capital deployment — instinct stops being enough. Clarity gives you proper insight: a board-ready pack with written commentary, a KPI dashboard you actually look at, and a senior advisor on the phone every month. This is where most growing UK businesses settle, and where the value of monthly reporting really earns its keep.",
+    best: 'Businesses £500K–£2M, making real decisions every quarter, who want to understand profitability and cash properly.',
+    includes: [
+      'Everything in Foundation',
+      'Full board-ready pack with month-on-month and year-on-year comparisons',
+      'KPI dashboard tailored to your business',
+      'Cash flow reporting and 12-month rolling forecast',
+      'Profitability analysis by product / service / channel',
+      'Written insight commentary — what changed, why, what to do',
+      'Monthly advisor call (60 minutes)',
+      'Quarterly extended strategy review (90 minutes)',
+    ],
+  };
+  const command = {
+    badge: 'Tier three',
+    name: 'Command',
+    price: '£1,800',
+    desc: "When the next 18 months are about growth, capital, or eventually exit — your finance function has to stand up to scrutiny. Command is embedded finance leadership: divisional reporting, scenario modelling, investor-ready packs, and an advisor on call. Built for owners who are running a board, raising, or putting the business in a position to be sold. Effectively a fractional CFO at a fixed monthly fee.",
+    best: 'Businesses £1M–£5M and above, planning serious growth, fundraise, or exit within the next 24 months.',
+    includes: [
+      'Everything in Clarity',
+      'Divisional / segment-level breakdown',
+      'Annual budget and quarterly re-forecast',
+      'Variance analysis vs budget, with written explanation',
+      'Three-statement rolling forecasts',
+      'Scenario planning (best / base / downside)',
+      'Investor and lender reporting packs',
+      'Ad hoc analysis on request',
+      'Unlimited advisor access — direct line to your senior advisor',
+    ],
+  };
+
+  return (
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="eyebrow dot">Services</span>
+          <h1 className="hb-title page-h1" style={{marginTop:20}}>
+            Three tiers.<br/>
+            <span className="hb-title-emph">One fixed monthly fee.</span>
+          </h1>
+          <p className="lead">Every tier is a monthly reporting cadence and a senior advisor relationship. The right one depends on where the business is right now — not where you wish it was, and not where you&rsquo;ll be in three years. Move up or down at one month notice.</p>
+        </div>
+      </section>
+
+      <EveryTierIncludes />
+      <TierDetail tier={foundation} />
+      <TierDetail tier={clarity} reverse />
+      <TierDetail tier={command} dark />
+      <FAQ />
+
+      <section className="final-cta-section">
+        <div className="final-cta">
+          <div className="fc-eyebrow">Not sure which tier?</div>
+          <h2 className="fc-title">That&rsquo;s what the<br/>discovery call is for.</h2>
+          <p className="fc-lead">Thirty minutes with a senior advisor. We&rsquo;ll listen, recommend a tier, and give you a fixed price. No pitch, no pressure, no commitment.</p>
+          <div className="fc-actions">
+            <a className="btn btn-on-dark lg" href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+            </a>
+            <a className="fc-phone" href="tel:02081377039">
+              <Icon name="phone" size={14} stroke={2} /> 0208 137 7039
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+window.ServicesPage = ServicesPage;
+
+  </script>
+  <script type="text/babel">
+/* Contact page — Incline Financial (per spec) */
+
+function ContactPage() {
+  const [form, setForm] = React.useState({
+    name: '', phone: '', company: '', email: '',
+    revenue: '', tier: '', notes: '',
+  });
+  const [errors, setErrors] = React.useState({});
+  const [submitted, setSubmitted] = React.useState(false);
+  const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = 'Required';
+    if (!form.company.trim()) e.company = 'Required';
+    if (!form.email.trim()) e.email = 'Required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Not a valid email';
+    return e;
+  };
+
+  const submit = (ev) => {
+    ev.preventDefault();
+    const e = validate();
+    if (Object.keys(e).length) { setErrors(e); return; }
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
+  if (submitted) {
+    return (
+      <>
+        <section className="page-hero">
+          <div className="container">
+            <span className="eyebrow dot">Booked</span>
+            <h1 className="hb-title page-h1" style={{marginTop:20}}>
+              Thanks{form.name ? ', ' + form.name.split(' ')[0] : ''}.<br/>
+              <span className="hb-title-emph">We&rsquo;ll be in touch.</span>
+            </h1>
+          </div>
+        </section>
+        <section className="success-section">
+          <div className="container">
+            <div className="success-card">
+              <div className="success-check">
+                <Icon name="check" size={32} stroke={2.5} />
+              </div>
+              <h2 className="success-title">Expect a call within one business day.</h2>
+              <p className="success-body">
+                A senior advisor will email <strong>{form.email}</strong> to confirm a 30-minute discovery call. No prep needed — just bring an honest answer to the question &ldquo;what do you wish you knew about your numbers?&rdquo;. The rest is our job.
+              </p>
+              <div className="success-meta">
+                <div className="success-meta-row">
+                  <div className="success-meta-label">If urgent, call</div>
+                  <a href="tel:02081377039" className="success-meta-val">0208 137 7039</a>
+                </div>
+                <div className="success-meta-row">
+                  <div className="success-meta-label">Or email</div>
+                  <a href="mailto:hello@incline.financial" className="success-meta-val">hello@incline.financial</a>
+                </div>
+              </div>
+              <div className="success-actions">
+                <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); window.navigate('/'); }}>Back to home</a>
+                <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>Read about the tiers</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="eyebrow dot">Contact</span>
+          <h1 className="hb-title page-h1" style={{marginTop:20}}>
+            Start the<br/>
+            <span className="hb-title-emph">conversation.</span>
+          </h1>
+          <p className="lead">Thirty minutes with a senior advisor. We&rsquo;ll talk about your business, your numbers, and whether Incline is the right fit. No pitch deck, no pressure, no commitment.</p>
+        </div>
+      </section>
+
+      <section className="contact-section">
+        <div className="container">
+          <div className="contact-grid">
+            <div className="contact-left">
+              <p className="contact-intro">A discovery call is a conversation, not a sales pitch. It&rsquo;s how we learn about the business, get a feel for what would actually help, and recommend the right service. If we&rsquo;re not the right fit, we&rsquo;ll tell you — and point you somewhere that is.</p>
+
+              <ul className="contact-methods">
+                <li>
+                  <div className="cm-icon"><Icon name="phone" size={16} stroke={2} /></div>
+                  <div>
+                    <div className="cm-label">Call directly</div>
+                    <a href="tel:02081377039" className="cm-val">0208 137 7039</a>
+                    <div className="cm-meta">Mon–Fri, 9am–6pm. Answered by a person.</div>
+                  </div>
+                </li>
+                <li>
+                  <div className="cm-icon"><Icon name="send" size={16} stroke={2} /></div>
+                  <div>
+                    <div className="cm-label">Submit the form</div>
+                    <span className="cm-val">Reply within one working day</span>
+                    <div className="cm-meta">A senior advisor will read it personally.</div>
+                  </div>
+                </li>
+                <li>
+                  <div className="cm-icon"><Icon name="target" size={16} stroke={2} /></div>
+                  <div>
+                    <div className="cm-label">Where we are</div>
+                    <span className="cm-val">London-based, UK-wide</span>
+                    <div className="cm-meta">All client work runs remote — no office visits required.</div>
+                  </div>
+                </li>
+              </ul>
+
+              <div className="expect-panel">
+                <div className="expect-eyebrow">What to expect from the discovery call</div>
+                <ul className="expect-list">
+                  <li><span className="expect-num">01</span><div><strong>30 minutes.</strong> Long enough to be useful, short enough to respect your day.</div></li>
+                  <li><span className="expect-num">02</span><div><strong>We listen and learn.</strong> About your business, your numbers, and what&rsquo;s prompting the call.</div></li>
+                  <li><span className="expect-num">03</span><div><strong>We recommend the right tier.</strong> Honestly. Including telling you if it&rsquo;s the lower one.</div></li>
+                  <li><span className="expect-num">04</span><div><strong>We give you a fixed price.</strong> Within 48 hours of the call. In writing. No moving parts.</div></li>
+                  <li><span className="expect-num">05</span><div><strong>No commitment required.</strong> No follow-ups, no pressure, no automated drip emails.</div></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="contact-right">
+              <div className="form-card">
+                <h2 className="form-heading">Tell us about your business.</h2>
+                <p className="form-sub">A few quick details so the right advisor can prepare for the call.</p>
+
+                <form className="form" onSubmit={submit} noValidate>
+                  <div className={"field" + (errors.name ? ' error' : '')}>
+                    <label>Your name</label>
+                    <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Jane Doe" />
+                    {errors.name && <div className="err">{errors.name}</div>}
+                  </div>
+                  <div className="field">
+                    <label>Phone number</label>
+                    <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
+                  </div>
+                  <div className={"field full" + (errors.company ? ' error' : '')}>
+                    <label>Business name</label>
+                    <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Acme Ltd." />
+                    {errors.company && <div className="err">{errors.company}</div>}
+                  </div>
+                  <div className={"field full" + (errors.email ? ' error' : '')}>
+                    <label>Email address</label>
+                    <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
+                    {errors.email && <div className="err">{errors.email}</div>}
+                  </div>
+                  <div className="field full">
+                    <label>Approximate annual turnover</label>
+                    <select value={form.revenue} onChange={(e) => set('revenue', e.target.value)}>
+                      <option value="">Select a range</option>
+                      <option>Under £500K</option>
+                      <option>£500K – £1M</option>
+                      <option>£1M – £2M</option>
+                      <option>£2M – £5M</option>
+                      <option>£5M – £10M</option>
+                      <option>£10M+</option>
+                    </select>
+                  </div>
+                  <div className="field full">
+                    <label>Which tier interests you?</label>
+                    <select value={form.tier} onChange={(e) => set('tier', e.target.value)}>
+                      <option value="">Select</option>
+                      <option>Foundation — from £450/month</option>
+                      <option>Clarity — from £950/month</option>
+                      <option>Command — from £1,800/month</option>
+                      <option>Not sure yet — would like a recommendation</option>
+                    </select>
+                  </div>
+                  <div className="field full">
+                    <label>Anything else you&rsquo;d like to share?</label>
+                    <textarea value={form.notes} onChange={(e) => set('notes', e.target.value)} placeholder="A sentence or two on where the business is and what's prompting the call." />
+                  </div>
+                  <div className="full">
+                    <button type="submit" className="btn btn-primary lg form-submit">
+                      Request my free discovery call
+                      <Icon name="arrow-right" size={14} stroke={2} />
+                    </button>
+                  </div>
+                </form>
+
+                <div className="form-divider"><span>Prefer to call?</span></div>
+
+                <a href="tel:02081377039" className="form-call">
+                  <Icon name="phone" size={16} stroke={2} />
+                  <span><strong>0208 137 7039</strong> — Mon–Fri, 9am–6pm</span>
+                </a>
+
+                <div className="form-foot">No obligation · Fully confidential · Fixed fees, always</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+window.ContactPage = ContactPage;
+
+  </script>
+  <script type="text/babel">
+/* App shell — router */
+
+function App() {
+  const [path, setPath] = React.useState(() => {
+    const h = window.location.hash.replace(/^#/, '');
+    return h && h.startsWith('/') ? h : '/';
+  });
+
+  React.useEffect(() => {
+    window.navigate = (to) => {
+      window.location.hash = to;
+      setPath(to);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    const onHash = () => {
+      const h = window.location.hash.replace(/^#/, '');
+      setPath(h && h.startsWith('/') ? h : '/');
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  let Page = HomePage;
+  if (path === '/about') Page = AboutPage;
+  else if (path === '/services') Page = ServicesPage;
+  else if (path === '/contact') Page = ContactPage;
+
+  const skipFooter = false;
+
+  return (
+    <div data-screen-label={"Page: " + path}>
+      <TopBar />
+      <div className="page-shell">
+        <Nav current={path} />
+        <main>
+          <Page />
+        </main>
+        {!skipFooter && <Footer />}
+      </div>
+      <MobileStickyBar />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+  </script>
+</body>
+</html>
