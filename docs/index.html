@@ -823,10 +823,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   flex-direction: column;
   gap: 18px;
   position: relative;
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, border-width 220ms ease;
-}
-.tier-card.is-featured {
-  transform: translateY(-8px);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, border-width 220ms ease, background-color 220ms ease;
 }
 .tier-eyebrow {
   font-size: 11px;
@@ -867,7 +864,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: 1.45;
 }
 .tier-list li svg { flex-shrink: 0; color: #000; margin-top: 2px; }
-.tier-cta { width: 100%; padding: 14px 18px; }
+.tier-cta {
+  width: 100%;
+  padding: 14px 18px;
+  transition: background-color 220ms ease, color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
 
 /* =========================================================
    Vs Accountant comparison
@@ -1939,10 +1940,6 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
     transform: translateY(0);
   }
 
-  /* Featured tier card keeps its -8px elevated final position */
-  .anim .tiers-grid > .tier-card.is-featured { transform: translateY(8px); }
-  .anim .tiers-grid.in > .tier-card.is-featured { transform: translateY(-8px); }
-
   /* Card hover lift */
   .wwd-card, .who-card, .test-card,
   .value-card, .how-row, .every-card {
@@ -1953,14 +1950,19 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0,0,0,0.10);
   }
-  /* Tier cards: subtle dark border + lift on hover */
+  /* Tier cards: warm-gold accent on hover (border, tint, lift, shadow, gold CTA) */
   .tier-card:hover {
-    border-color: rgba(0,0,0,0.18);
+    border-color: rgba(184,137,58,0.5);
     border-width: 1.5px;
-    box-shadow: 0 20px 48px rgba(0,0,0,0.12);
+    background-color: rgba(184,137,58,0.03);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.10);
   }
-  .tier-card:not(.is-featured):hover { transform: translateY(-12px); }
-  .tier-card.is-featured:hover { transform: translateY(-16px); }
+  .tier-card:hover .tier-cta {
+    background: #b8893a;
+    color: #fff;
+    box-shadow: none;
+  }
 
   /* Button colour transitions */
   .btn { transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
@@ -2957,6 +2959,7 @@ function ServicesPage() {
         </div>
       </section>
 
+      <TiersOverview featured="Clarity" />
       <EveryTierIncludes />
       <TierDetail tier={foundation} />
       <TierDetail tier={clarity} reverse />
