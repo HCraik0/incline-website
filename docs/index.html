@@ -1912,10 +1912,8 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
    card hover lifts, button transitions, hero mock slide-in
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
-  /* Section fade-up — every section except the home hero.
-     Starting opacity:0 is gated on .js-ready so content stays visible
-     when JS fails to run (slow connections, PDF exports, etc). */
-  .js-ready .anim section:not(.hero-big) {
+  /* Section fade-up — every section except the home hero */
+  .anim section:not(.hero-big) {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 400ms ease-out, transform 400ms ease-out;
@@ -1924,14 +1922,14 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   .anim section.in { opacity: 1; transform: translateY(0); }
 
   /* Staggered grid children */
-  .js-ready .anim .wwd-grid > *,
-  .js-ready .anim .who-grid > *,
-  .js-ready .anim .tiers-grid > *,
-  .js-ready .anim .test-grid > *,
-  .js-ready .anim .values-grid > *,
-  .js-ready .anim .how-list > *,
-  .js-ready .anim .every-grid > *,
-  .js-ready .anim .vs-table > .vs-row:not(.vs-row-head) {
+  .anim .wwd-grid > *,
+  .anim .who-grid > *,
+  .anim .tiers-grid > *,
+  .anim .test-grid > *,
+  .anim .values-grid > *,
+  .anim .how-list > *,
+  .anim .every-grid > *,
+  .anim .vs-table > .vs-row:not(.vs-row-head) {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 400ms ease-out, transform 400ms ease-out;
@@ -1972,7 +1970,7 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   .btn { transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
 
   /* Hero mock dashboards slide in from right on home-page mount */
-  .js-ready .anim .hb-mocks {
+  .anim .hb-mocks {
     opacity: 0;
     transform: translateX(40px);
     transition: opacity 600ms ease-out, transform 600ms ease-out;
@@ -3249,10 +3247,6 @@ function App() {
 
   // Animation orchestration — runs after each route mount
   React.useEffect(() => {
-    // Signal JS is running so the opacity:0 starting states activate.
-    // Without this class all content stays fully visible.
-    document.documentElement.classList.add('js-ready');
-
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
       document.querySelectorAll('[data-counter-target]:not([data-counter-done])').forEach(el => {
@@ -3288,27 +3282,9 @@ function App() {
         });
       }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
     }
-    const animTargets = document.querySelectorAll('main section:not(.hero-big):not(.in), .wwd-grid:not(.in), .who-grid:not(.in), .tiers-grid:not(.in), .test-grid:not(.in), .values-grid:not(.in), .how-list:not(.in), .every-grid:not(.in), .vs-table:not(.in)');
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    animTargets.forEach(el => {
-      // Immediate fire for elements already in the viewport on mount —
-      // don't wait for the observer's first async callback or a scroll event.
-      const r = el.getBoundingClientRect();
-      if (r.top < vh && r.bottom > 0) {
-        el.classList.add('in');
-        if (el.matches('[data-counter-target]')) startCounter(el);
-        return;
-      }
+    document.querySelectorAll('main section:not(.hero-big):not(.in), .wwd-grid:not(.in), .who-grid:not(.in), .tiers-grid:not(.in), .test-grid:not(.in), .values-grid:not(.in), .how-list:not(.in), .every-grid:not(.in), .vs-table:not(.in)').forEach(el => {
       window.__inclineIO.observe(el);
     });
-
-    // Safety net: if anything still hasn't received .in within 3 seconds
-    // (observer never fired, JS error mid-run, etc), force everything visible.
-    setTimeout(() => {
-      document.querySelectorAll('.anim section:not(.hero-big):not(.in), .anim .wwd-grid:not(.in), .anim .who-grid:not(.in), .anim .tiers-grid:not(.in), .anim .test-grid:not(.in), .anim .values-grid:not(.in), .anim .how-list:not(.in), .anim .every-grid:not(.in), .anim .vs-table:not(.in), .anim .hb-mocks:not(.in)').forEach(el => {
-        el.classList.add('in');
-      });
-    }, 3000);
 
     // Hero mock dashboard slide-in + sequential figure counters (home-page only)
     const mocks = document.querySelector('.hb-mocks');
