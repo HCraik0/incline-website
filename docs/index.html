@@ -867,7 +867,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 .tier-cta {
   width: 100%;
   padding: 14px 18px;
+  background: #fff;
+  color: #b8893a;
+  box-shadow: inset 0 0 0 1.5px #b8893a;
   transition: background-color 220ms ease, color 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.tier-cta:hover {
+  background: #fff;
+  color: #b8893a;
+  box-shadow: inset 0 0 0 1.5px #b8893a;
 }
 
 /* =========================================================
@@ -1950,18 +1958,12 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
     transform: translateY(-4px);
     box-shadow: 0 12px 28px rgba(0,0,0,0.10);
   }
-  /* Tier cards: warm-gold accent on hover (border, tint, lift, shadow, gold CTA) */
+  /* Tier cards: gold border + soft shadow + lift on hover (no bg change) */
   .tier-card:hover {
     border-color: rgba(184,137,58,0.5);
     border-width: 1.5px;
-    background-color: rgba(184,137,58,0.03);
     transform: translateY(-6px);
     box-shadow: 0 16px 40px rgba(0,0,0,0.10);
-  }
-  .tier-card:hover .tier-cta {
-    background: #b8893a;
-    color: #fff;
-    box-shadow: none;
   }
 
   /* Button colour transitions */
@@ -2457,7 +2459,7 @@ function TiersOverview({ featured }) {
                   </li>
                 ))}
               </ul>
-              <a className={"btn " + (t.name === featured ? "btn-primary" : "btn-secondary") + " tier-cta"}
+              <a className="btn tier-cta"
                  href="#/services"
                  onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
                 See full tier detail <Icon name="arrow-right" size={12} stroke={2} />
