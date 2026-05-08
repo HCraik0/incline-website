@@ -1911,6 +1911,83 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   box-shadow: 0 0 0 3px rgba(184,137,58,0.16);
 }
 
+/* =========================================================
+   Animations: scroll-triggered fade-ins, staggered grids,
+   card hover lifts, button transitions, hero mock slide-in
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Section fade-up — every section except the home hero */
+  .anim section:not(.hero-big) {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+    will-change: opacity, transform;
+  }
+  .anim section.in { opacity: 1; transform: translateY(0); }
+
+  /* Staggered grid children */
+  .anim .wwd-grid > *,
+  .anim .who-grid > *,
+  .anim .tiers-grid > *,
+  .anim .test-grid > *,
+  .anim .values-grid > *,
+  .anim .how-list > *,
+  .anim .every-grid > *,
+  .anim .vs-table > .vs-row:not(.vs-row-head) {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+    transition-delay: calc(var(--stagger-i, 0) * 100ms);
+    will-change: opacity, transform;
+  }
+  .anim .wwd-grid.in > *,
+  .anim .who-grid.in > *,
+  .anim .tiers-grid.in > *,
+  .anim .test-grid.in > *,
+  .anim .values-grid.in > *,
+  .anim .how-list.in > *,
+  .anim .every-grid.in > *,
+  .anim .vs-table.in > .vs-row:not(.vs-row-head) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Featured tier card keeps its -8px elevated final position */
+  .anim .tiers-grid > .tier-card.is-featured { transform: translateY(8px); }
+  .anim .tiers-grid.in > .tier-card.is-featured { transform: translateY(-8px); }
+
+  /* Card hover lift */
+  .wwd-card, .who-card, .tier-card, .test-card,
+  .value-card, .how-row, .every-card {
+    transition: transform 200ms ease, box-shadow 200ms ease;
+  }
+  .wwd-card:hover, .who-card:hover, .test-card:hover,
+  .value-card:hover, .how-row:hover, .every-card:hover,
+  .tier-card:not(.is-featured):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+  }
+  .tier-card.is-featured:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 64px rgba(0,0,0,0.22);
+  }
+
+  /* Button colour transitions */
+  .btn { transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
+
+  /* Hero mock dashboards slide in from right on home-page mount */
+  .anim .hb-mocks {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+    will-change: opacity, transform;
+  }
+  .anim .hb-mocks.in { opacity: 1; transform: translateX(0); }
+
+  /* Counter targets render with stable widths during animation */
+  [data-counter-target] { font-variant-numeric: tabular-nums; }
+}
+
   </style>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -2153,8 +2230,8 @@ function HeroBigBlock() {
             <div className="hbm-eyebrow">P&amp;L SUMMARY · MARCH</div>
             <div className="hbm-feat">
               <div className="hbm-feat-l">
-                <div className="hbm-feat-title">Revenue £312,840</div>
-                <div className="hbm-feat-sub">EBITDA £64,210 · Net £41,880</div>
+                <div className="hbm-feat-title">Revenue £<span data-counter-target="312840" data-counter-format="comma">0</span></div>
+                <div className="hbm-feat-sub">EBITDA £<span data-counter-target="64210" data-counter-format="comma">0</span> · Net £41,880</div>
                 <div className="hbm-feat-tag">+6.2% MoM</div>
               </div>
               <div className="hbm-feat-r">
@@ -2189,7 +2266,7 @@ function HeroBigBlock() {
                 <Icon name="chart" size={12} stroke={2} />
               </span>
             </div>
-            <div className="hbm2-amt">£642K <span className="hbm2-delta">cash on hand</span></div>
+            <div className="hbm2-amt">£<span data-counter-target="642">0</span>K <span className="hbm2-delta">cash on hand</span></div>
             <div className="hbm2-chart">
               <svg viewBox="0 0 220 80" preserveAspectRatio="none">
                 <path d="M0 60 L20 50 L40 56 L60 40 L80 44 L100 30 L120 36 L140 22 L160 28 L180 14 L200 18 L220 8"
@@ -2204,15 +2281,15 @@ function HeroBigBlock() {
             </div>
             <div className="hbm2-rows">
               <div className="hbm2-r">
-                <div>42.4%</div>
+                <div><span data-counter-target="42.4" data-counter-format="decimal">0</span>%</div>
                 <div className="hbm2-r-l">Gross margin</div>
               </div>
               <div className="hbm2-r">
-                <div>14 mo.</div>
+                <div><span data-counter-target="14">0</span> mo.</div>
                 <div className="hbm2-r-l">Runway</div>
               </div>
               <div className="hbm2-r">
-                <div>31 days</div>
+                <div><span data-counter-target="31">0</span> days</div>
                 <div className="hbm2-r-l">DSO</div>
               </div>
             </div>
@@ -3131,6 +3208,28 @@ window.ContactPage = ContactPage;
   <script type="text/babel">
 /* App shell — router */
 
+function startCounter(el) {
+  if (el.dataset.counterDone) return;
+  el.dataset.counterDone = '1';
+  const target = parseFloat(el.dataset.counterTarget);
+  const format = el.dataset.counterFormat || 'integer';
+  const duration = parseInt(el.dataset.counterDuration || '800', 10);
+  const start = performance.now();
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const fmt = (n) => {
+    if (format === 'decimal') return n.toFixed(1);
+    if (format === 'comma') return Math.round(n).toLocaleString('en-GB');
+    return Math.round(n).toString();
+  };
+  function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    el.textContent = fmt(target * ease(t));
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+window.startCounter = startCounter;
+
 function App() {
   const [path, setPath] = React.useState(() => {
     const h = window.location.hash.replace(/^#/, '');
@@ -3151,6 +3250,61 @@ function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
+  // Animation orchestration — runs after each route mount
+  React.useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      document.querySelectorAll('[data-counter-target]:not([data-counter-done])').forEach(el => {
+        const t = parseFloat(el.dataset.counterTarget);
+        const f = el.dataset.counterFormat || 'integer';
+        el.textContent = f === 'decimal' ? t.toFixed(1) : f === 'comma' ? Math.round(t).toLocaleString('en-GB') : Math.round(t).toString();
+        el.dataset.counterDone = '1';
+      });
+      return;
+    }
+
+    // Stagger index on grid children (idempotent)
+    document.querySelectorAll('.wwd-grid, .who-grid, .tiers-grid, .test-grid, .values-grid, .how-list, .every-grid, .vs-table').forEach(g => {
+      if (g.dataset.staggered) return;
+      g.dataset.staggered = '1';
+      const kids = (g.classList.contains('vs-table'))
+        ? g.querySelectorAll(':scope > .vs-row:not(.vs-row-head)')
+        : g.children;
+      [...kids].forEach((c, i) => c.style.setProperty('--stagger-i', i));
+    });
+
+    // Singleton observer — adds .in once, then unobserves so it never re-fires
+    if (!window.__inclineIO) {
+      window.__inclineIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            window.__inclineIO.unobserve(entry.target);
+            if (entry.target.matches('[data-counter-target]')) {
+              startCounter(entry.target);
+            }
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('main section:not(.hero-big):not(.in), .wwd-grid:not(.in), .who-grid:not(.in), .tiers-grid:not(.in), .test-grid:not(.in), .values-grid:not(.in), .how-list:not(.in), .every-grid:not(.in), .vs-table:not(.in)').forEach(el => {
+      window.__inclineIO.observe(el);
+    });
+
+    // Hero mock dashboard slide-in + sequential figure counters (home-page only)
+    const mocks = document.querySelector('.hb-mocks');
+    if (mocks && !mocks.dataset.animated) {
+      mocks.dataset.animated = '1';
+      requestAnimationFrame(() => {
+        mocks.classList.add('in');
+        setTimeout(() => {
+          const figures = mocks.querySelectorAll('[data-counter-target]');
+          figures.forEach((f, i) => setTimeout(() => startCounter(f), i * 150));
+        }, 600);
+      });
+    }
+  }, [path]);
+
   let Page = HomePage;
   if (path === '/about') Page = AboutPage;
   else if (path === '/services') Page = ServicesPage;
@@ -3159,7 +3313,7 @@ function App() {
   const skipFooter = false;
 
   return (
-    <div data-screen-label={"Page: " + path}>
+    <div className="anim" data-screen-label={"Page: " + path}>
       <TopBar />
       <div className="page-shell">
         <Nav current={path} />
