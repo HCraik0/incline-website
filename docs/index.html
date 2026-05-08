@@ -2348,7 +2348,7 @@ function WhatWeDo() {
         <div className="wwd-head">
           <span className="eyebrow dot">What we do</span>
           <h2 className="h1">Three things, done well —<br/>not ten things, done in passing.</h2>
-          <p className="lead">Incline isn&rsquo;t a tax practice with reporting bolted on. We don&rsquo;t do payroll, VAT returns, or year-end as a side hustle. The whole firm is built around one cadence: monthly numbers, monthly insight, monthly conversation.</p>
+          <p className="lead">Incline is built around one cadence &mdash; monthly numbers, monthly insight, monthly conversation. We focus entirely on management information so your financial picture is always current, always clear, and always explained.</p>
         </div>
         <div className="wwd-grid">
           {pillars.map(p => (
@@ -2739,15 +2739,14 @@ function AboutPage() {
         <div className="final-cta">
           <div className="fc-eyebrow">Ready to talk?</div>
           <h2 className="fc-title">Thirty minutes.<br/>No pitch deck. No commitment.</h2>
-          <p className="fc-lead">A senior advisor will listen first, recommend a tier, and give you a fixed price. If we&rsquo;re not the right fit, we&rsquo;ll say so.</p>
+          <p className="fc-lead">A senior advisor will listen, ask a few questions, and tell you honestly whether Incline is the right fit.</p>
           <div className="fc-actions">
             <a className="btn btn-on-dark lg" href="#/contact"
                onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
               <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
             </a>
-            <a className="btn btn-ghost-on-dark lg" href="#/services"
-               onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
-              See the services
+            <a className="fc-phone" href="tel:02081377039">
+              <Icon name="phone" size={14} stroke={2} /> 0208 137 7039
             </a>
           </div>
         </div>
@@ -3115,7 +3114,7 @@ function ContactPage() {
                   <li><span className="expect-num">01</span><div><strong>30 minutes.</strong> Long enough to be useful, short enough to respect your day.</div></li>
                   <li><span className="expect-num">02</span><div><strong>We listen and learn.</strong> About your business, your numbers, and what&rsquo;s prompting the call.</div></li>
                   <li><span className="expect-num">03</span><div><strong>We recommend the right tier.</strong> Honestly. Including telling you if it&rsquo;s the lower one.</div></li>
-                  <li><span className="expect-num">04</span><div><strong>We give you a fixed price.</strong> Within 48 hours of the call. In writing. No moving parts.</div></li>
+                  <li><span className="expect-num">04</span><div><strong>We give you a fixed price.</strong> Within two working days of the call. In writing. No moving parts.</div></li>
                   <li><span className="expect-num">05</span><div><strong>No commitment required.</strong> No follow-ups, no pressure, no automated drip emails.</div></li>
                 </ul>
               </div>
