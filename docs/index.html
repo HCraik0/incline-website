@@ -2131,7 +2131,7 @@ function Footer() {
     { h: 'Navigate', links: [['Home','/'], ['About','/about'], ['Services','/services'], ['Contact','/contact']] },
     { h: 'Services', links: [['Foundation — £450/mo','/services'], ['Clarity — £950/mo','/services'], ['Command — £1,800/mo','/services']] },
     { h: 'Contact', links: [['0208 137 7039','tel:02081377039'], ['hello@incline.financial','mailto:hello@incline.financial'], ['Book a free discovery call','/contact']] },
-    { h: 'Legal', links: [['Privacy policy','#'], ['Terms','#'], ['Company no. 11842090','#']] },
+    { h: 'Legal', links: [['Privacy policy','/privacy.html'], ['Terms','#'], ['Company no. 11842090','#']] },
   ];
   return (
     <footer className="footer">
@@ -2147,7 +2147,7 @@ function Footer() {
               <ul>
                 {c.links.map(([l, h]) => (
                   <li key={l}>
-                    <a href={h.startsWith('/') ? "#" + h : h} onClick={(e) => { if (h.startsWith('/')) { e.preventDefault(); window.navigate(h); } }}>{l}</a>
+                    <a href={h.startsWith('/') && !h.endsWith('.html') ? "#" + h : h} onClick={(e) => { if (h.startsWith('/') && !h.endsWith('.html')) { e.preventDefault(); window.navigate(h); } }}>{l}</a>
                   </li>
                 ))}
               </ul>
