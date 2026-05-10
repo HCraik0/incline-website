@@ -16,7 +16,7 @@
    Uber-inspired: stark monochrome, pill-shaped UI, geometric type
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
 :root {
   /* ---------- Color: Primary ---------- */
@@ -1772,6 +1772,111 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* =========================================================
+   Mobile: hero stats block (replaces dashboard mocks below 768px)
+   ========================================================= */
+.hb-stats-mobile { display: none; }
+@media (max-width: 768px) {
+  .hb-mocks { display: none; }
+  .hb-stats-mobile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding-top: 28px;
+    margin-top: 28px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .hb-stat { text-align: left; }
+  .hb-stat-num {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-size: clamp(48px, 13vw, 64px);
+    font-weight: 500;
+    line-height: 1;
+    color: #000;
+    letter-spacing: -0.02em;
+  }
+  .hb-stat-label {
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #4b4b4b;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+}
+
+/* =========================================================
+   Mobile: tier-detail "See all inclusions" toggle
+   ========================================================= */
+.td-toggle { display: none; }
+@media (max-width: 768px) {
+  .td-includes:not(.expanded) .td-include-extra { display: none; }
+  .td-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.18);
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000;
+    cursor: pointer;
+    transition: background 180ms ease, border-color 180ms ease;
+  }
+  .td-toggle:hover { background: rgba(0,0,0,0.04); border-color: #000; }
+  .tier-detail.tier-dark .td-toggle {
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+  }
+  .tier-detail.tier-dark .td-toggle:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+  }
+}
+
+/* =========================================================
+   Mobile: tighten section spacing on small viewports (<=480px)
+   ========================================================= */
+@media (max-width: 480px) {
+  .wwd-section,
+  .why-section,
+  .faq-section { padding: 48px 20px; }
+  .who-section,
+  .tiers-section,
+  .vs-section,
+  .test-section,
+  .values-section,
+  .how-section { padding: 48px 20px 56px; }
+  .every-tier-section { padding: 48px 20px 40px; }
+
+  .section-head { margin-bottom: 32px; }
+  .wwd-head, .who-head, .tiers-head,
+  .vs-head, .test-head { margin-bottom: 32px; }
+
+  .final-cta-section { padding: 16px 12px 16px; }
+  .final-cta { padding: 48px 24px; border-radius: 24px; }
+  .fc-actions .btn,
+  .fc-actions .fc-phone { width: 100%; justify-content: center; }
+
+  .tier-detail { padding: 48px 20px; }
+  .tier-detail.tier-dark { margin: 16px 12px; padding: 48px 20px; border-radius: 24px; }
+  .td-grid { gap: 28px; }
+
+  .hb-card { padding: 36px 22px 40px; }
+  .page-hero .container { padding: 36px 22px 44px; }
+  .hb-title { font-size: clamp(36px, 9vw, 48px); }
+  .page-h1 { font-size: clamp(36px, 9vw, 52px) !important; }
+  .hb-lead, .page-hero .lead { font-size: 15px; }
+
+  .footer { padding: 56px 20px 24px; }
+  .footer-inner { padding: 0 8px; }
+}
+
+/* =========================================================
    ACCENT OVERRIDE — deep gold (#b8893a)
    Applied to: primary CTAs, active nav, bullet dots,
    key highlights, hover states, key icons.
@@ -2116,7 +2221,7 @@ function Footer() {
   const cols = [
     { h: 'Navigate', links: [['Home','/'], ['About','/about'], ['Services','/services'], ['Contact','/contact']] },
     { h: 'Services', links: [['Foundation — £450/mo','/services'], ['Clarity — £950/mo','/services'], ['Command — £1,800/mo','/services']] },
-    { h: 'Contact', links: [['0208 137 7039','tel:02081377039'], ['hello@incline.financial','mailto:hello@incline.financial'], ['Book a free discovery call','/contact']] },
+    { h: 'Contact', links: [['0208 137 7039','tel:02081377039'], ['hello@inclinefinancial.co.uk','mailto:hello@inclinefinancial.co.uk'], ['Book a free discovery call','/contact']] },
     { h: 'Legal', links: [['Privacy policy','/privacy.html']] },
   ];
   return (
@@ -2277,6 +2382,20 @@ function HeroBigBlock() {
               <span className="hbm2-act review">Review pack</span>
               <span className="hbm2-act export">Export</span>
             </div>
+          </div>
+        </div>
+        <div className="hb-stats-mobile" aria-hidden="false">
+          <div className="hb-stat">
+            <div className="hb-stat-num">3</div>
+            <div className="hb-stat-label">Service tiers</div>
+          </div>
+          <div className="hb-stat">
+            <div className="hb-stat-num">1</div>
+            <div className="hb-stat-label">Fixed monthly fee</div>
+          </div>
+          <div className="hb-stat">
+            <div className="hb-stat-num">0</div>
+            <div className="hb-stat-label">Lock-in contracts</div>
           </div>
         </div>
       </div>
@@ -2788,6 +2907,8 @@ function EveryTierIncludes() {
 }
 
 function TierDetail({ tier, reverse, dark }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const hasMore = tier.includes.length > 4;
   return (
     <section className={"tier-detail" + (dark ? " tier-dark" : "") + (reverse ? " tier-reverse" : "")}>
       <div className="container">
@@ -2813,14 +2934,22 @@ function TierDetail({ tier, reverse, dark }) {
           </div>
           <div className="td-right">
             <div className="td-includes-label">What&rsquo;s included</div>
-            <ul className="td-includes">
+            <ul className={"td-includes" + (expanded ? " expanded" : "")}>
               {tier.includes.map((c, i) => (
-                <li key={i}>
+                <li key={i} className={i >= 4 ? "td-include-extra" : ""}>
                   <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
                   <span>{c}</span>
                 </li>
               ))}
             </ul>
+            {hasMore && (
+              <button type="button"
+                      className="td-toggle"
+                      aria-expanded={expanded}
+                      onClick={() => setExpanded(v => !v)}>
+                {expanded ? 'Show fewer' : 'See all inclusions'}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -3034,7 +3163,7 @@ function ContactPage() {
                 </div>
                 <div className="success-meta-row">
                   <div className="success-meta-label">Or email</div>
-                  <a href="mailto:hello@incline.financial" className="success-meta-val">hello@incline.financial</a>
+                  <a href="mailto:hello@inclinefinancial.co.uk" className="success-meta-val">hello@inclinefinancial.co.uk</a>
                 </div>
               </div>
               <div className="success-actions">
