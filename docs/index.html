@@ -1875,27 +1875,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .nav-sidebar-phone:hover { color: #4b4b4b; }
 
-.nav-sidebar-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 14px;
-  padding: 12px 20px;
-  background: transparent;
-  color: #0A0F1E;
-  border: 1px solid #0A0F1E;
-  border-radius: 3px;
-  font-family: 'Instrument Sans', system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 180ms ease, color 180ms ease;
-}
-.nav-sidebar-cta:hover { background: #0A0F1E; color: #fff; }
-
 @media (max-width: 768px) {
   .nav-hamburger { display: inline-flex; align-items: center; justify-content: center; }
   .nav-sticky .btn-primary,
@@ -2325,11 +2304,6 @@ function Nav({ current }) {
            href="tel:02081377039"
            onClick={() => setMenuOpen(false)}>
           0208 137 7039
-        </a>
-        <a className="nav-sidebar-cta"
-           href="#/contact"
-           onClick={goto('/contact')}>
-          Book a free discovery call
         </a>
       </aside>
     </>
