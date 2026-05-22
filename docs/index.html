@@ -3252,6 +3252,7 @@ window.ServicesPage = ServicesPage;
 /* Contact page — Incline Financial (per spec) */
 
 function ContactPage(props) {
+  console.log('ContactPage render', 'submitted:', props.submitted, 'path:', window.location.hash);
   const [form, setForm] = React.useState({
     name: '', phone: '', company: '', email: '',
     revenue: '', tier: '', notes: '',
@@ -3269,6 +3270,7 @@ function ContactPage(props) {
   };
 
   const submit = (ev) => {
+    console.log('SUBMIT FIRED');
     ev.preventDefault();
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
@@ -3289,6 +3291,7 @@ function ContactPage(props) {
       }),
     }).catch(() => {});
     props.onSubmit(form.name.split(' ')[0] || '');
+    console.log('SUBMITTED STATE SET');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -3498,6 +3501,10 @@ function App() {
   });
   const [contactSubmitted, setContactSubmitted] = React.useState(false);
   const [contactName, setContactName] = React.useState('');
+
+  React.useEffect(() => {
+    console.log('contactSubmitted changed to:', contactSubmitted);
+  }, [contactSubmitted]);
 
   React.useEffect(() => {
     window.navigate = (to) => {
