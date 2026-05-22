@@ -3257,7 +3257,10 @@ function ContactPage() {
     revenue: '', tier: '', notes: '',
   });
   const [errors, setErrors] = React.useState({});
-  const [submitted, setSubmitted] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(
+    () => !!sessionStorage.getItem('contact_submitted')
+  );
+  const savedName = sessionStorage.getItem('contact_submitted') || '';
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
 
   const validate = () => {
@@ -3290,6 +3293,7 @@ function ContactPage() {
       }),
     }).catch(() => {});
     setSubmitted(true);
+    sessionStorage.setItem('contact_submitted', form.name.split(' ')[0] || 'there');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
@@ -3300,7 +3304,7 @@ function ContactPage() {
           <div className="container">
             <span className="eyebrow dot">Booked</span>
             <h1 className="hb-title page-h1" style={{marginTop:20}}>
-              Thanks{form.name ? ', ' + form.name.split(' ')[0] : ''}.<br/>
+              Thanks{savedName ? ', ' + savedName : ''}.<br/>
               <span className="hb-title-emph">We&rsquo;ll be in touch.</span>
             </h1>
           </div>
@@ -3318,8 +3322,8 @@ function ContactPage() {
               </ul>
             </div>
             <div className="success-actions" style={{marginTop: 32}}>
-              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); window.navigate('/'); }}>Back to home</a>
-              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>Explore our services</a>
+              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); sessionStorage.removeItem('contact_submitted'); window.navigate('/'); }}>Back to home</a>
+              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); sessionStorage.removeItem('contact_submitted'); window.navigate('/services'); }}>Explore our services</a>
             </div>
             <p className="form-foot" style={{marginTop: 20}}>
               While you wait — <a href="tel:02080640366" style={{color: 'inherit', textDecoration: 'underline'}}>0208 064 0366</a> if you would rather speak to someone now. Mon–Fri, 9am–6pm.
