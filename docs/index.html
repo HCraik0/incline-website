@@ -3306,30 +3306,24 @@ function ContactPage() {
           </div>
         </section>
         <section className="success-section">
-          <div className="container">
-            <div className="success-card">
-              <div className="success-check">
-                <Icon name="check" size={32} stroke={2.5} />
-              </div>
-              <h2 className="success-title">Expect a call within one business day.</h2>
-              <p className="success-body">
-                A senior advisor will email <strong>{form.email}</strong> to confirm a 30-minute discovery call. No prep needed — just bring an honest answer to the question &ldquo;what do you wish you knew about your numbers?&rdquo;. The rest is our job.
-              </p>
-              <div className="success-meta">
-                <div className="success-meta-row">
-                  <div className="success-meta-label">If urgent, call</div>
-                  <a href="tel:02080640366" className="success-meta-val">0208 064 0366</a>
-                </div>
-                <div className="success-meta-row">
-                  <div className="success-meta-label">Or email</div>
-                  <a href="mailto:hello@inclinefinancial.co.uk" className="success-meta-val">hello@inclinefinancial.co.uk</a>
-                </div>
-              </div>
-              <div className="success-actions">
-                <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); window.navigate('/'); }}>Back to home</a>
-                <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>Read about the tiers</a>
-              </div>
+          <div className="container" style={{maxWidth: 720}}>
+            <div className="expect-panel">
+              <div className="expect-eyebrow">What happens next</div>
+              <ul className="expect-list">
+                <li><span className="expect-num">01</span><div>We will call you within one business day. Not a sales call — a conversation.</div></li>
+                <li><span className="expect-num">02</span><div>We will spend 30 minutes understanding your business and what you actually need.</div></li>
+                <li><span className="expect-num">03</span><div>We will tell you honestly which tier is the right fit — including if it is the lower one.</div></li>
+                <li><span className="expect-num">04</span><div>We will follow up with a clear fixed-fee proposal within two working days.</div></li>
+                <li><span className="expect-num">05</span><div>No commitment required. No follow-ups if you decide it is not for you.</div></li>
+              </ul>
             </div>
+            <div className="success-actions" style={{marginTop: 32}}>
+              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); window.navigate('/'); }}>Back to home</a>
+              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>Explore our services</a>
+            </div>
+            <p className="form-foot" style={{marginTop: 20}}>
+              While you wait — <a href="tel:02080640366" style={{color: 'inherit', textDecoration: 'underline'}}>0208 064 0366</a> if you would rather speak to someone now. Mon–Fri, 9am–6pm.
+            </p>
           </div>
         </section>
       </>
