@@ -3251,16 +3251,12 @@ window.ServicesPage = ServicesPage;
   <script type="text/babel">
 /* Contact page — Incline Financial (per spec) */
 
-function ContactPage() {
+function ContactPage(props) {
   const [form, setForm] = React.useState({
     name: '', phone: '', company: '', email: '',
     revenue: '', tier: '', notes: '',
   });
   const [errors, setErrors] = React.useState({});
-  const [submitted, setSubmitted] = React.useState(
-    () => !!sessionStorage.getItem('contact_submitted')
-  );
-  const savedName = sessionStorage.getItem('contact_submitted') || '';
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
 
   const validate = () => {
@@ -3292,19 +3288,18 @@ function ContactPage() {
         submitted: new Date().toISOString(),
       }),
     }).catch(() => {});
-    setSubmitted(true);
-    sessionStorage.setItem('contact_submitted', form.name.split(' ')[0] || 'there');
+    props.onSubmit(form.name.split(' ')[0] || '');
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  if (submitted) {
+  if (props.submitted) {
     return (
       <>
         <section className="page-hero">
           <div className="container">
             <span className="eyebrow dot">Booked</span>
             <h1 className="hb-title page-h1" style={{marginTop:20}}>
-              Thanks{savedName ? ', ' + savedName : ''}.<br/>
+              Thanks{props.submittedName ? ', ' + props.submittedName : ''}.<br/>
               <span className="hb-title-emph">We&rsquo;ll be in touch.</span>
             </h1>
           </div>
@@ -3322,8 +3317,8 @@ function ContactPage() {
               </ul>
             </div>
             <div className="success-actions" style={{marginTop: 32}}>
-              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); sessionStorage.removeItem('contact_submitted'); window.navigate('/'); }}>Back to home</a>
-              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); sessionStorage.removeItem('contact_submitted'); window.navigate('/services'); }}>Explore our services</a>
+              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); props.onSubmit(''); window.navigate('/'); }}>Back to home</a>
+              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); props.onSubmit(''); window.navigate('/services'); }}>Explore our services</a>
             </div>
             <p className="form-foot" style={{marginTop: 20}}>
               While you wait — <a href="tel:02080640366" style={{color: 'inherit', textDecoration: 'underline'}}>0208 064 0366</a> if you would rather speak to someone now. Mon–Fri, 9am–6pm.
@@ -3501,6 +3496,8 @@ function App() {
     const h = window.location.hash.replace(/^#/, '');
     return h && h.startsWith('/') ? h : '/';
   });
+  const [contactSubmitted, setContactSubmitted] = React.useState(false);
+  const [contactName, setContactName] = React.useState('');
 
   React.useEffect(() => {
     window.navigate = (to) => {
@@ -3571,10 +3568,20 @@ function App() {
     }
   }, [path]);
 
-  let Page = HomePage;
-  if (path === '/about') Page = AboutPage;
-  else if (path === '/services') Page = ServicesPage;
-  else if (path === '/contact') Page = ContactPage;
+  let pageEl;
+  if (path === '/about') pageEl = <AboutPage />;
+  else if (path === '/services') pageEl = <ServicesPage />;
+  else if (path === '/contact') pageEl = (
+    <ContactPage
+      submitted={contactSubmitted}
+      submittedName={contactName}
+      onSubmit={(name) => {
+        setContactSubmitted(true);
+        setContactName(name);
+      }}
+    />
+  );
+  else pageEl = <HomePage />;
 
   const skipFooter = false;
 
@@ -3584,7 +3591,7 @@ function App() {
       <div className="page-shell">
         <Nav current={path} />
         <main>
-          <Page />
+          {pageEl}
         </main>
         {!skipFooter && <Footer />}
       </div>
