@@ -3261,6 +3261,14 @@ function ContactPage() {
   const [errors, setErrors] = React.useState({});
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
 
+  React.useEffect(() => {
+    if (step === 'success') {
+      document.querySelectorAll('main section').forEach(s => {
+        s.classList.add('in');
+      });
+    }
+  }, [step]);
+
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Required';
@@ -3298,7 +3306,7 @@ function ContactPage() {
   if (step === 'success') {
     return (
       <>
-        <section className="page-hero">
+        <section className="page-hero in">
           <div className="container">
             <span className="eyebrow dot">Booked</span>
             <h1 className="hb-title page-h1" style={{marginTop:20}}>
@@ -3307,7 +3315,7 @@ function ContactPage() {
             </h1>
           </div>
         </section>
-        <section className="success-section">
+        <section className="success-section in">
           <div className="container" style={{maxWidth: 720}}>
             <div className="expect-panel">
               <div className="expect-eyebrow">What happens next</div>
