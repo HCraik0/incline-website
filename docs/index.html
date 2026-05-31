@@ -3252,22 +3252,12 @@ window.ServicesPage = ServicesPage;
 /* Contact page — Incline Financial (per spec) */
 
 function ContactPage() {
-  const [step, setStep] = React.useState('form');
-  const [firstName, setFirstName] = React.useState('');
   const [form, setForm] = React.useState({
     name: '', phone: '', company: '', email: '',
     revenue: '', tier: '', notes: '',
   });
   const [errors, setErrors] = React.useState({});
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
-
-  React.useEffect(() => {
-    if (step === 'success') {
-      document.querySelectorAll('main section').forEach(s => {
-        s.classList.add('in');
-      });
-    }
-  }, [step]);
 
   const validate = () => {
     const e = {};
@@ -3298,47 +3288,8 @@ function ContactPage() {
         submitted: new Date().toISOString(),
       }),
     }).catch(() => {});
-    setFirstName(form.name.trim().split(/\s+/)[0] || '');
-    setStep('success');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.location.href = '/thank-you.html';
   };
-
-  if (step === 'success') {
-    return (
-      <>
-        <section className="page-hero in">
-          <div className="container">
-            <span className="eyebrow dot">Booked</span>
-            <h1 className="hb-title page-h1" style={{marginTop:20}}>
-              Thanks{firstName ? ', ' + firstName : ''}.<br/>
-              <span className="hb-title-emph" style={{fontStyle: 'italic'}}>We&rsquo;ll be in touch.</span>
-            </h1>
-          </div>
-        </section>
-        <section className="success-section in">
-          <div className="container" style={{maxWidth: 720}}>
-            <div className="expect-panel">
-              <div className="expect-eyebrow">What happens next</div>
-              <ul className="expect-list">
-                <li><span className="expect-num">01</span><div>We will call you within one business day. Not a sales call — a conversation.</div></li>
-                <li><span className="expect-num">02</span><div>We will spend 30 minutes understanding your business and what you actually need.</div></li>
-                <li><span className="expect-num">03</span><div>We will tell you honestly which tier is the right fit — including if it is the lower one.</div></li>
-                <li><span className="expect-num">04</span><div>We will follow up with a clear fixed-fee proposal within two working days.</div></li>
-                <li><span className="expect-num">05</span><div>No commitment required. No follow-ups if you decide it is not for you.</div></li>
-              </ul>
-            </div>
-            <div className="success-actions" style={{marginTop: 32}}>
-              <a className="btn btn-secondary" href="#/" onClick={(e) => { e.preventDefault(); setStep('form'); window.navigate('/'); }}>Back to home</a>
-              <a className="btn btn-primary" href="#/services" onClick={(e) => { e.preventDefault(); setStep('form'); window.navigate('/services'); }}>Explore our services</a>
-            </div>
-            <p className="form-foot" style={{marginTop: 20}}>
-              While you wait — <a href="tel:02080640366" style={{color: 'inherit', textDecoration: 'underline'}}>0208 064 0366</a> if you would rather speak to someone now. Mon–Fri, 9am–6pm.
-            </p>
-          </div>
-        </section>
-      </>
-    );
-  }
 
   return (
     <>
