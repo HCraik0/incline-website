@@ -3319,26 +3319,30 @@ function ContactPage() {
     return e;
   };
 
-  const submit = (ev) => {
+  const submit = async (ev) => {
     ev.preventDefault();
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
+    try {
+      await fetch('https://formspree.io/f/xaqkjppr', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          business: form.company,
+          email: form.email,
+          turnover: form.revenue,
+          tier: form.tier,
+          notes: form.notes,
+          source: 'Contact page',
+          submitted: new Date().toISOString(),
+        }),
+      });
+    } catch (err) {
+      console.error('Formspree error:', err);
+    }
     if (window.fbq) window.fbq('track', 'Lead');
-    fetch('https://formspree.io/f/xaqkjppr', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: form.name,
-        phone: form.phone,
-        business: form.company,
-        email: form.email,
-        turnover: form.revenue,
-        tier: form.tier,
-        notes: form.notes,
-        source: 'Contact page',
-        submitted: new Date().toISOString(),
-      }),
-    }).catch(() => {});
     window.location.href = '/thank-you.html';
   };
 
