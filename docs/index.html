@@ -1752,7 +1752,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 
   .success-card { padding: 40px 24px 48px; }
 
-  .final-cta { padding: 64px 32px; }
   .tier-detail.tier-dark { margin: 24px 16px; padding: 56px 24px; }
 }
 
@@ -1933,8 +1932,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .wwd-head, .who-head, .tiers-head,
   .vs-head, .test-head { margin-bottom: 32px; }
 
-  .final-cta-section { padding: 16px 12px 16px; }
-  .final-cta { padding: 48px 24px; border-radius: 24px; }
+  .final-cta { padding: 64px 28px; }
   .fc-actions .btn,
   .fc-actions .fc-phone { width: 100%; justify-content: center; }
 
@@ -2173,69 +2171,33 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
 }
 
 /* =========================================================
-   BOTTOM CTA — flat, full-width black, no card
-   Used on every page (home, about, services, tiers).
-   Removes the rounded card, grid overlay, and radial glow;
-   makes inner CTA buttons plain white text — no fill, no border.
+   BOTTOM CTA — match landing.html exactly
+   Eyebrow gets gold accent + gold dot pseudo; the booking
+   CTA inside the card reverts to white-on-dark for contrast
+   against the inner #000 card.
    ========================================================= */
-.final-cta-section {
-  background: #000000;
-  padding: 96px 24px;
-  position: relative;
-  overflow: hidden;
+.fc-eyebrow {
+  color: var(--accent);
 }
-.final-cta-section::before {
+.fc-eyebrow::before {
   content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  pointer-events: none;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
 }
-.final-cta {
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-  overflow: visible;
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-  color: #ffffff;
-  position: relative;
-  z-index: 1;
-}
-.final-cta::before,
-.final-cta::after { display: none; }
 
-.final-cta .btn,
-.final-cta .btn-primary,
 .final-cta .btn-on-dark {
-  background: transparent !important;
-  color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
   border: none !important;
-  box-shadow: none !important;
-  padding: 8px 4px;
-  font-weight: 500;
 }
-.final-cta .btn:hover,
-.final-cta .btn-primary:hover,
 .final-cta .btn-on-dark:hover {
-  background: transparent !important;
-  color: rgba(255,255,255,0.75) !important;
-}
-
-.final-cta .fc-phone { color: #ffffff; }
-.final-cta .fc-phone:hover { color: rgba(255,255,255,0.75); }
-
-@media (max-width: 980px) {
-  .final-cta-section { padding: 72px 20px; }
-  .final-cta { padding: 0; border-radius: 0; }
-}
-@media (max-width: 640px) {
-  .final-cta-section { padding: 56px 16px; }
-  .final-cta { padding: 0; border-radius: 0; }
+  background: #e2e2e2 !important;
+  color: #000000 !important;
 }
 
   </style>
