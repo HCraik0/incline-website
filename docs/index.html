@@ -3305,7 +3305,7 @@ window.ServicesPage = ServicesPage;
 function ContactPage() {
   const [form, setForm] = React.useState({
     name: '', phone: '', company: '', email: '',
-    revenue: '', tier: '', notes: '',
+    revenue: '', tier: 'Not sure yet — advise me', notes: '',
   });
   const [errors, setErrors] = React.useState({});
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
@@ -3313,6 +3313,7 @@ function ContactPage() {
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Required';
+    if (!form.phone.trim()) e.phone = 'Required';
     if (!form.company.trim()) e.company = 'Required';
     if (!form.email.trim()) e.email = 'Required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Not a valid email';
@@ -3415,9 +3416,10 @@ function ContactPage() {
                     <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Jane Doe" />
                     {errors.name && <div className="err">{errors.name}</div>}
                   </div>
-                  <div className="field">
+                  <div className={"field" + (errors.phone ? ' error' : '')}>
                     <label>Phone number</label>
                     <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
+                    {errors.phone && <div className="err">{errors.phone}</div>}
                   </div>
                   <div className={"field full" + (errors.company ? ' error' : '')}>
                     <label>Business name</label>
@@ -3443,11 +3445,10 @@ function ContactPage() {
                   <div className="field full">
                     <label>Which tier interests you?</label>
                     <select value={form.tier} onChange={(e) => set('tier', e.target.value)}>
-                      <option value="">Select</option>
+                      <option>Not sure yet — advise me</option>
                       <option>Foundation — from £450/month</option>
                       <option>Clarity — from £950/month</option>
                       <option>Command — from £1,800/month</option>
-                      <option>Not sure yet — would like a recommendation</option>
                     </select>
                   </div>
                   <div className="field full">
