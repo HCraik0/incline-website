@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Incline Financial — Financial reporting & advisory for growing UK businesses</title>
+  <title>Incline Financial — The outsourced finance function for growing construction subcontractors</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="The outsourced finance function for growing construction subcontractors. CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control — built properly and run for you.">
+  <meta property="og:title" content="Incline Financial — The outsourced finance function for growing construction subcontractors">
+  <meta property="og:description" content="CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control — built properly and run for you.">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
@@ -2275,7 +2279,7 @@ function TopBar() {
   return (
     <div className="topbar">
       <div className="topbar-inner">
-        <span className="topbar-tag">Monthly financial reporting &amp; advisory · for ambitious UK businesses</span>
+        <span className="topbar-tag">The outsourced finance function · for growing construction subcontractors</span>
         <div className="topbar-actions">
           <a href="tel:02080640366" className="topbar-phone">
             <Icon name="phone" size={12} stroke={2} /> 0208 064 0366
@@ -2303,7 +2307,8 @@ function Nav({ current }) {
   }, [menuOpen]);
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/services', label: 'Services' },
+    { href: '/what-we-do', label: 'What We Do' },
+    { href: '/construction-finance', label: 'Construction Finance' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -2330,7 +2335,7 @@ function Nav({ current }) {
           <a className="nav-phone" href="tel:02080640366">0208 064 0366</a>
           <a className="btn btn-primary" href="#/contact"
              onClick={goto('/contact')}>
-            Book a free discovery call
+            Book a free scoping call
           </a>
           <button type="button"
                   className="nav-hamburger"
@@ -2386,40 +2391,16 @@ function MobileStickyBar() {
       </a>
       <a href="#/contact" className="ms-btn ms-book"
          onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-        Book a free call <Icon name="arrow-right" size={14} stroke={2} />
+        Book a scoping call <Icon name="arrow-right" size={14} stroke={2} />
       </a>
     </div>
   );
 }
 
-function CTABanner() {
-  const [email, setEmail] = React.useState('');
-  const [sent, setSent] = React.useState(false);
-  const submit = (e) => {
-    e.preventDefault();
-    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      window.navigate('/contact');
-    }
-  };
-  return (
-    <section className="cta-section">
-      <div className="cta-banner">
-        <h2>Take control of your<br/>financial future today.</h2>
-        <p className="lead">Empower your business with monthly insight and a senior advisor relationship designed to help you make confident decisions.</p>
-        <form className="form-row" onSubmit={submit}>
-          <input type="email" placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <button type="submit" className="btn btn-primary">Get started</button>
-        </form>
-      </div>
-    </section>
-  );
-}
-
 function Footer() {
   const cols = [
-    { h: 'Navigate', links: [['Home','/'], ['About','/about'], ['Services','/services'], ['Contact','/contact']] },
-    { h: 'Services', links: [['Foundation — £450/mo','/services'], ['Clarity — £950/mo','/services'], ['Command — £1,800/mo','/services']] },
-    { h: 'Contact', links: [['0208 064 0366','tel:02080640366'], ['hello@inclinefinancial.co.uk','mailto:hello@inclinefinancial.co.uk'], ['Book a free discovery call','/contact']] },
+    { h: 'Navigate', links: [['Home','/'], ['What We Do','/what-we-do'], ['Construction Finance','/construction-finance'], ['About','/about'], ['Contact','/contact']] },
+    { h: 'Contact', links: [['0208 064 0366','tel:02080640366'], ['WhatsApp','https://wa.me/44XXXXXXXXXX'], ['hello@inclinefinancial.co.uk','mailto:hello@inclinefinancial.co.uk'], ['Book a free scoping call','/contact']] },
     { h: 'Legal', links: [['Privacy policy','/privacy.html']] },
   ];
   return (
@@ -2428,7 +2409,7 @@ function Footer() {
         <div className="footer-cols">
           <div className="footer-brand">
             <Brand />
-            <p className="footer-tag">Financial reporting and advisory for ambitious UK businesses. Monthly insight, a real advisor, no upsells.</p>
+            <p className="footer-tag">The outsourced finance function for growing construction subcontractors. CIS, reverse charge VAT, retentions, payment runs — built properly and run for you.</p>
           </div>
           {cols.map(c => (
             <div key={c.h}>
@@ -2462,7 +2443,6 @@ window.Icon = Icon;
 window.TopBar = TopBar;
 window.Nav = Nav;
 window.MobileStickyBar = MobileStickyBar;
-window.CTABanner = CTABanner;
 window.Footer = Footer;
 
   </script>
@@ -2474,48 +2454,48 @@ function HeroBigBlock() {
     <section className="hero-big">
       <div className="hb-card">
         <div className="hb-text">
-          <span className="eyebrow dot">Financial reporting &amp; advisory</span>
+          <span className="eyebrow dot">Construction finance function</span>
           <h1 className="hb-title" style={{marginTop:20}}>
-            Your accountant<br/>files the past.<br/>
-            <span className="hb-title-emph">We run<br/>the future.</span>
+            The outsourced<br/>finance function<br/>
+            <span className="hb-title-emph">for growing<br/>construction<br/>subcontractors.</span>
           </h1>
           <p className="hb-lead">
-            Incline gives ambitious UK business owners what a standard accountant doesn&rsquo;t — monthly management accounts, plain-English insight, and a senior advisor who knows your numbers as well as you do. Fixed monthly fee, no upsells.
+            CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control &mdash; built properly and run for you.
           </p>
           <div className="hb-cta-row">
             <a className="btn btn-primary lg" href="#/contact"
                onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
             </a>
-            <a className="btn btn-secondary lg" href="#/services"
-               onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
-              See the services
+            <a className="btn btn-secondary lg" href="#/what-we-do"
+               onClick={(e) => { e.preventDefault(); window.navigate('/what-we-do'); }}>
+              See what we do
             </a>
           </div>
           <div className="hb-trust">
             <span className="hb-trust-dots"><span></span><span></span><span></span></span>
-            <span>Senior advisor on every account · Fixed monthly fees</span>
+            <span>Construction only · Fixed monthly fees · You approve every payment</span>
           </div>
         </div>
         <div className="hb-mocks">
           <div className="hb-mock hb-m1">
             <div className="hbm-head">
-              <span className="hbm-title">March board pack</span>
+              <span className="hbm-title">Payment run · week 24</span>
               <span className="hbm-bell"><Icon name="check" size={12} stroke={2.5} /></span>
             </div>
-            <div className="hbm-search">Period: 1 – 31 March 2026 · 14 pages</div>
+            <div className="hbm-search">Prepared for your approval · 12 subcontractors</div>
             <div className="hbm-tabs">
-              <span className="hbm-tab active">P&amp;L</span>
-              <span className="hbm-tab">Cash</span>
-              <span className="hbm-tab">KPIs</span>
+              <span className="hbm-tab active">Subs</span>
+              <span className="hbm-tab">CIS</span>
+              <span className="hbm-tab">Retentions</span>
               <span className="hbm-tab">Notes</span>
             </div>
-            <div className="hbm-eyebrow">P&amp;L SUMMARY · MARCH</div>
+            <div className="hbm-eyebrow">PAYMENT RUN · TOTAL</div>
             <div className="hbm-feat">
               <div className="hbm-feat-l">
-                <div className="hbm-feat-title">Revenue £<span data-counter-target="84200" data-counter-format="comma">0</span></div>
-                <div className="hbm-feat-sub">EBITDA £<span data-counter-target="14800" data-counter-format="comma">0</span> · Net £11,200</div>
-                <div className="hbm-feat-tag">+6.2% MoM</div>
+                <div className="hbm-feat-title">£<span data-counter-target="47320" data-counter-format="comma">0</span></div>
+                <div className="hbm-feat-sub">CIS deducted £<span data-counter-target="4820" data-counter-format="comma">0</span> · Net £42,500</div>
+                <div className="hbm-feat-tag">Awaiting your approval</div>
               </div>
               <div className="hbm-feat-r">
                 <svg viewBox="0 0 60 30" width="60" height="30">
@@ -2523,33 +2503,33 @@ function HeroBigBlock() {
                 </svg>
               </div>
             </div>
-            <div className="hbm-eyebrow">COMMENTARY · ADVISOR NOTE</div>
+            <div className="hbm-eyebrow">SUBCONTRACTORS</div>
             <div className="hbm-row">
               <div className="hbm-row-mark dark"></div>
               <div className="hbm-row-text">
-                <div className="hbm-row-t">Gross margin held at 64.2%</div>
-                <div className="hbm-row-s">Up 1.1pts vs Feb despite Q1 input prices</div>
+                <div className="hbm-row-t">Groundworks · verified · 20% deducted</div>
+                <div className="hbm-row-s">Application 04 · certified £18,400</div>
               </div>
             </div>
             <div className="hbm-row">
               <div className="hbm-row-mark light"></div>
               <div className="hbm-row-text">
-                <div className="hbm-row-t">Cash inflow £58,420 in March</div>
-                <div className="hbm-row-s">DSO improved to 28 days from 38</div>
+                <div className="hbm-row-t">Roofing · gross status · nil deduction</div>
+                <div className="hbm-row-s">Application 02 · certified £9,120</div>
               </div>
             </div>
           </div>
           <div className="hb-mock hb-m2">
             <div className="hbm2-head">
               <div>
-                <div className="hbm2-co">Cash &amp; KPI snapshot</div>
-                <div className="hbm2-tag">12-MONTH ROLLING</div>
+                <div className="hbm2-co">Retention register</div>
+                <div className="hbm2-tag">LIVE · ALL CONTRACTS</div>
               </div>
               <span className="hbm-bell" style={{background:'#1a1a1a', color:'#fff'}}>
                 <Icon name="chart" size={12} stroke={2} />
               </span>
             </div>
-            <div className="hbm2-amt">£<span data-counter-target="43600" data-counter-format="comma">0</span> <span className="hbm2-delta">cash on hand</span></div>
+            <div className="hbm2-amt">£<span data-counter-target="86400" data-counter-format="comma">0</span> <span className="hbm2-delta">held by customers</span></div>
             <div className="hbm2-chart">
               <svg viewBox="0 0 220 80" preserveAspectRatio="none">
                 <path d="M0 60 L20 50 L40 56 L60 40 L80 44 L100 30 L120 36 L140 22 L160 28 L180 14 L200 18 L220 8"
@@ -2564,20 +2544,20 @@ function HeroBigBlock() {
             </div>
             <div className="hbm2-rows">
               <div className="hbm2-r">
-                <div><span data-counter-target="64.2" data-counter-format="decimal">0</span>%</div>
-                <div className="hbm2-r-l">Gross margin</div>
+                <div><span data-counter-target="14">0</span></div>
+                <div className="hbm2-r-l">Contracts</div>
               </div>
               <div className="hbm2-r">
-                <div><span data-counter-target="6">0</span> mo.</div>
-                <div className="hbm2-r-l">Runway</div>
+                <div>£<span data-counter-target="24200" data-counter-format="comma">0</span></div>
+                <div className="hbm2-r-l">Due &lt; 90 days</div>
               </div>
               <div className="hbm2-r">
-                <div><span data-counter-target="28">0</span> days</div>
-                <div className="hbm2-r-l">DSO</div>
+                <div><span data-counter-target="3">0</span></div>
+                <div className="hbm2-r-l">Overdue release</div>
               </div>
             </div>
             <div className="hbm2-actions">
-              <span className="hbm2-act review">Review pack</span>
+              <span className="hbm2-act review">Chase releases</span>
               <span className="hbm2-act export">Export</span>
             </div>
           </div>
@@ -2589,21 +2569,21 @@ function HeroBigBlock() {
 
 function SocialProof() {
   const items = [
-    'Management Accounts',
-    'Financial Reporting',
-    'Bookkeeping',
-    'KPI Dashboards',
-    'Cash Flow Forecasting',
-    'Variance Analysis',
-    'Budget Preparation',
-    'Scenario Planning',
-    'Investor Reporting',
-    'Profitability Analysis',
-    'Financial Insight Reports',
-    'Monthly Advisory Call',
-    'Board-Ready Reporting',
-    'Working Capital Analysis',
-    'Rolling Forecasts',
+    'CIS Verification & Deductions',
+    'Monthly CIS Returns',
+    'Domestic Reverse Charge VAT',
+    'Retention Register',
+    'Applications for Payment',
+    'Payment Runs Prepared',
+    'Credit Control',
+    'Subcontractor Ledger',
+    'Purchase & Sales Ledger',
+    'Bank Reconciliations',
+    'Payroll',
+    'Xero + Dext',
+    'Live Cash Position',
+    'Historical Clean-Up',
+    'Written Processes',
   ];
   return (
     <section className="proof-bar">
@@ -2623,38 +2603,58 @@ function SocialProof() {
   );
 }
 
-function WhatWeDo() {
-  const pillars = [
+function TheProblem() {
+  return (
+    <section className="why-section">
+      <div className="container">
+        <div className="why-grid">
+          <div className="why-text">
+            <span className="eyebrow dot">The problem</span>
+            <h2 className="h1" style={{marginTop:14}}>You&rsquo;re winning bigger contracts<br/>than your back office can handle.</h2>
+          </div>
+          <div className="why-body">
+            <p className="lead">More sites. More subcontractors to verify and pay. Retentions held for months. Applications for payment to track. CIS and reverse charge VAT that a high-street bookkeeper gets wrong.</p>
+            <p className="lead">And a growing suspicion that you don&rsquo;t actually know, week to week, where your cash is.</p>
+            <p className="lead lead-emph">You don&rsquo;t need another generalist accountant. You need a finance function built for how construction actually works &mdash; and run for you, so you can get back on the tenders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  const cards = [
     {
       n: '01',
-      t: 'Clean financial records',
-      d: "We start with the books — properly maintained, properly reconciled, every month. You can't run a business off numbers you don't trust, so we make sure the foundation is right before anything else.",
+      t: 'Finance Function Build',
+      label: 'One-off setup project',
+      d: "We build your finance function from the ground up and clean up whatever's behind you. Software, job coding, CIS, reverse charge, retention register, payment approvals, credit control, live cash position.",
+      price: 'From £1,500 — fixed price, quoted after a free scoping call.',
     },
     {
       n: '02',
-      t: 'Meaningful monthly reporting',
-      d: "Consistently, every month, you get a board-ready pack. P&L, balance sheet, cash flow, KPIs, and a written read on what changed and why. No spreadsheet exports. No raw data dumps.",
-    },
-    {
-      n: '03',
-      t: 'A real advisory relationship',
-      d: "One senior advisor — the same person every month. They know your business, your board, and what you're trying to do. Available between calls. Not a switchboard, not a junior, not a sales rep.",
+      t: 'Ongoing Operations',
+      label: 'Monthly retainer',
+      d: "Once it's built, we run it. Bookkeeping, CIS and VAT returns prepared, ledgers, payroll, payment runs prepared for your approval, credit control, retention and application tracking.",
+      price: 'From £850/month — fixed fee, no hourly billing.',
     },
   ];
   return (
     <section className="wwd-section">
       <div className="container">
         <div className="wwd-head">
-          <span className="eyebrow dot">What we do</span>
-          <h2 className="h1">Three things, done well —<br/>not ten things, done in passing.</h2>
-          <p className="lead">Incline is built around one cadence &mdash; monthly numbers, monthly insight, monthly conversation. We focus entirely on management information so your financial picture is always current, always clear, and always explained.</p>
+          <span className="eyebrow dot">How it works</span>
+          <h2 className="h1">Build it. Run it.<br/>Two stages, one fixed price.</h2>
         </div>
-        <div className="wwd-grid">
-          {pillars.map(p => (
-            <article className="wwd-card" key={p.n}>
-              <div className="wwd-num">{p.n}</div>
-              <h3 className="wwd-title">{p.t}</h3>
-              <p className="wwd-body">{p.d}</p>
+        <div className="wwd-grid" style={{gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))'}}>
+          {cards.map(c => (
+            <article className="wwd-card" key={c.n}>
+              <div className="wwd-num">{c.n}</div>
+              <h3 className="wwd-title">{c.t}</h3>
+              <div className="tier-eyebrow" style={{marginTop:-6,marginBottom:12}}>{c.label}</div>
+              <p className="wwd-body">{c.d}</p>
+              {c.price && <p className="wwd-body" style={{marginTop:16,fontWeight:600,color:'var(--fg-1)'}}>{c.price}</p>}
             </article>
           ))}
         </div>
@@ -2663,42 +2663,75 @@ function WhatWeDo() {
   );
 }
 
-function WhoItIsFor() {
-  const profiles = [
+function AdvisoryBand() {
+  const goto = (e) => {
+    e.preventDefault();
+    window.navigate('/what-we-do');
+    setTimeout(() => {
+      const el = document.getElementById('advisory');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+  };
+  return (
+    <section className="why-section" style={{background:'var(--accent-bg)'}}>
+      <div className="container">
+        <div className="why-grid">
+          <div className="why-text">
+            <span className="eyebrow dot">Through our partner network</span>
+            <h2 className="h1" style={{marginTop:14}}>Strategic Advisory</h2>
+          </div>
+          <div className="why-body">
+            <p className="lead">Once your finance function is running clean, the bigger questions start. Which contracts are actually making money. What your cash looks like in three months. Whether the funding stacks up.</p>
+            <p className="lead">That work is delivered by our advisory partner &mdash; qualified and regulated to provide it &mdash; working from books we already know inside out. We make the introduction, we supply the numbers, and we stay involved throughout.</p>
+            <p className="lead lead-emph">Management accounts &middot; Cash flow forecasting &middot; Contract margin analysis &middot; Funding support</p>
+            <div style={{marginTop:24}}>
+              <a href="#/what-we-do" onClick={goto} style={{fontWeight:600,color:'var(--accent-deep)',textDecoration:'underline',textUnderlineOffset:'4px'}}>
+                More about advisory <Icon name="arrow-right" size={12} stroke={2} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyIncline() {
+  const blocks = [
     {
-      tag: 'Outgrown your accountant',
-      t: 'You signed up when the business was £400K. It&rsquo;s £2M now and your accountant is still emailing you a P&L six weeks after quarter end.',
-      stat: 'Most clients arrive here',
-      detail: "You don't need a bigger accountant. You need a different kind of relationship — one where the numbers arrive on time and someone explains them.",
+      n: '01',
+      h: 'Construction only.',
+      p: "CIS, reverse charge, retentions and applications for payment aren't edge cases to us. They're the whole job.",
     },
     {
-      tag: 'Flying without instruments',
-      t: "You're making real decisions — hiring, pricing, capital — without management accounts you trust. The numbers come once a year, late, and you&rsquo;re running the business on instinct.",
-      stat: 'Three weeks to your first pack',
-      detail: "We get clean monthly reporting standing within four working weeks. By month two you'll be making decisions with data, not guesswork.",
+      n: '02',
+      h: 'You stay in control.',
+      p: 'We prepare every payment run. You approve it. Nothing leaves your account without your say-so.',
     },
     {
-      tag: 'Planning the next chapter',
-      t: 'Growth, fundraise, acquisition, exit. The next 18 months matter and your numbers need to stand up to a board, an investor, or a buyer&rsquo;s diligence team.',
-      stat: 'Investor-ready from day one',
-      detail: "Command tier exists for this. Three-statement models, scenario planning, board packs that survive serious external scrutiny.",
+      n: '03',
+      h: 'Fixed, predictable pricing.',
+      p: "You'll always know exactly what you're paying. No hourly billing. No surprise invoices.",
+    },
+    {
+      n: '04',
+      h: 'We grow with you.',
+      p: 'Start with the build. Scale the retainer as you take on more work.',
     },
   ];
   return (
-    <section className="who-section">
+    <section className="values-section">
       <div className="container">
-        <div className="who-head">
-          <span className="eyebrow dot">Who it&rsquo;s for</span>
-          <h2 className="h1">If any of this sounds familiar,<br/>we should talk.</h2>
+        <div className="section-head">
+          <span className="eyebrow dot">Why Incline</span>
+          <h2 className="h1">Four reasons growing<br/>subcontractors switch to us.</h2>
         </div>
-        <div className="who-grid">
-          {profiles.map((p, i) => (
-            <article className="who-card" key={i}>
-              <div className="who-tag">{p.tag}</div>
-              <p className="who-headline" dangerouslySetInnerHTML={{__html: p.t}} />
-              <div className="who-divider"></div>
-              <div className="who-stat">{p.stat}</div>
-              <p className="who-detail">{p.detail}</p>
+        <div className="values-grid">
+          {blocks.map(b => (
+            <article className="value-card" key={b.n}>
+              <div className="value-num">{b.n}</div>
+              <h3 className="value-title">{b.h}</h3>
+              <p className="value-body">{b.p}</p>
             </article>
           ))}
         </div>
@@ -2707,165 +2740,21 @@ function WhoItIsFor() {
   );
 }
 
-function TiersOverview({ featured }) {
-  const tiers = [
-    {
-      name: 'Foundation',
-      eyebrow: 'Tier one',
-      price: '£450',
-      pitch: 'A clean monthly baseline. Real management information for the first time.',
-      highlights: ['Monthly management accounts', 'Key financial metrics', 'Plain-English summary', 'Quarterly advisor call'],
-    },
-    {
-      name: 'Clarity',
-      eyebrow: 'Tier two · Most popular',
-      price: '£950',
-      pitch: 'Real insight plus a real advisory relationship. Where most growing UK businesses settle.',
-      highlights: ['Full board-ready pack', 'KPI dashboard', 'Cash flow and profitability', 'Monthly advisor call'],
-    },
-    {
-      name: 'Command',
-      eyebrow: 'Tier three',
-      price: '£1,800',
-      pitch: 'Embedded finance leadership. Built for owners planning growth, raise, or exit.',
-      highlights: ['Rolling forecasts &amp; scenarios', 'Investor reporting', 'Variance analysis', 'Unlimited advisor access'],
-    },
-  ];
+function ExpertisePointer() {
   return (
     <section className="tiers-section">
       <div className="container">
         <div className="tiers-head">
-          <span className="eyebrow dot">Service tiers</span>
-          <h2 className="h1">Three tiers. One fixed monthly fee.<br/>No surprises.</h2>
-          <p className="lead">Pick the depth that matches where the business is right now. Move up or down at one month notice — we want you on the right tier, not the most expensive one.</p>
-        </div>
-        <div className="tiers-grid">
-          {tiers.map(t => (
-            <article key={t.name} className={"tier-card" + (t.name === featured ? ' is-featured' : '')}>
-              <div className="tier-eyebrow">{t.eyebrow}</div>
-              <div className="tier-name">{t.name}</div>
-              <div className="tier-price-row">
-                <span className="tier-from">From</span>
-                <span className="tier-price">{t.price}</span>
-                <span className="tier-period">/month</span>
-              </div>
-              <p className="tier-pitch">{t.pitch}</p>
-              <ul className="tier-list">
-                {t.highlights.map(h => (
-                  <li key={h}>
-                    <Icon name="check" size={14} stroke={2.5} />
-                    <span dangerouslySetInnerHTML={{__html: h}} />
-                  </li>
-                ))}
-              </ul>
-              <a className="btn tier-cta"
-                 href="#/services"
-                 onClick={(e) => { e.preventDefault(); window.navigate('/services'); }}>
-                See full tier detail <Icon name="arrow-right" size={12} stroke={2} />
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VsAccountant() {
-  const rows = [
-    { topic: 'Cadence', acc: 'Year-end. Maybe quarterly if you ask.', inc: 'Monthly. Consistently, every month. Without exception.' },
-    { topic: 'What you get', acc: 'A P&L. A balance sheet. Often a spreadsheet.', inc: 'A board-ready pack. P&L, cash flow, KPIs, written commentary.' },
-    { topic: 'Insight', acc: 'You read the numbers yourself.', inc: "We tell you what changed, why it matters, what to do." },
-    { topic: 'Relationship', acc: "You email when something's wrong. They reply when they can.", inc: 'A named senior advisor. Same one every month. Available in between.' },
-    { topic: 'Forecasting', acc: 'Not included. Hourly extra.', inc: 'Rolling 12-month forecast. Updated every month.' },
-    { topic: 'Pricing', acc: 'Hourly billing. Surprise invoices.', inc: 'Fixed monthly fee. Three transparent tiers. No upsells.' },
-    { topic: 'Software', acc: 'Whatever they use internally.', inc: 'Sits on your Xero, QuickBooks, or Sage. We adapt to you.' },
-    { topic: 'When you need them', acc: 'Months out. Booked in advance.', inc: 'Email or call. Same week. Often same day.' },
-  ];
-  return (
-    <section className="vs-section">
-      <div className="container">
-        <div className="vs-head">
-          <span className="eyebrow dot">Why Incline is different</span>
-          <h2 className="h1">A standard accountant is built for compliance.<br/>We&rsquo;re built for the running of the business.</h2>
-          <p className="lead">No shade — most accountants are good at what they do. But what they do is file the past, not run the future. Here&rsquo;s the honest comparison.</p>
-        </div>
-        <div className="vs-table">
-          <div className="vs-row vs-row-head">
-            <div className="vs-col"></div>
-            <div className="vs-col">Standard accountant</div>
-            <div className="vs-col vs-col-incline">
-              <span className="vs-mark"><Mark size={16} color="#fff"/></span>
-              Incline
-            </div>
+          <span className="eyebrow dot">Construction, specifically</span>
+          <h2 className="h1">We know your numbers<br/>because we know your trade.</h2>
+          <p className="lead">Reverse charge VAT. Retentions. Applications for payment versus invoices. CIS deductions and verification. The things generalist bookkeepers get wrong &mdash; and what it costs you when they do.</p>
+          <div style={{marginTop:32}}>
+            <a className="btn btn-primary lg"
+               href="#/construction-finance"
+               onClick={(e) => { e.preventDefault(); window.navigate('/construction-finance'); }}>
+              Read our construction finance guide <Icon name="arrow-right" size={14} stroke={2} />
+            </a>
           </div>
-          {rows.map((r, i) => (
-            <div className="vs-row" key={i}>
-              <div className="vs-col vs-topic">{r.topic}</div>
-              <div className="vs-col vs-acc">{r.acc}</div>
-              <div className="vs-col vs-inc">{r.inc}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  const items = [
-    {
-      stars: 5,
-      quote: "Within four months we had monthly board packs that meant something. Within a year we&rsquo;d closed our Series A on numbers that didn&rsquo;t need a single revision in diligence.",
-      name: 'Eleanor H.',
-      role: 'Co-founder &amp; CEO',
-      biz: 'B2B SaaS founder',
-      i: 'EH',
-    },
-    {
-      stars: 5,
-      quote: "I&rsquo;d been making pricing and hiring decisions on instinct for two years. The first month with Incline I realised exactly which products were unprofitable. We changed the mix and added 12 points of margin.",
-      name: 'James O.',
-      role: 'Managing Director',
-      biz: 'Specialty manufacturing',
-      i: 'JO',
-    },
-    {
-      stars: 5,
-      quote: "Old accountant emailed accounts six weeks late and didn&rsquo;t answer the phone. Switched to Incline a year ago. Pack arrives on the 7th. Nadia knows my business better than my last FD did.",
-      name: 'Priya R.',
-      role: 'Founder',
-      biz: 'Premium consumer goods',
-      i: 'PR',
-    },
-  ];
-  return (
-    <section className="test-section">
-      <div className="container">
-        <div className="test-head">
-          <span className="eyebrow dot">Owners who switched</span>
-          <h2 className="h1">What clients say after making the switch.</h2>
-        </div>
-        <div className="test-grid">
-          {items.map((it, i) => (
-            <article className="test-card" key={i}>
-              <div className="test-stars">
-                {Array.from({length: it.stars}).map((_, s) => (
-                  <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="test-quote" dangerouslySetInnerHTML={{__html: '&ldquo;' + it.quote + '&rdquo;'}} />
-              <div className="test-attribution">
-                <div className="test-avatar">{it.i}</div>
-                <div className="test-meta">
-                  <div className="test-name">{it.name}</div>
-                  <div className="test-role"><span dangerouslySetInnerHTML={{__html: it.role}} /> · <span dangerouslySetInnerHTML={{__html: it.biz}} /></div>
-                </div>
-              </div>
-            </article>
-          ))}
         </div>
       </div>
     </section>
@@ -2877,15 +2766,24 @@ function FinalCTA() {
     <section className="final-cta-section">
       <div className="final-cta">
         <div className="fc-eyebrow">Ready when you are.</div>
-        <h2 className="fc-title">Thirty minutes.<br/>No pitch deck. No commitment.</h2>
-        <p className="fc-lead">A senior advisor will listen, ask a few questions, and tell you honestly whether Incline is the right fit. If we&rsquo;re not, we&rsquo;ll point you somewhere that is.</p>
+        <h2 className="fc-title">Let&rsquo;s have a look<br/>at your books.</h2>
+        <p className="fc-lead">A free 15-minute scoping call. We look at where you are, and give you a fixed price to sort it properly. No obligation, no sales pitch.</p>
         <div className="fc-actions">
           <a className="btn btn-on-dark lg" href="#/contact"
              onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-            <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+            <Icon name="phone" size={14} stroke={2} /> Book a scoping call
           </a>
+        </div>
+        <div className="fc-actions" style={{marginTop:16,gap:24,flexWrap:'wrap'}}>
           <a className="fc-phone" href="tel:02080640366">
-            <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
+            <Icon name="phone" size={14} stroke={2} /> Call · 0208 064 0366
+          </a>
+          <a className="fc-phone" href="https://wa.me/44XXXXXXXXXX">
+            {/* WhatsApp: replace 44XXXXXXXXXX with real number */}
+            <Icon name="send" size={14} stroke={2} /> WhatsApp
+          </a>
+          <a className="fc-phone" href="mailto:hello@inclinefinancial.co.uk">
+            <Icon name="send" size={14} stroke={2} /> hello@inclinefinancial.co.uk
           </a>
         </div>
       </div>
@@ -2894,16 +2792,15 @@ function FinalCTA() {
 }
 
 function HomePage() {
-  const featured = 'Clarity';
   return (
     <>
       <HeroBigBlock />
       <SocialProof />
-      <WhatWeDo />
-      <WhoItIsFor />
-      <TiersOverview featured={featured} />
-      <VsAccountant />
-      <Testimonials />
+      <TheProblem />
+      <HowItWorks />
+      <AdvisoryBand />
+      <WhyIncline />
+      <ExpertisePointer />
       <FinalCTA />
     </>
   );
@@ -2916,54 +2813,26 @@ window.HomePage = HomePage;
 /* About page — Incline Financial (per spec) */
 
 function AboutPage() {
-  const values = [
+  const blocks = [
     {
       n: '01',
-      h: 'Clarity over complexity.',
-      p: "If a number can't be explained in plain English, it shouldn't be in the pack. We strip out jargon, accountancy shorthand, and anything that exists to make finance look hard. The board pack is for the owner, not for another accountant.",
+      h: 'Systems first.',
+      p: "We build before we run. A finance function that only works because someone's memory is holding it together isn't a finance function.",
     },
     {
       n: '02',
-      h: 'Proactive over reactive.',
-      p: "We don't wait for you to ask. If margin slips, if cash tightens, if a forecast breaks — you hear from us first. Reporting is the floor of the relationship, not the ceiling.",
+      h: 'You stay in control.',
+      p: 'We prepare payment runs. You approve and release them. We never hold your money and never sit on your bank mandate.',
     },
     {
       n: '03',
-      h: 'Consistency over convenience.',
-      p: "The pack lands consistently, every month. The advisor call happens. The forecast updates. Every month, exactly the same. Rhythm is the most under-rated feature of a finance function.",
+      h: 'Fixed price, always.',
+      p: "No hourly billing, no surprise invoices. You know what you're paying before we start.",
     },
     {
       n: '04',
-      h: 'Transparency over ambiguity.',
-      p: 'Fixed monthly fees. Three tiers. No setup fee, no minimum contract, no hourly billing. If we recommend Foundation, that is what you need — even if Clarity pays us more.',
-    },
-  ];
-
-  const steps = [
-    {
-      n: '01',
-      h: 'Understand the business.',
-      p: "First call is a 30-minute conversation. What the business does, where it's heading, what's broken about your current finance setup, and what you actually want from monthly reporting.",
-    },
-    {
-      n: '02',
-      h: 'Set up clean records.',
-      p: 'We connect to your Xero, QuickBooks or Sage, audit the chart of accounts, and clean anything blocking real reporting. By end of week two we have a baseline you can trust.',
-    },
-    {
-      n: '03',
-      h: 'Produce meaningful reports.',
-      p: 'Consistently, every month, the pack lands. Management accounts, KPIs, cash flow, and a written read on what the numbers say — not just what they are.',
-    },
-    {
-      n: '04',
-      h: 'Explain what the numbers mean.',
-      p: "Every month, your senior advisor walks you through the pack. What changed, why, and what it implies for the next 90 days. This is where the value lives — not in the spreadsheet.",
-    },
-    {
-      n: '05',
-      h: 'Stay available between calls.',
-      p: "Pricing decision on Tuesday? Hiring question on Thursday? Email or call. Same advisor. Same week. Often same day. You're not a ticket in a queue.",
+      h: 'Qualified advice when you need it.',
+      p: "Our core service is operational — we build and run your finance function. Strategic advisory is delivered through our advisory partner, qualified and regulated to provide it. We're clear about what we do and what we don't.",
     },
   ];
 
@@ -2973,10 +2842,11 @@ function AboutPage() {
         <div className="container">
           <span className="eyebrow dot">About Incline</span>
           <h1 className="hb-title page-h1" style={{marginTop:20}}>
-            Built for the gap<br/>
-            <span className="hb-title-emph">between an accountant<br/>and a CFO.</span>
+            About<br/>
+            <span className="hb-title-emph">Incline Financial.</span>
           </h1>
-          <p className="lead">There&rsquo;s a level of financial support that growing UK businesses need — and that almost no firm provides. Incline exists to fill it.</p>
+          <p className="lead">Incline Financial builds and runs finance functions for construction subcontractors.</p>
+          <p className="lead">Not accounts prep. Not a year-end service. The day-to-day operational engine: the ledgers, the CIS, the VAT, the payment runs, the credit control, the retentions &mdash; set up properly and run week in, week out.</p>
         </div>
       </section>
 
@@ -2984,13 +2854,12 @@ function AboutPage() {
         <div className="container">
           <div className="why-grid">
             <div className="why-text">
-              <span className="eyebrow dot">Why Incline exists</span>
-              <h2 className="h1" style={{marginTop:14}}>The reporting most owners need<br/>doesn&rsquo;t come from either side.</h2>
+              <span className="eyebrow dot">Why construction</span>
+              <h2 className="h1" style={{marginTop:14}}>Because it&rsquo;s where the finance function<br/>breaks first, and hardest.</h2>
             </div>
             <div className="why-body">
-              <p className="lead">A standard accountant is a compliance function. They file your year-end, run your VAT, settle your tax. They&rsquo;re reactive by design — and most of them are good at what they do. But they&rsquo;re not built for the day-to-day decisions of a growing business, and asking them to be is asking the wrong thing.</p>
-              <p className="lead">A full-time Finance Director is the other end of the scale. £120K-plus, a real hire, a real seat at the table. The right answer when the business is large enough to keep one busy. Most growing UK businesses aren&rsquo;t — and won&rsquo;t be for years.</p>
-              <p className="lead lead-emph">Incline sits between the two. We provide what neither does: monthly reporting that means something, written commentary that explains it, and a senior advisor on the other end of the phone. Not as cheap as a compliance accountant, not as expensive as a full FD, and built for exactly where most ambitious owners actually are.</p>
+              <p className="lead">A subcontractor at £1&ndash;3m is running real contract complexity &mdash; retentions, applications, CIS, reverse charge &mdash; usually on the back of a system built when they were doing half the turnover, held together by the owner and whoever does the books.</p>
+              <p className="lead lead-emph">The work grows. The back office doesn&rsquo;t. That&rsquo;s the gap we fill.</p>
             </div>
           </div>
         </div>
@@ -2999,35 +2868,15 @@ function AboutPage() {
       <section className="values-section">
         <div className="container">
           <div className="section-head">
-            <span className="eyebrow dot">Four values</span>
-            <h2 className="h1">How we operate.<br/>And how to hold us to it.</h2>
-            <p className="lead">These are not posters on a wall. They&rsquo;re the rules we run the firm by — and the things you&rsquo;re entitled to expect of us.</p>
+            <span className="eyebrow dot">How we work</span>
+            <h2 className="h1">Four things we run<br/>the firm by.</h2>
           </div>
           <div className="values-grid">
-            {values.map(v => (
-              <article className="value-card" key={v.n}>
-                <div className="value-num">{v.n}</div>
-                <h3 className="value-title">{v.h}</h3>
-                <p className="value-body">{v.p}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="how-section">
-        <div className="container">
-          <div className="section-head">
-            <span className="eyebrow dot">How we work</span>
-            <h2 className="h1">From first call<br/>to running cadence.</h2>
-            <p className="lead">No mystery. Here&rsquo;s exactly what working with Incline looks like, week by week.</p>
-          </div>
-          <div className="how-list">
-            {steps.map(s => (
-              <article className="how-row" key={s.n}>
-                <div className="how-num">{s.n}</div>
-                <div className="how-step-title">{s.h}</div>
-                <p className="how-step-body">{s.p}</p>
+            {blocks.map(b => (
+              <article className="value-card" key={b.n}>
+                <div className="value-num">{b.n}</div>
+                <h3 className="value-title">{b.h}</h3>
+                <p className="value-body">{b.p}</p>
               </article>
             ))}
           </div>
@@ -3036,13 +2885,13 @@ function AboutPage() {
 
       <section className="final-cta-section">
         <div className="final-cta">
-          <div className="fc-eyebrow">Ready to talk?</div>
-          <h2 className="fc-title">Thirty minutes.<br/>No pitch deck. No commitment.</h2>
-          <p className="fc-lead">A senior advisor will listen, ask a few questions, and tell you honestly whether Incline is the right fit.</p>
+          <div className="fc-eyebrow">Ready when you are.</div>
+          <h2 className="fc-title">Let&rsquo;s have a look<br/>at your books.</h2>
+          <p className="fc-lead">A free 15-minute scoping call. No obligation, no sales pitch.</p>
           <div className="fc-actions">
             <a className="btn btn-on-dark lg" href="#/contact"
                onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
             </a>
             <a className="fc-phone" href="tel:02080640366">
               <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
@@ -3058,92 +2907,53 @@ window.AboutPage = AboutPage;
 
   </script>
   <script type="text/babel">
-/* Services page — Incline Financial (per spec) */
+/* What We Do page — Incline Financial (per spec) */
 
-function EveryTierIncludes() {
-  const items = [
-    {
-      n: '01',
-      t: 'Maintained bookkeeping',
-      d: "We make sure the ledger stands up before we report off it. Reconciled bank feeds, clean chart of accounts, accruals where they should be. The numbers in your pack are numbers you can trust.",
-    },
-    {
-      n: '02',
-      t: 'Consistent monthly reporting',
-      d: 'A pack consistently, every month. Same format, same cadence, every time. P&L, balance sheet, cash flow — at the depth the tier specifies.',
-    },
-    {
-      n: '03',
-      t: 'A dedicated advisory call',
-      d: "One named senior advisor — same person every month — who walks you through the numbers and answers the questions the pack provokes. Not a junior, not a switchboard.",
-    },
+function StageBuild() {
+  const includes = [
+    'Cloud accounting set up properly (Xero + Dext), coded to your jobs and contracts',
+    'CIS configured — deductions, verification, monthly returns',
+    'Domestic reverse charge VAT set up correctly',
+    'Retention register, so nothing owed to you gets forgotten',
+    'Applications-for-payment tracking',
+    'Payment-approval workflow — you approve every payment before a penny leaves your account',
+    'Live cash-position dashboard',
+    'Full historical clean-up',
+    'Written processes, so it runs without you',
   ];
   return (
-    <section className="every-tier-section">
-      <div className="container">
-        <div className="section-head">
-          <span className="eyebrow dot">Every tier includes</span>
-          <h2 className="h1">Three things every Incline client gets,<br/>regardless of tier.</h2>
-          <p className="lead">Before we talk about what changes between Foundation, Clarity, and Command — here&rsquo;s the floor. The standard we apply to every business we work with.</p>
-        </div>
-        <div className="every-grid">
-          {items.map(it => (
-            <article className="every-card" key={it.n}>
-              <div className="every-num">{it.n}</div>
-              <h3 className="every-title">{it.t}</h3>
-              <p className="every-body">{it.d}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TierDetail({ tier, reverse, dark }) {
-  const [expanded, setExpanded] = React.useState(false);
-  const hasMore = tier.includes.length > 4;
-  return (
-    <section className={"tier-detail" + (dark ? " tier-dark" : "") + (reverse ? " tier-reverse" : "")}>
+    <section className="tier-detail">
       <div className="container">
         <div className="td-grid">
           <div className="td-left">
-            <div className="td-badge">{tier.badge}</div>
-            <h2 className="td-name">{tier.name}</h2>
+            <div className="td-badge">Stage one · One-off project</div>
+            <h2 className="td-name">Finance Function Build</h2>
             <div className="td-price-row">
               <span className="td-from">From</span>
-              <span className="td-price">{tier.price}</span>
-              <span className="td-period">/month</span>
+              <span className="td-price">£1,500</span>
+              <span className="td-period">fixed price</span>
             </div>
-            <p className="td-desc">{tier.desc}</p>
+            <p className="td-desc">Most firms we meet have outgrown whatever they set up when they were half the size. We build the finance function properly, and clean up what&rsquo;s behind you.</p>
             <div className="td-best">
-              <div className="td-best-label">Best for</div>
-              <p className="td-best-body">{tier.best}</p>
+              <div className="td-best-label">Pricing note</div>
+              <p className="td-best-body">From £1,500. Fixed price, quoted after a free scoping call. Most builds land between £3,000 and £3,500 depending on the state of the books. No surprises.</p>
             </div>
-            <a className={"btn " + (dark ? "btn-on-dark" : "btn-primary") + " lg"}
+            <a className="btn btn-primary lg"
                href="#/contact"
                onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
             </a>
           </div>
           <div className="td-right">
             <div className="td-includes-label">What&rsquo;s included</div>
-            <ul className={"td-includes" + (expanded ? " expanded" : "")}>
-              {tier.includes.map((c, i) => (
-                <li key={i} className={i >= 4 ? "td-include-extra" : ""}>
+            <ul className="td-includes expanded">
+              {includes.map((c, i) => (
+                <li key={i}>
                   <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
                   <span>{c}</span>
                 </li>
               ))}
             </ul>
-            {hasMore && (
-              <button type="button"
-                      className="td-toggle"
-                      aria-expanded={expanded}
-                      onClick={() => setExpanded(v => !v)}>
-                {expanded ? 'Show fewer' : 'See all inclusions'}
-              </button>
-            )}
           </div>
         </div>
       </div>
@@ -3151,140 +2961,145 @@ function TierDetail({ tier, reverse, dark }) {
   );
 }
 
-function FAQ() {
-  const items = [
-    {
-      q: 'How do I choose between the three tiers?',
-      a: "Start with revenue and decision velocity. Foundation suits businesses up to £500K with limited current reporting. Clarity is where most £500K–£2M businesses settle. Command is for £1M–£5M+ owners who are running a board, planning a raise, or modelling material decisions every month. The discovery call exists to make this recommendation properly — and we'll always recommend the lower tier when it fits.",
-    },
-    {
-      q: 'What happens to my existing accountant?',
-      a: "Often they stay for compliance — VAT returns, payroll, year-end filings — and Incline handles management reporting and advisory. Sometimes clients consolidate everything with us. Sometimes they switch entirely. There's no right answer; we'll tell you honestly which arrangement makes sense for your business.",
-    },
-    {
-      q: 'Is there a setup fee or minimum contract?',
-      a: 'No setup fee. No minimum contract. Onboarding (getting your data connected and the first pack produced) is included in your first month. You can give one month notice at any time — though most clients have been with us for over three years.',
-    },
-    {
-      q: 'What software do you work with?',
-      a: 'We sit on top of Xero, QuickBooks, and Sage — whichever you already use. We don&rsquo;t make you migrate. For non-finance data (KPIs, sales pipeline, headcount), we agree a lightweight monthly export from whatever system you use today.',
-    },
-    {
-      q: 'Can I change tier later?',
-      a: 'Yes — in either direction, with one month notice. Most businesses start on Clarity and move up to Command around the £3M revenue mark, or as a raise approaches. A few step down from Clarity to Foundation when the immediate strategic moves are behind them. Either is fine.',
-    },
-    {
-      q: 'How quickly does onboarding happen?',
-      a: 'Four working weeks from contract signed to first published pack. Week one: discovery and chart-of-accounts review. Week two: data connections and parallel reconciliation. Week three: draft pack and walkthrough. Week four: published pack and first advisor call.',
-    },
+function StageOperations() {
+  const rows = [
+    ['Bookkeeping & bank reconciliations', true, true, true],
+    ['Purchase & sales ledger', true, true, true],
+    ['CIS returns prepared', true, true, true],
+    ['VAT returns prepared', true, true, true],
+    ['Payroll', false, true, true],
+    ['Weekly payment runs prepared', false, true, true],
+    ['Credit control', false, true, true],
+    ['Retention & application tracking', false, true, true],
+    ['Weekly cash position', false, true, true],
+    ['Dedicated delivery, priority turnaround', false, false, true],
   ];
-  const [open, setOpen] = React.useState(0);
+  const cell = (v) => v ? <Icon name="check" size={14} stroke={2.5} /> : <span style={{color:'var(--muted-gray)'}}>&mdash;</span>;
   return (
-    <section className="faq-section">
+    <section className="tier-detail tier-reverse">
       <div className="container">
-        <div className="section-head">
-          <span className="eyebrow dot">Common questions</span>
-          <h2 className="h1">The things owners ask<br/>before booking a call.</h2>
-        </div>
-        <div className="faq">
-          {items.map((it, i) => (
-            <div className={"faq-row" + (open === i ? ' open' : '')} key={i} onClick={() => setOpen(open === i ? -1 : i)}>
-              <div className="faq-num">0{i + 1}</div>
-              <div>
-                <div className="faq-q">{it.q}</div>
-                {open === i && <div className="faq-a">{it.a}</div>}
-              </div>
-              <div className="faq-toggle">+</div>
+        <div className="td-grid">
+          <div className="td-left">
+            <div className="td-badge">Stage two · Monthly retainer</div>
+            <h2 className="td-name">Ongoing Operations</h2>
+            <div className="td-price-row">
+              <span className="td-from">From</span>
+              <span className="td-price">£850</span>
+              <span className="td-period">/month</span>
             </div>
-          ))}
+            <p className="td-desc">Once the system&rsquo;s in place, we run your day-to-day finance function so you never have to think about it.</p>
+            <div className="td-best">
+              <div className="td-best-label">Fixed monthly fee</div>
+              <p className="td-best-body">No hourly billing. Tiers are set by your transaction volume, how many subcontractors you engage, and how many contracts you&rsquo;re running &mdash; we&rsquo;ll tell you which one you&rsquo;re in on the scoping call.</p>
+            </div>
+            <a className="btn btn-primary lg"
+               href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
+            </a>
+          </div>
+          <div className="td-right">
+            <div className="vs-table">
+              <div className="vs-row vs-row-head">
+                <div className="vs-col"></div>
+                <div className="vs-col">Core</div>
+                <div className="vs-col">Managed</div>
+                <div className="vs-col vs-col-incline">Full Function</div>
+              </div>
+              {rows.map((r, i) => (
+                <div className="vs-row" key={i}>
+                  <div className="vs-col vs-topic">{r[0]}</div>
+                  <div className="vs-col vs-acc" style={{textAlign:'center'}}>{cell(r[1])}</div>
+                  <div className="vs-col vs-acc" style={{textAlign:'center'}}>{cell(r[2])}</div>
+                  <div className="vs-col vs-inc" style={{textAlign:'center'}}>{cell(r[3])}</div>
+                </div>
+              ))}
+              <div className="vs-row">
+                <div className="vs-col vs-topic"><strong>From</strong></div>
+                <div className="vs-col vs-acc" style={{textAlign:'center'}}><strong>£850/mo</strong></div>
+                <div className="vs-col vs-acc" style={{textAlign:'center'}}><strong>£1,400/mo</strong></div>
+                <div className="vs-col vs-inc" style={{textAlign:'center'}}><strong>£2,200/mo</strong></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function ServicesPage() {
-  const foundation = {
-    badge: 'Tier one',
-    name: 'Foundation',
-    price: '£450',
-    desc: "If you've never had real management information, this is where it starts. A clean monthly baseline — properly reconciled, properly presented — so that for the first time, you actually understand your numbers month to month. No spreadsheets emailed at midnight, no quarterly mystery. Just the basics, done well, every month, on time.",
-    best: 'Businesses up to £500K turnover, currently receiving little or no real management information from their accountant.',
-    includes: [
-      'Maintained bookkeeping on Xero, QuickBooks, or Sage',
-      'Monthly management accounts (P&L and balance sheet)',
-      'Key financial metrics — revenue, gross margin, cash position',
-      'Plain-English summary of the month',
-      'One advisor call per quarter (60 minutes)',
-      'Email support, two business day response',
-      'Onboarding within four working weeks',
-    ],
-  };
-  const clarity = {
-    badge: 'Tier two · Most popular',
-    name: 'Clarity',
-    price: '£950',
-    desc: "When you're past the survival phase and into real decisions — pricing, hiring, capital deployment — instinct stops being enough. Clarity gives you proper insight: a board-ready pack with written commentary, a KPI dashboard you actually look at, and a senior advisor on the phone every month. This is where most growing UK businesses settle, and where the value of monthly reporting really earns its keep.",
-    best: 'Businesses £500K–£2M, making real decisions every quarter, who want to understand profitability and cash properly.',
-    includes: [
-      'Everything in Foundation',
-      'Full board-ready pack with month-on-month and year-on-year comparisons',
-      'KPI dashboard tailored to your business',
-      'Cash flow reporting and 12-month rolling forecast',
-      'Profitability analysis by product / service / channel',
-      'Written insight commentary — what changed, why, what to do',
-      'Monthly advisor call (60 minutes)',
-      'Quarterly extended strategy review (90 minutes)',
-    ],
-  };
-  const command = {
-    badge: 'Tier three',
-    name: 'Command',
-    price: '£1,800',
-    desc: "When the next 18 months are about growth, capital, or eventually exit — your finance function has to stand up to scrutiny. Command is embedded finance leadership: divisional reporting, scenario modelling, investor-ready packs, and an advisor on call. Built for owners who are running a board, raising, or putting the business in a position to be sold. Effectively a fractional CFO at a fixed monthly fee.",
-    best: 'Businesses £1M–£5M and above, planning serious growth, fundraise, or exit within the next 24 months.',
-    includes: [
-      'Everything in Clarity',
-      'Divisional / segment-level breakdown',
-      'Annual budget and quarterly re-forecast',
-      'Variance analysis vs budget, with written explanation',
-      'Three-statement rolling forecasts',
-      'Scenario planning (best / base / downside)',
-      'Investor and lender reporting packs',
-      'Ad hoc analysis on request',
-      'Unlimited advisor access — direct line to your senior advisor',
-    ],
-  };
+function AdvisoryBandWWD() {
+  const available = [
+    'Management accounts and performance reporting',
+    'Cash flow forecasting',
+    'Contract-level margin analysis',
+    'Funding support — invoice finance, facilities, lender packs',
+    'Board-level reporting',
+  ];
+  return (
+    <>
+      {/* Visual band-break to separate the core two-stage offer from the partner-attributed advisory band. */}
+      <div style={{height:'1px', background:'transparent'}} aria-hidden="true"></div>
+      <section id="advisory" className="values-section" style={{background:'var(--accent-bg)'}}>
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow dot">Through our partner network</span>
+            <h2 className="h1">Strategic Advisory</h2>
+          </div>
+          <div className="why-grid" style={{marginTop:32}}>
+            <div className="why-text">
+              <p className="lead">Our core service is operational: we build your finance function and we run it. But once the numbers are clean and reliable, the questions get bigger &mdash; and you need someone qualified to answer them.</p>
+              <p className="lead lead-emph">That&rsquo;s what our advisory partner is for. Qualified, regulated, and working from books we already know inside out, because we keep them.</p>
+            </div>
+            <div className="why-body">
+              <div className="td-includes-label">What&rsquo;s available through our partner</div>
+              <ul className="td-includes expanded" style={{marginTop:12}}>
+                {available.map((c, i) => (
+                  <li key={i}>
+                    <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="td-best" style={{marginTop:24}}>
+                <div className="td-best-label">How it works</div>
+                <p className="td-best-body">We make the introduction and supply the numbers. Your advisory engagement sits directly with our partner, so you&rsquo;re getting advice from someone regulated to give it. We stay involved throughout &mdash; same books, same team, one relationship.</p>
+              </div>
+              <p className="lead" style={{marginTop:16,fontStyle:'italic',color:'var(--body-gray)'}}>Available once your finance function is up and running.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
 
+function WhatWeDoPage() {
   return (
     <>
       <section className="page-hero">
         <div className="container">
-          <span className="eyebrow dot">Services</span>
+          <span className="eyebrow dot">What we do</span>
           <h1 className="hb-title page-h1" style={{marginTop:20}}>
-            Three tiers.<br/>
-            <span className="hb-title-emph">One fixed monthly fee.</span>
+            Two stages, and a<br/>
+            <span className="hb-title-emph">partner network for<br/>everything beyond them.</span>
           </h1>
-          <p className="lead">Every tier is a monthly reporting cadence and a senior advisor relationship. The right one depends on where the business is right now — not where you wish it was, and not where you&rsquo;ll be in three years. Move up or down at one month notice.</p>
         </div>
       </section>
 
-      <TiersOverview featured="Clarity" />
-      <EveryTierIncludes />
-      <TierDetail tier={foundation} />
-      <TierDetail tier={clarity} reverse />
-      <TierDetail tier={command} dark />
-      <FAQ />
+      <StageBuild />
+      <StageOperations />
+      <AdvisoryBandWWD />
 
       <section className="final-cta-section">
         <div className="final-cta">
-          <div className="fc-eyebrow">Not sure which tier?</div>
-          <h2 className="fc-title">That&rsquo;s what the<br/>discovery call is for.</h2>
-          <p className="fc-lead">Thirty minutes with a senior advisor. We&rsquo;ll listen, recommend a tier, and give you a fixed price. No pitch, no pressure, no commitment.</p>
+          <div className="fc-eyebrow">Not sure which one you need?</div>
+          <h2 className="fc-title">That&rsquo;s what the<br/>scoping call is for.</h2>
+          <p className="fc-lead">Fifteen minutes. We&rsquo;ll listen, look at where you are, and give you a fixed price to sort it properly.</p>
           <div className="fc-actions">
             <a className="btn btn-on-dark lg" href="#/contact"
                onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free discovery call
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
             </a>
             <a className="fc-phone" href="tel:02080640366">
               <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
@@ -3296,7 +3111,117 @@ function ServicesPage() {
   );
 }
 
-window.ServicesPage = ServicesPage;
+window.WhatWeDoPage = WhatWeDoPage;
+
+  </script>
+  <script type="text/babel">
+/* Construction Finance page — Incline Financial (per spec) */
+
+function ConstructionFinancePage() {
+  const sections = [
+    {
+      h: 'The Construction Industry Scheme (CIS)',
+      body: [
+        "If you engage subcontractors, you deduct tax at source and pay it to HMRC. Sounds simple. In practice: every subcontractor has to be verified before you pay them, the deduction rate depends on their status, materials are treated differently from labour, and a return goes in every month whether you've paid anyone or not.",
+      ],
+      wrong: "Unverified subbies deducted at the wrong rate, materials included in the deduction when they shouldn't be, late returns racking up penalties, and CIS suffered on your own sales not being reclaimed properly.",
+      us: "Verification, correct deduction treatment, monthly returns prepared for your approval, and CIS suffered tracked and recovered.",
+    },
+    {
+      h: 'Domestic reverse charge VAT',
+      body: [
+        "Since 2021, most construction services supplied between VAT-registered contractors don't have VAT charged on them. The customer accounts for it instead. It applies when the supply is a CIS-reportable construction service, both parties are VAT-registered, and the customer isn't an end user.",
+      ],
+      wrong: "VAT charged when it shouldn't be. VAT not charged when it should be. End-user status not established or documented. Mixed supplies treated inconsistently. Every one of these is a correction, and some are an assessment.",
+      us: "The treatment is agreed and documented once, then applied consistently on every transaction — so your returns are right and your position is defensible.",
+    },
+    {
+      h: 'Retentions',
+      body: [
+        "Your customer holds back a percentage of every application — typically 3–5% — for months or years after the work is done. Half released at practical completion, the rest at the end of the defects period.",
+      ],
+      wrong: "The money sits on a spreadsheet nobody maintains, or nowhere at all. Release dates pass unnoticed. Firms routinely write off retentions they were owed and simply forgot to chase.",
+      us: "A live retention register — what's held, by whom, against which contract, due when. Nothing owed to you gets forgotten.",
+    },
+    {
+      h: 'Applications for payment',
+      body: [
+        "You don't invoice. You apply. The application goes in, the customer issues a payment notice, and what you get paid is what they say — unless you challenge it in time.",
+      ],
+      wrong: "Applications tracked in someone's head or a folder of PDFs. Certified amounts not reconciled back to what was applied for. Nobody notices a shortfall until the cash doesn't arrive.",
+      us: "Every application tracked from submission to certification to payment, with the gaps visible.",
+    },
+  ];
+
+  return (
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <span className="eyebrow dot">Construction finance</span>
+          <h1 className="hb-title page-h1" style={{marginTop:20}}>
+            Construction finance,<br/>
+            <span className="hb-title-emph">explained properly.</span>
+          </h1>
+          <p className="lead">Construction doesn&rsquo;t work like other industries, and construction finance doesn&rsquo;t either. Here&rsquo;s what&rsquo;s different, and where it usually goes wrong.</p>
+        </div>
+      </section>
+
+      {sections.map((s, i) => (
+        <section className={"why-section" + (i % 2 === 1 ? "" : "")} key={i} style={{background: i % 2 === 1 ? 'var(--bg-2)' : 'var(--bg-1)'}}>
+          <div className="container">
+            <div className="why-grid">
+              <div className="why-text">
+                <span className="eyebrow dot">{"0" + (i + 1)}</span>
+                <h2 className="h1" style={{marginTop:14}}>{s.h}</h2>
+              </div>
+              <div className="why-body">
+                {s.body.map((p, j) => (
+                  <p className="lead" key={j}>{p}</p>
+                ))}
+                <p className="lead"><strong>Where it goes wrong:</strong> {s.wrong}</p>
+                <p className="lead lead-emph"><strong>What we do:</strong> {s.us}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section className="why-section" style={{background:'var(--bg-inverse)', color:'var(--fg-inverse)'}}>
+        <div className="container">
+          <div className="why-grid">
+            <div className="why-text">
+              <span className="eyebrow dot" style={{color:'var(--accent)'}}>05</span>
+              <h2 className="h1" style={{marginTop:14, color:'var(--fg-inverse)'}}>Why generalist<br/>bookkeepers struggle.</h2>
+            </div>
+            <div className="why-body">
+              <p className="lead" style={{color:'#d0d0d0'}}>None of the above is exotic &mdash; it&rsquo;s just specific. A bookkeeper who does a hairdresser, a haulier and a builder will treat construction like the other two, because that&rsquo;s what they know. The result is CIS penalties, VAT corrections, forgotten retentions and a set of books that don&rsquo;t tell you anything about a contract.</p>
+              <p className="lead lead-emph" style={{color:'#ffffff'}}>We only do construction. That&rsquo;s the difference.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="final-cta-section">
+        <div className="final-cta">
+          <div className="fc-eyebrow">Want us to look at yours?</div>
+          <h2 className="fc-title">A free 15-minute<br/>scoping call.</h2>
+          <p className="fc-lead">We look at where you are and give you a fixed price to sort it properly. No obligation, no sales pitch.</p>
+          <div className="fc-actions">
+            <a className="btn btn-on-dark lg" href="#/contact"
+               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
+              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
+            </a>
+            <a className="fc-phone" href="tel:02080640366">
+              <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+window.ConstructionFinancePage = ConstructionFinancePage;
 
   </script>
   <script type="text/babel">
@@ -3304,8 +3229,7 @@ window.ServicesPage = ServicesPage;
 
 function ContactPage() {
   const [form, setForm] = React.useState({
-    name: '', phone: '', company: '', email: '',
-    revenue: '', tier: 'Not sure yet — advise me', notes: '',
+    name: '', company: '', trade: '', phone: '', email: '', problem: '',
   });
   const [errors, setErrors] = React.useState({});
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
@@ -3313,8 +3237,8 @@ function ContactPage() {
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Required';
-    if (!form.phone.trim()) e.phone = 'Required';
     if (!form.company.trim()) e.company = 'Required';
+    if (!form.phone.trim()) e.phone = 'Required';
     if (!form.email.trim()) e.email = 'Required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Not a valid email';
     return e;
@@ -3330,12 +3254,11 @@ function ContactPage() {
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.name,
+          company: form.company,
+          trade: form.trade,
           phone: form.phone,
-          business: form.company,
           email: form.email,
-          turnover: form.revenue,
-          tier: form.tier,
-          notes: form.notes,
+          problem: form.problem,
           source: 'Contact page',
           submitted: new Date().toISOString(),
         }),
@@ -3353,10 +3276,43 @@ function ContactPage() {
         <div className="container">
           <span className="eyebrow dot">Contact</span>
           <h1 className="hb-title page-h1" style={{marginTop:20}}>
-            Start the<br/>
-            <span className="hb-title-emph">conversation.</span>
+            Get in<br/>
+            <span className="hb-title-emph">touch.</span>
           </h1>
-          <p className="lead">Thirty minutes with a senior advisor. We&rsquo;ll talk about your business, your numbers, and whether Incline is the right fit. No pitch deck, no pressure, no commitment.</p>
+          <p className="lead">The quickest way to find out if we can help is a 15-minute call. Free, no obligation.</p>
+        </div>
+      </section>
+
+      <section className="wwd-section">
+        <div className="container">
+          <div className="wwd-grid" style={{gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))'}}>
+            <a className="wwd-card" href="tel:02080640366" style={{textDecoration:'none'}}>
+              <div className="wwd-num"><Icon name="phone" size={20} stroke={2} /></div>
+              <h3 className="wwd-title">Call</h3>
+              <p className="wwd-body">0208 064 0366</p>
+            </a>
+            <a className="wwd-card" href="https://wa.me/44XXXXXXXXXX" style={{textDecoration:'none'}}>
+              {/* WhatsApp: replace 44XXXXXXXXXX with real number */}
+              <div className="wwd-num"><Icon name="send" size={20} stroke={2} /></div>
+              <h3 className="wwd-title">WhatsApp</h3>
+              <p className="wwd-body">Message us direct</p>
+            </a>
+            <a className="wwd-card" href="mailto:hello@inclinefinancial.co.uk" style={{textDecoration:'none'}}>
+              <div className="wwd-num"><Icon name="send" size={20} stroke={2} /></div>
+              <h3 className="wwd-title">Email</h3>
+              <p className="wwd-body">hello@inclinefinancial.co.uk</p>
+            </a>
+            <a className="wwd-card" href="#form" onClick={(e) => { e.preventDefault(); document.getElementById('form-card').scrollIntoView({behavior:'smooth'}); }} style={{textDecoration:'none'}}>
+              <div className="wwd-num"><Icon name="arrow" size={20} stroke={2} /></div>
+              <h3 className="wwd-title">Form</h3>
+              <p className="wwd-body">Send us the details</p>
+            </a>
+          </div>
+
+          <div className="expect-panel" style={{marginTop:48, textAlign:'center'}}>
+            <div className="expect-eyebrow">Response promise</div>
+            <p className="lead lead-emph" style={{marginTop:12}}>We aim to come back to every enquiry within one working hour.</p>
+          </div>
         </div>
       </section>
 
@@ -3364,100 +3320,65 @@ function ContactPage() {
         <div className="container">
           <div className="contact-grid">
             <div className="contact-left">
-              <p className="contact-intro">A discovery call is a conversation, not a sales pitch. It&rsquo;s how we learn about the business, get a feel for what would actually help, and recommend the right service. If we&rsquo;re not the right fit, we&rsquo;ll tell you — and point you somewhere that is.</p>
-
-              <ul className="contact-methods">
-                <li>
-                  <div className="cm-icon"><Icon name="phone" size={16} stroke={2} /></div>
-                  <div>
-                    <div className="cm-label">Call directly</div>
-                    <a href="tel:02080640366" className="cm-val">0208 064 0366</a>
-                    <div className="cm-meta">Mon–Fri, 9am–6pm. Answered by a person.</div>
-                  </div>
-                </li>
-                <li>
-                  <div className="cm-icon"><Icon name="send" size={16} stroke={2} /></div>
-                  <div>
-                    <div className="cm-label">Submit the form</div>
-                    <span className="cm-val">Reply within one working day</span>
-                    <div className="cm-meta">A senior advisor will read it personally.</div>
-                  </div>
-                </li>
-                <li>
-                  <div className="cm-icon"><Icon name="target" size={16} stroke={2} /></div>
-                  <div>
-                    <div className="cm-label">Where we are</div>
-                    <span className="cm-val">London-based, UK-wide</span>
-                    <div className="cm-meta">All client work runs remote — no office visits required.</div>
-                  </div>
-                </li>
-              </ul>
+              <p className="contact-intro">A scoping call is a conversation, not a sales pitch. It&rsquo;s how we learn about your business, get a feel for what would actually help, and give you a fixed price to sort it properly. If we&rsquo;re not the right fit, we&rsquo;ll tell you.</p>
 
               <div className="expect-panel">
-                <div className="expect-eyebrow">What to expect from the discovery call</div>
+                <div className="expect-eyebrow">What to expect from the scoping call</div>
                 <ul className="expect-list">
-                  <li><span className="expect-num">01</span><div><strong>30 minutes.</strong> Long enough to be useful, short enough to respect your day.</div></li>
-                  <li><span className="expect-num">02</span><div><strong>We listen and learn.</strong> About your business, your numbers, and what&rsquo;s prompting the call.</div></li>
-                  <li><span className="expect-num">03</span><div><strong>We recommend the right tier.</strong> Honestly. Including telling you if it&rsquo;s the lower one.</div></li>
-                  <li><span className="expect-num">04</span><div><strong>We give you a fixed price.</strong> Within two working days of the call. In writing. No moving parts.</div></li>
-                  <li><span className="expect-num">05</span><div><strong>No commitment required.</strong> No follow-ups, no pressure, no automated drip emails.</div></li>
+                  <li><span className="expect-num">01</span><div><strong>15 minutes.</strong> Long enough to be useful, short enough to respect your day.</div></li>
+                  <li><span className="expect-num">02</span><div><strong>We listen.</strong> About your contracts, your team, your current setup, and what&rsquo;s prompting the call.</div></li>
+                  <li><span className="expect-num">03</span><div><strong>We give you a fixed price.</strong> To build it, run it, or both. In writing. No moving parts.</div></li>
+                  <li><span className="expect-num">04</span><div><strong>No commitment.</strong> No follow-ups, no pressure, no automated drip emails.</div></li>
                 </ul>
               </div>
             </div>
 
             <div className="contact-right">
-              <div className="form-card">
-                <h2 className="form-heading">Tell us about your business.</h2>
-                <p className="form-sub">A few quick details so the right advisor can prepare for the call.</p>
+              <div className="form-card" id="form-card">
+                <h2 className="form-heading">Tell us what&rsquo;s going on.</h2>
+                <p className="form-sub">A few quick details so we can prepare for the call.</p>
 
                 <form className="form" onSubmit={submit} noValidate>
-                  <div className={"field" + (errors.name ? ' error' : '')}>
-                    <label>Your name</label>
-                    <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Jane Doe" />
+                  <div className={"field full" + (errors.name ? ' error' : '')}>
+                    <label>Name</label>
+                    <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Your name" />
                     {errors.name && <div className="err">{errors.name}</div>}
                   </div>
+                  <div className={"field full" + (errors.company ? ' error' : '')}>
+                    <label>Company</label>
+                    <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Company name" />
+                    {errors.company && <div className="err">{errors.company}</div>}
+                  </div>
+                  <div className="field full">
+                    <label>Trade</label>
+                    <select value={form.trade} onChange={(e) => set('trade', e.target.value)}>
+                      <option value="">Select your trade</option>
+                      <option>Groundworks / Civils</option>
+                      <option>Electrical</option>
+                      <option>Mechanical / Plumbing / HVAC</option>
+                      <option>Roofing</option>
+                      <option>Scaffolding</option>
+                      <option>Fit-out / Joinery</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
                   <div className={"field" + (errors.phone ? ' error' : '')}>
-                    <label>Phone number</label>
+                    <label>Phone</label>
                     <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
                     {errors.phone && <div className="err">{errors.phone}</div>}
                   </div>
-                  <div className={"field full" + (errors.company ? ' error' : '')}>
-                    <label>Business name</label>
-                    <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Acme Ltd." />
-                    {errors.company && <div className="err">{errors.company}</div>}
-                  </div>
-                  <div className={"field full" + (errors.email ? ' error' : '')}>
-                    <label>Email address</label>
+                  <div className={"field" + (errors.email ? ' error' : '')}>
+                    <label>Email</label>
                     <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
                     {errors.email && <div className="err">{errors.email}</div>}
                   </div>
                   <div className="field full">
-                    <label>Approximate annual turnover</label>
-                    <select value={form.revenue} onChange={(e) => set('revenue', e.target.value)}>
-                      <option value="">Select a range</option>
-                      <option>Under £250k</option>
-                      <option>£250k – £500k</option>
-                      <option>£500k – £1m</option>
-                      <option>£1m – £3m</option>
-                      <option>Over £3m</option>
-                    </select>
-                  </div>
-                  <div className="field full">
-                    <label>Which tier interests you?</label>
-                    <select value={form.tier} onChange={(e) => set('tier', e.target.value)}>
-                      <option>Not sure yet — advise me</option>
-                      <option>Foundation — from £450/month</option>
-                      <option>Clarity — from £950/month</option>
-                      <option>Command — from £1,800/month</option>
-                    </select>
-                  </div>
-                  <div className="field full">
-                    <label>Anything else you&rsquo;d like to share?</label>
-                    <textarea value={form.notes} onChange={(e) => set('notes', e.target.value)} placeholder="A sentence or two on where the business is and what's prompting the call." />
+                    <label>What&rsquo;s the problem?</label>
+                    <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="A sentence or two on what's prompting the call." />
                   </div>
                   <div className="full">
                     <button type="submit" className="btn btn-primary lg form-submit">
-                      Request my free discovery call
+                      Book my free scoping call
                       <Icon name="arrow-right" size={14} stroke={2} />
                     </button>
                   </div>
@@ -3467,7 +3388,7 @@ function ContactPage() {
 
                 <a href="tel:02080640366" className="form-call">
                   <Icon name="phone" size={16} stroke={2} />
-                  <span><strong>0208 064 0366</strong> — Mon–Fri, 9am–6pm</span>
+                  <span><strong>0208 064 0366</strong> &mdash; Mon&ndash;Fri, 9am&ndash;6pm</span>
                 </a>
 
                 <div className="form-foot">No obligation · Fully confidential · Fixed fees, always</div>
@@ -3584,7 +3505,8 @@ function App() {
 
   let pageEl;
   if (path === '/about') pageEl = <AboutPage />;
-  else if (path === '/services') pageEl = <ServicesPage />;
+  else if (path === '/what-we-do') pageEl = <WhatWeDoPage />;
+  else if (path === '/construction-finance') pageEl = <ConstructionFinancePage />;
   else if (path === '/contact') pageEl = <ContactPage />;
   else pageEl = <HomePage />;
 
