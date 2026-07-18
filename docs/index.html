@@ -2204,6 +2204,75 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   color: #000000 !important;
 }
 
+/* =========================================================
+   Service tier comparison table (WhatWeDo · StageOperations)
+   Clean 4-column table, subtle 1px row dividers, gold price row.
+   Overflows to horizontal scroll on narrow viewports.
+   ========================================================= */
+.svc-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+}
+.svc-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #000;
+}
+.svc-table th,
+.svc-table td {
+  padding: 14px 18px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.svc-table thead th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #fafafa;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.svc-table th.svc-feature,
+.svc-table td.svc-feature {
+  text-align: left;
+  font-weight: 500;
+  color: #1a1a1a;
+  min-width: 240px;
+}
+.svc-table .svc-check {
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-table .svc-dash {
+  color: var(--muted-gray);
+  display: inline-block;
+}
+.svc-table tr:last-child td { border-bottom: none; }
+.svc-table tr.svc-price-row td {
+  font-weight: 700;
+  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  background: #fafafa;
+}
+.svc-table tr.svc-price-row td:not(.svc-feature) {
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
   </style>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -2673,7 +2742,7 @@ function AdvisoryBand() {
     }, 120);
   };
   return (
-    <section className="why-section" style={{background:'var(--accent-bg)'}}>
+    <section className="why-section" style={{borderTop:'1px solid var(--accent)'}}>
       <div className="container">
         <div className="why-grid">
           <div className="why-text">
@@ -2974,7 +3043,9 @@ function StageOperations() {
     ['Weekly cash position', false, true, true],
     ['Dedicated delivery, priority turnaround', false, false, true],
   ];
-  const cell = (v) => v ? <Icon name="check" size={14} stroke={2.5} /> : <span style={{color:'var(--muted-gray)'}}>&mdash;</span>;
+  const cell = (v) => v
+    ? <span className="svc-check"><Icon name="check" size={14} stroke={2.5} /></span>
+    : <span className="svc-dash">&mdash;</span>;
   return (
     <section className="tier-detail tier-reverse">
       <div className="container">
@@ -2999,27 +3070,33 @@ function StageOperations() {
             </a>
           </div>
           <div className="td-right">
-            <div className="vs-table">
-              <div className="vs-row vs-row-head">
-                <div className="vs-col"></div>
-                <div className="vs-col">Core</div>
-                <div className="vs-col">Managed</div>
-                <div className="vs-col vs-col-incline">Full Function</div>
-              </div>
-              {rows.map((r, i) => (
-                <div className="vs-row" key={i}>
-                  <div className="vs-col vs-topic">{r[0]}</div>
-                  <div className="vs-col vs-acc" style={{textAlign:'center'}}>{cell(r[1])}</div>
-                  <div className="vs-col vs-acc" style={{textAlign:'center'}}>{cell(r[2])}</div>
-                  <div className="vs-col vs-inc" style={{textAlign:'center'}}>{cell(r[3])}</div>
-                </div>
-              ))}
-              <div className="vs-row">
-                <div className="vs-col vs-topic"><strong>From</strong></div>
-                <div className="vs-col vs-acc" style={{textAlign:'center'}}><strong>£850/mo</strong></div>
-                <div className="vs-col vs-acc" style={{textAlign:'center'}}><strong>£1,400/mo</strong></div>
-                <div className="vs-col vs-inc" style={{textAlign:'center'}}><strong>£2,200/mo</strong></div>
-              </div>
+            <div className="svc-table-wrap">
+              <table className="svc-table">
+                <thead>
+                  <tr>
+                    <th className="svc-feature"></th>
+                    <th>Core</th>
+                    <th>Managed</th>
+                    <th>Full Function</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((r, i) => (
+                    <tr key={i}>
+                      <td className="svc-feature">{r[0]}</td>
+                      <td>{cell(r[1])}</td>
+                      <td>{cell(r[2])}</td>
+                      <td>{cell(r[3])}</td>
+                    </tr>
+                  ))}
+                  <tr className="svc-price-row">
+                    <td className="svc-feature">From</td>
+                    <td>£850/mo</td>
+                    <td>£1,400/mo</td>
+                    <td>£2,200/mo</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -3037,40 +3114,36 @@ function AdvisoryBandWWD() {
     'Board-level reporting',
   ];
   return (
-    <>
-      {/* Visual band-break to separate the core two-stage offer from the partner-attributed advisory band. */}
-      <div style={{height:'1px', background:'transparent'}} aria-hidden="true"></div>
-      <section id="advisory" className="values-section" style={{background:'var(--accent-bg)'}}>
-        <div className="container">
-          <div className="section-head">
-            <span className="eyebrow dot">Through our partner network</span>
-            <h2 className="h1">Strategic Advisory</h2>
+    <section id="advisory" className="values-section" style={{borderTop:'1px solid var(--accent)'}}>
+      <div className="container">
+        <div className="section-head">
+          <span className="eyebrow dot">Through our partner network</span>
+          <h2 className="h1">Strategic Advisory</h2>
+        </div>
+        <div className="why-grid" style={{marginTop:32}}>
+          <div className="why-text">
+            <p className="lead">Our core service is operational: we build your finance function and we run it. But once the numbers are clean and reliable, the questions get bigger &mdash; and you need someone qualified to answer them.</p>
+            <p className="lead lead-emph">That&rsquo;s what our advisory partner is for. Qualified, regulated, and working from books we already know inside out, because we keep them.</p>
           </div>
-          <div className="why-grid" style={{marginTop:32}}>
-            <div className="why-text">
-              <p className="lead">Our core service is operational: we build your finance function and we run it. But once the numbers are clean and reliable, the questions get bigger &mdash; and you need someone qualified to answer them.</p>
-              <p className="lead lead-emph">That&rsquo;s what our advisory partner is for. Qualified, regulated, and working from books we already know inside out, because we keep them.</p>
+          <div className="why-body">
+            <div className="td-includes-label">What&rsquo;s available through our partner</div>
+            <ul className="td-includes expanded" style={{marginTop:12}}>
+              {available.map((c, i) => (
+                <li key={i}>
+                  <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
+                  <span>{c}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="td-best" style={{marginTop:24}}>
+              <div className="td-best-label">How it works</div>
+              <p className="td-best-body">We make the introduction and supply the numbers. Your advisory engagement sits directly with our partner, so you&rsquo;re getting advice from someone regulated to give it. We stay involved throughout &mdash; same books, same team, one relationship.</p>
             </div>
-            <div className="why-body">
-              <div className="td-includes-label">What&rsquo;s available through our partner</div>
-              <ul className="td-includes expanded" style={{marginTop:12}}>
-                {available.map((c, i) => (
-                  <li key={i}>
-                    <span className="td-check"><Icon name="check" size={14} stroke={2.5} /></span>
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="td-best" style={{marginTop:24}}>
-                <div className="td-best-label">How it works</div>
-                <p className="td-best-body">We make the introduction and supply the numbers. Your advisory engagement sits directly with our partner, so you&rsquo;re getting advice from someone regulated to give it. We stay involved throughout &mdash; same books, same team, one relationship.</p>
-              </div>
-              <p className="lead" style={{marginTop:16,fontStyle:'italic',color:'var(--body-gray)'}}>Available once your finance function is up and running.</p>
-            </div>
+            <p className="lead" style={{marginTop:16,fontStyle:'italic',color:'var(--body-gray)'}}>Available once your finance function is up and running.</p>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 
@@ -3311,7 +3384,8 @@ function ContactPage() {
 
           <div className="expect-panel" style={{marginTop:48, textAlign:'center'}}>
             <div className="expect-eyebrow">Response promise</div>
-            <p className="lead lead-emph" style={{marginTop:12}}>We aim to come back to every enquiry within one working hour.</p>
+            {/* .lead-emph is color:#000 by default and would be invisible on the black expect-panel; override to white here. */}
+            <p className="lead" style={{marginTop:12, color:'#fff', fontWeight:500}}>We aim to come back to every enquiry within one working hour.</p>
           </div>
         </div>
       </section>
