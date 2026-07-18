@@ -3347,7 +3347,7 @@ function ContactPage() {
 
       <section className="wwd-section">
         <div className="container">
-          <div className="wwd-grid" style={{gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))'}}>
+          <div className="wwd-grid">
             <a className="wwd-card" href="tel:02080640366" style={{textDecoration:'none'}}>
               <div className="wwd-num"><Icon name="phone" size={20} stroke={2} /></div>
               <h3 className="wwd-title">Call</h3>
@@ -3364,99 +3364,62 @@ function ContactPage() {
               <h3 className="wwd-title">Email</h3>
               <p className="wwd-body">hello@inclinefinancial.co.uk</p>
             </a>
-            <a className="wwd-card" href="#form" onClick={(e) => { e.preventDefault(); document.getElementById('form-card').scrollIntoView({behavior:'smooth'}); }} style={{textDecoration:'none'}}>
-              <div className="wwd-num"><Icon name="arrow" size={20} stroke={2} /></div>
-              <h3 className="wwd-title">Form</h3>
-              <p className="wwd-body">Send us the details</p>
-            </a>
-          </div>
-
-          <div className="expect-panel" style={{marginTop:48, textAlign:'center'}}>
-            <div className="expect-eyebrow">Response promise</div>
-            {/* .lead-emph is color:#000 by default and would be invisible on the black expect-panel; override to white here. */}
-            <p className="lead" style={{marginTop:12, color:'#fff', fontWeight:500}}>We aim to come back to every enquiry within one working hour.</p>
           </div>
         </div>
       </section>
 
-      <section className="contact-section">
+      <section className="contact-section" style={{paddingTop:0}}>
         <div className="container">
-          <div className="contact-grid">
-            <div className="contact-left">
-              <p className="contact-intro">A scoping call is a conversation, not a sales pitch. It&rsquo;s how we learn about your business, get a feel for what would actually help, and give you a fixed price to sort it properly. If we&rsquo;re not the right fit, we&rsquo;ll tell you.</p>
+          <div className="form-card" id="form-card" style={{maxWidth:720, margin:'0 auto'}}>
+            <h2 className="form-heading">Or send us the details</h2>
+            <p className="form-sub">A few quick details so we can prepare for the call.</p>
 
-              <div className="expect-panel">
-                <div className="expect-eyebrow">What to expect from the scoping call</div>
-                <ul className="expect-list">
-                  <li><span className="expect-num">01</span><div><strong>15 minutes.</strong> Long enough to be useful, short enough to respect your day.</div></li>
-                  <li><span className="expect-num">02</span><div><strong>We listen.</strong> About your contracts, your team, your current setup, and what&rsquo;s prompting the call.</div></li>
-                  <li><span className="expect-num">03</span><div><strong>We give you a fixed price.</strong> To build it, run it, or both. In writing. No moving parts.</div></li>
-                  <li><span className="expect-num">04</span><div><strong>No commitment.</strong> No follow-ups, no pressure, no automated drip emails.</div></li>
-                </ul>
+            <form className="form" onSubmit={submit} noValidate>
+              <div className={"field full" + (errors.name ? ' error' : '')}>
+                <label>Name</label>
+                <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Your name" />
+                {errors.name && <div className="err">{errors.name}</div>}
               </div>
-            </div>
-
-            <div className="contact-right">
-              <div className="form-card" id="form-card">
-                <h2 className="form-heading">Tell us what&rsquo;s going on.</h2>
-                <p className="form-sub">A few quick details so we can prepare for the call.</p>
-
-                <form className="form" onSubmit={submit} noValidate>
-                  <div className={"field full" + (errors.name ? ' error' : '')}>
-                    <label>Name</label>
-                    <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Your name" />
-                    {errors.name && <div className="err">{errors.name}</div>}
-                  </div>
-                  <div className={"field full" + (errors.company ? ' error' : '')}>
-                    <label>Company</label>
-                    <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Company name" />
-                    {errors.company && <div className="err">{errors.company}</div>}
-                  </div>
-                  <div className="field full">
-                    <label>Trade</label>
-                    <select value={form.trade} onChange={(e) => set('trade', e.target.value)}>
-                      <option value="">Select your trade</option>
-                      <option>Groundworks / Civils</option>
-                      <option>Electrical</option>
-                      <option>Mechanical / Plumbing / HVAC</option>
-                      <option>Roofing</option>
-                      <option>Scaffolding</option>
-                      <option>Fit-out / Joinery</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div className={"field" + (errors.phone ? ' error' : '')}>
-                    <label>Phone</label>
-                    <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
-                    {errors.phone && <div className="err">{errors.phone}</div>}
-                  </div>
-                  <div className={"field" + (errors.email ? ' error' : '')}>
-                    <label>Email</label>
-                    <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
-                    {errors.email && <div className="err">{errors.email}</div>}
-                  </div>
-                  <div className="field full">
-                    <label>What&rsquo;s the problem?</label>
-                    <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="A sentence or two on what's prompting the call." />
-                  </div>
-                  <div className="full">
-                    <button type="submit" className="btn btn-primary lg form-submit">
-                      Book my free scoping call
-                      <Icon name="arrow-right" size={14} stroke={2} />
-                    </button>
-                  </div>
-                </form>
-
-                <div className="form-divider"><span>Prefer to call?</span></div>
-
-                <a href="tel:02080640366" className="form-call">
-                  <Icon name="phone" size={16} stroke={2} />
-                  <span><strong>0208 064 0366</strong> &mdash; Mon&ndash;Fri, 9am&ndash;6pm</span>
-                </a>
-
-                <div className="form-foot">No obligation · Fully confidential · Fixed fees, always</div>
+              <div className={"field full" + (errors.company ? ' error' : '')}>
+                <label>Company</label>
+                <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Company name" />
+                {errors.company && <div className="err">{errors.company}</div>}
               </div>
-            </div>
+              <div className="field full">
+                <label>Trade</label>
+                <select value={form.trade} onChange={(e) => set('trade', e.target.value)}>
+                  <option value="">Select your trade</option>
+                  <option>Groundworks / Civils</option>
+                  <option>Electrical</option>
+                  <option>Mechanical / Plumbing / HVAC</option>
+                  <option>Roofing</option>
+                  <option>Scaffolding</option>
+                  <option>Fit-out / Joinery</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div className={"field" + (errors.phone ? ' error' : '')}>
+                <label>Phone</label>
+                <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
+                {errors.phone && <div className="err">{errors.phone}</div>}
+              </div>
+              <div className={"field" + (errors.email ? ' error' : '')}>
+                <label>Email</label>
+                <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
+                {errors.email && <div className="err">{errors.email}</div>}
+              </div>
+              <div className="field full">
+                <label>What&rsquo;s the problem?</label>
+                <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="A sentence or two on what's prompting the call." />
+              </div>
+              <div className="full">
+                <button type="submit" className="btn btn-primary lg form-submit">
+                  Book my free scoping call
+                  <Icon name="arrow-right" size={14} stroke={2} />
+                </button>
+                <p style={{marginTop:12, fontSize:13, color:'var(--body-gray)', textAlign:'center'}}>We come back to every enquiry within one working hour.</p>
+              </div>
+            </form>
           </div>
         </div>
       </section>
