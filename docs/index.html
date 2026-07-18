@@ -3291,7 +3291,7 @@ window.ConstructionFinancePage = ConstructionFinancePage;
 
 function ContactPage() {
   const [form, setForm] = React.useState({
-    name: '', company: '', trade: '', phone: '', email: '', problem: '',
+    name: '', company: '', turnover: '', trade: '', phone: '', email: '', problem: '',
   });
   const [errors, setErrors] = React.useState({});
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
@@ -3317,6 +3317,7 @@ function ContactPage() {
         body: JSON.stringify({
           name: form.name,
           company: form.company,
+          'Annual turnover': form.turnover,
           trade: form.trade,
           phone: form.phone,
           email: form.email,
@@ -3386,6 +3387,17 @@ function ContactPage() {
                 {errors.company && <div className="err">{errors.company}</div>}
               </div>
               <div className="field full">
+                <label>Turnover</label>
+                <select value={form.turnover} onChange={(e) => set('turnover', e.target.value)}>
+                  <option value="">Select a range</option>
+                  <option>Under £500k</option>
+                  <option>£500k – £1m</option>
+                  <option>£1m – £3m</option>
+                  <option>£3m – £5m</option>
+                  <option>Over £5m</option>
+                </select>
+              </div>
+              <div className="field full">
                 <label>Trade</label>
                 <select value={form.trade} onChange={(e) => set('trade', e.target.value)}>
                   <option value="">Select your trade</option>
@@ -3410,7 +3422,7 @@ function ContactPage() {
               </div>
               <div className="field full">
                 <label>What&rsquo;s the problem?</label>
-                <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="A sentence or two on what's prompting the call." />
+                <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="Tell us what's going on with your finances right now." />
               </div>
               <div className="full">
                 <button type="submit" className="btn btn-primary lg form-submit">
