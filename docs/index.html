@@ -732,6 +732,25 @@ ul { margin: 0; padding: 0; list-style: none; }
   flex: 1;
 }
 
+/* Contact-page variant: shorter cards with content vertically
+   balanced, no flex-fill stretching the primary line. */
+.wwd-card.contact-card {
+  min-height: 220px;
+  gap: 12px;
+  justify-content: center;
+}
+.wwd-card.contact-card .wwd-body {
+  flex: none;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+.wwd-card.contact-card .wwd-sub {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b6b6b;
+  margin: 0;
+}
+
 /* =========================================================
    Who it is for (3 profiles)
    ========================================================= */
@@ -2230,9 +2249,50 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
 }
 
 /* =========================================================
+   Closing-CTA — robustness pass
+   The decorative glow (::after) must never sit above the
+   button or contact links, even mid-animation. And the CTA
+   content must be fully visible and clickable from the very
+   first paint, so an incomplete or paused scroll-fade never
+   leaves the CTA hidden.
+   ========================================================= */
+.final-cta { isolation: isolate; }
+.final-cta::before,
+.final-cta::after { z-index: 0; }
+.final-cta > * { position: relative; z-index: 2; }
+.final-cta .fc-actions,
+.final-cta .fc-contact-links { z-index: 3; }
+
+/* The closing-CTA section opts out of the section-level fade-up:
+   its content is guaranteed visible from the first paint, whether
+   the IntersectionObserver fires or not. */
+.anim section.final-cta-section {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* The decorative glow keeps its "animates into place" feel — but
+   only for users without reduced-motion, and it lives beneath the
+   button in the stacking order, so it can never obscure it. */
+@media (prefers-reduced-motion: no-preference) {
+  .final-cta::after {
+    opacity: 0;
+    transform: translate(-50%, 32px);
+    transition:
+      opacity 700ms ease-out 120ms,
+      transform 800ms ease-out 120ms;
+  }
+  .anim section.final-cta-section.in .final-cta::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* =========================================================
    Service tier comparison table (WhatWeDo · StageOperations)
-   Clean 4-column table, subtle 1px row dividers, gold price row.
-   Overflows to horizontal scroll on narrow viewports.
+   4-column table with gold accents, emphasised "Managed" column
+   (most popular), stronger price row. Scrolls horizontally on
+   narrow viewports.
    ========================================================= */
 .svc-table-wrap {
   width: 100%;
@@ -2251,7 +2311,7 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
 }
 .svc-table th,
 .svc-table td {
-  padding: 14px 18px;
+  padding: 18px 20px;
   text-align: center;
   vertical-align: middle;
   border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -2262,8 +2322,8 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #4b4b4b;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   background: #fafafa;
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
@@ -2275,27 +2335,57 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   min-width: 240px;
 }
 .svc-table .svc-check {
-  color: #000;
+  color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 .svc-table .svc-dash {
-  color: var(--muted-gray);
+  color: rgba(0,0,0,0.28);
   display: inline-block;
+  font-size: 16px;
 }
 .svc-table tr:last-child td { border-bottom: none; }
 .svc-table tr.svc-price-row td {
   font-weight: 700;
-  font-size: 15px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px solid rgba(0,0,0,0.12);
+  font-size: 16px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  border-top: 2px solid rgba(0,0,0,0.18);
   background: #fafafa;
 }
 .svc-table tr.svc-price-row td:not(.svc-feature) {
   color: var(--accent);
   letter-spacing: -0.01em;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* "Managed" — the recommended middle tier — visually emphasised
+   with a soft tint and a subtle gold outline down the column. */
+.svc-table thead th:nth-child(3) {
+  background: #f6efe1;
+  color: var(--accent-deep);
+  position: relative;
+}
+.svc-table thead th:nth-child(3)::after {
+  content: "Most popular";
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+}
+.svc-table tbody td:nth-child(3) {
+  background: rgba(184,137,58,0.05);
+  box-shadow:
+    inset 1px 0 0 rgba(184,137,58,0.35),
+    inset -1px 0 0 rgba(184,137,58,0.35);
+}
+.svc-table tr.svc-price-row td:nth-child(3) {
+  background: #f6efe1;
 }
 
   </style>
@@ -2361,6 +2451,8 @@ const Icon = ({ name, size = 20, stroke = 1.5 }) => {
     'help-circle': <><circle cx="12" cy="12" r="10" /><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.5-3 4" /><path d="M12 17h.01" /></>,
     'pound-sterling': <path d="M18 7a4 4 0 0 0-8 0v4H6m0 4h12M9 11v3a4 4 0 0 1-3 4h12" />,
     'check-circle': <><circle cx="12" cy="12" r="10" /><path d="m8 12 3 3 5-6" /></>,
+    mail: <><rect x="2" y="4" width="20" height="16" rx="2" ry="2" /><path d="m2 7 10 6 10-6" /></>,
+    'message-circle': <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />,
   };
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">
@@ -2519,7 +2611,7 @@ function Footer() {
           ))}
         </div>
         <div className="footer-bot">
-          <span>© 2025 Incline Financial. All rights reserved.</span>
+          <span>© 2026 Incline Financial. All rights reserved.</span>
           <div className="footer-social">
             <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18H5.7v-8.5h2.6V18zM7 8.4c-.8 0-1.5-.7-1.5-1.5S6.2 5.4 7 5.4s1.5.7 1.5 1.5S7.8 8.4 7 8.4zM18.3 18h-2.6v-4.6c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.7V18H10s0-7.5 0-8.5h2.6v1.2c.4-.6 1-1.4 2.5-1.4 1.8 0 3.2 1.2 3.2 3.7V18z"/></svg></a>
             <a href="#" aria-label="Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.5-2.4.6.9-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-1.6-1.7-4.2-1.7-5.8-.1-1 1-1.5 2.5-1.2 4-3.3-.2-6.4-1.7-8.4-4.3-1.1 1.9-.5 4.3 1.3 5.5-.6 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.8.1.5 1.7 2.1 2.8 3.8 2.9-1.6 1.2-3.6 1.8-5.6 1.6 1.8 1.1 3.9 1.7 6 1.7 7.2 0 11.2-6.1 11-11.5.8-.6 1.5-1.3 2-2.1z"/></svg></a>
@@ -3341,19 +3433,19 @@ function ContactPage() {
       <section className="wwd-section">
         <div className="container">
           <div className="wwd-grid">
-            <a className="wwd-card" href="tel:02080640366" style={{textDecoration:'none'}}>
+            <a className="wwd-card contact-card" href="tel:02080640366" style={{textDecoration:'none'}}>
               <div className="wwd-num"><Icon name="phone" size={20} stroke={2} /></div>
               <h3 className="wwd-title">Call</h3>
               <p className="wwd-body">0208 064 0366</p>
+              <p className="wwd-sub">Mon&ndash;Fri, we call back within the hour</p>
             </a>
-            <a className="wwd-card" href="https://wa.me/44XXXXXXXXXX" style={{textDecoration:'none'}}>
-              {/* WhatsApp: replace 44XXXXXXXXXX with real number */}
-              <div className="wwd-num"><Icon name="send" size={20} stroke={2} /></div>
+            <a className="wwd-card contact-card" href="https://wa.me/44XXXXXXXXXX" style={{textDecoration:'none'}}>
+              <div className="wwd-num"><Icon name="message-circle" size={20} stroke={2} /></div>
               <h3 className="wwd-title">WhatsApp</h3>
               <p className="wwd-body">Message us direct</p>
             </a>
-            <a className="wwd-card" href="mailto:hello@inclinefinancial.co.uk" style={{textDecoration:'none'}}>
-              <div className="wwd-num"><Icon name="send" size={20} stroke={2} /></div>
+            <a className="wwd-card contact-card" href="mailto:hello@inclinefinancial.co.uk" style={{textDecoration:'none'}}>
+              <div className="wwd-num"><Icon name="mail" size={20} stroke={2} /></div>
               <h3 className="wwd-title">Email</h3>
               <p className="wwd-body">hello@inclinefinancial.co.uk</p>
             </a>
