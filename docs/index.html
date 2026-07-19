@@ -1060,6 +1060,31 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: 8px;
 }
 .fc-phone:hover { color: #fff; }
+.fc-contact-links {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.01em;
+}
+.fc-contact-links a {
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 180ms ease;
+}
+.fc-contact-links a:hover { color: #fff; }
+.fc-contact-links .sep {
+  margin: 0 12px;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 520px) {
+  .fc-contact-links { flex-direction: column; gap: 10px; }
+  .fc-contact-links .sep { display: none; }
+}
 
 /* =========================================================
    ABOUT — Why Incline
@@ -2819,30 +2844,25 @@ function ExpertisePointer() {
   );
 }
 
-function FinalCTA() {
+function FinalCTA({ eyebrow, title, lead }) {
   return (
     <section className="final-cta-section">
       <div className="final-cta">
-        <div className="fc-eyebrow">Ready when you are.</div>
-        <h2 className="fc-title">Let&rsquo;s have a look<br/>at your books.</h2>
-        <p className="fc-lead">A free 15-minute scoping call. We look at where you are, and give you a fixed price to sort it properly. No obligation, no sales pitch.</p>
+        <div className="fc-eyebrow">{eyebrow}</div>
+        <h2 className="fc-title">{title}</h2>
+        <p className="fc-lead">{lead}</p>
         <div className="fc-actions">
           <a className="btn btn-on-dark lg" href="#/contact"
              onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-            <Icon name="phone" size={14} stroke={2} /> Book a scoping call
+            <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
           </a>
         </div>
-        <div className="fc-actions" style={{marginTop:16,gap:24,flexWrap:'wrap'}}>
-          <a className="fc-phone" href="tel:02080640366">
-            <Icon name="phone" size={14} stroke={2} /> Call · 0208 064 0366
-          </a>
-          <a className="fc-phone" href="https://wa.me/44XXXXXXXXXX">
-            {/* WhatsApp: replace 44XXXXXXXXXX with real number */}
-            <Icon name="send" size={14} stroke={2} /> WhatsApp
-          </a>
-          <a className="fc-phone" href="mailto:hello@inclinefinancial.co.uk">
-            <Icon name="send" size={14} stroke={2} /> hello@inclinefinancial.co.uk
-          </a>
+        <div className="fc-contact-links">
+          <a href="tel:+442080640366">Call</a>
+          <span className="sep">·</span>
+          <a href="https://wa.me/44XXXXXXXXXX">WhatsApp</a>
+          <span className="sep">·</span>
+          <a href="mailto:hello@inclinefinancial.co.uk">Email</a>
         </div>
       </div>
     </section>
@@ -2859,12 +2879,17 @@ function HomePage() {
       <AdvisorySignpost />
       <WhyIncline />
       <ExpertisePointer />
-      <FinalCTA />
+      <FinalCTA
+        eyebrow="Ready when you are."
+        title={<>Let&rsquo;s have a look<br/>at your books.</>}
+        lead="A free 15-minute scoping call. We look at where you are, and give you a fixed price to sort it properly. No obligation, no sales pitch."
+      />
     </>
   );
 }
 
 window.HomePage = HomePage;
+window.FinalCTA = FinalCTA;
 
   </script>
   <script type="text/babel">
@@ -2941,22 +2966,11 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="final-cta-section">
-        <div className="final-cta">
-          <div className="fc-eyebrow">Ready when you are.</div>
-          <h2 className="fc-title">Let&rsquo;s have a look<br/>at your books.</h2>
-          <p className="fc-lead">A free 15-minute scoping call. No obligation, no sales pitch.</p>
-          <div className="fc-actions">
-            <a className="btn btn-on-dark lg" href="#/contact"
-               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
-            </a>
-            <a className="fc-phone" href="tel:02080640366">
-              <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
-            </a>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        eyebrow="Ready when you are."
+        title={<>Let&rsquo;s have a look<br/>at your books.</>}
+        lead="A free 15-minute scoping call. No obligation, no sales pitch."
+      />
     </>
   );
 }
@@ -3153,22 +3167,11 @@ function WhatWeDoPage() {
       <StageOperations />
       <AdvisoryBandWWD />
 
-      <section className="final-cta-section">
-        <div className="final-cta">
-          <div className="fc-eyebrow">Not sure which one you need?</div>
-          <h2 className="fc-title">That&rsquo;s what the<br/>scoping call is for.</h2>
-          <p className="fc-lead">Fifteen minutes. We&rsquo;ll listen, look at where you are, and give you a fixed price to sort it properly.</p>
-          <div className="fc-actions">
-            <a className="btn btn-on-dark lg" href="#/contact"
-               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
-            </a>
-            <a className="fc-phone" href="tel:02080640366">
-              <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
-            </a>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        eyebrow="Not sure which one you need?"
+        title={<>That&rsquo;s what the<br/>scoping call is for.</>}
+        lead="Fifteen minutes. We’ll listen, look at where you are, and give you a fixed price to sort it properly."
+      />
     </>
   );
 }
@@ -3263,22 +3266,11 @@ function ConstructionFinancePage() {
         </div>
       </section>
 
-      <section className="final-cta-section">
-        <div className="final-cta">
-          <div className="fc-eyebrow">Want us to look at yours?</div>
-          <h2 className="fc-title">A free 15-minute<br/>scoping call.</h2>
-          <p className="fc-lead">We look at where you are and give you a fixed price to sort it properly. No obligation, no sales pitch.</p>
-          <div className="fc-actions">
-            <a className="btn btn-on-dark lg" href="#/contact"
-               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              <Icon name="phone" size={14} stroke={2} /> Book a free scoping call
-            </a>
-            <a className="fc-phone" href="tel:02080640366">
-              <Icon name="phone" size={14} stroke={2} /> 0208 064 0366
-            </a>
-          </div>
-        </div>
-      </section>
+      <FinalCTA
+        eyebrow="Want us to look at yours?"
+        title={<>A free 15-minute<br/>scoping call.</>}
+        lead="We look at where you are and give you a fixed price to sort it properly. No obligation, no sales pitch."
+      />
     </>
   );
 }
