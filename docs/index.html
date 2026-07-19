@@ -3102,11 +3102,6 @@ function StageBuild() {
               <div className="td-best-label">Pricing note</div>
               <p className="td-best-body">From £1,500. Fixed price, quoted after a free scoping call. Most builds land between £3,000 and £3,500 depending on the state of the books. No surprises.</p>
             </div>
-            <a className="btn btn-primary lg"
-               href="#/contact"
-               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              Book a free scoping call
-            </a>
           </div>
           <div className="td-right">
             <div className="td-includes-label">What&rsquo;s included</div>
@@ -3158,11 +3153,6 @@ function StageOperations() {
               <div className="td-best-label">Fixed monthly fee</div>
               <p className="td-best-body">No hourly billing. Tiers are set by your transaction volume, how many subcontractors you engage, and how many contracts you&rsquo;re running &mdash; we&rsquo;ll tell you which one you&rsquo;re in on the scoping call.</p>
             </div>
-            <a className="btn btn-primary lg"
-               href="#/contact"
-               onClick={(e) => { e.preventDefault(); window.navigate('/contact'); }}>
-              Book a free scoping call
-            </a>
           </div>
           <div className="td-right">
             <div className="svc-table-wrap">
@@ -3209,7 +3199,7 @@ function AdvisoryBandWWD() {
     'Board-level reporting',
   ];
   return (
-    <section id="advisory" className="why-section" style={{borderTop:'1px solid var(--accent)', paddingTop:96, paddingBottom:96}}>
+    <section id="advisory" className="why-section" style={{paddingTop:32, paddingBottom:96}}>
       <div className="container">
         <div className="section-head" style={{marginBottom:48}}>
           <span className="eyebrow dot">Through our partner network</span>
