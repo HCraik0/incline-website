@@ -2660,7 +2660,7 @@ function HeroBigBlock() {
           </div>
           <div className="hb-trust">
             <span className="hb-trust-dots"><span></span><span></span><span></span></span>
-            <span>Construction finance specialists · One fixed monthly fee · You approve every payment</span>
+            <span>Construction finance specialists · One fixed monthly fee · We run it, you build</span>
           </div>
         </div>
         <div className="hb-mocks">
@@ -2831,7 +2831,7 @@ function HowItWorks() {
       <div className="container">
         <div className="wwd-head">
           <span className="eyebrow dot">How it works</span>
-          <h2 className="h1">Build it. Run it.<br/>Scoped for your business. Fixed up front.</h2>
+          <h2 className="h1">Build it. Run it.<br/>Scoped for your business.</h2>
         </div>
         <div className="wwd-grid" style={{gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))'}}>
           {cards.map(c => (
@@ -2974,7 +2974,7 @@ function HomePage() {
       <FinalCTA
         eyebrow="Ready when you are."
         title={<>Let&rsquo;s have a look<br/>at your books.</>}
-        lead="A free 15-minute scoping call. We look at where you are, and give you a fixed price to sort it properly. No obligation, no sales pitch."
+        lead="A free 15-minute scoping call. We look at where you are, and show you exactly what we'd do and what it costs. No obligation, no sales pitch."
       />
     </>
   );
@@ -3075,9 +3075,9 @@ window.AboutPage = AboutPage;
 
 function StageBuild() {
   const includes = [
-    'Cloud accounting set up properly (Xero + Dext), coded to your jobs and contracts',
+    'Cloud accounting (Xero & Dext), coded to your jobs and contracts',
     'CIS configured: deductions, verification, monthly returns',
-    'Domestic reverse charge VAT set up correctly',
+    'Domestic reverse charge VAT',
     'Retention register, so nothing owed to you gets forgotten',
     'Applications-for-payment tracking',
     'Payment-approval workflow: you approve every payment before a penny leaves your account',
@@ -3097,10 +3097,10 @@ function StageBuild() {
               <span className="td-price">£1,500</span>
               <span className="td-period">fixed price</span>
             </div>
-            <p className="td-desc">Most firms we meet have outgrown whatever they set up when they were half the size. We build the finance function properly, and clean up what&rsquo;s behind you.</p>
+            <p className="td-desc">We build the finance function your business needs for the next stage of growth: set up around how construction actually works, starting from wherever you are today.</p>
             <div className="td-best">
               <div className="td-best-label">Pricing note</div>
-              <p className="td-best-body">From £1,500. We scope your business on a free call, then quote one fixed price for the build. Most land between £3,000 and £3,500 depending on the state of the books. No hourly billing, no surprises.</p>
+              <p className="td-best-body">From £1,500. One fixed price, agreed after a free scoping call.</p>
             </div>
           </div>
           <div className="td-right">
@@ -3131,7 +3131,9 @@ function StageOperations() {
     ['Credit control', false, true, true],
     ['Retention & application tracking', false, true, true],
     ['Weekly cash position', false, true, true],
-    ['Dedicated delivery, priority turnaround', false, false, true],
+    ['Higher transaction & subcontractor volume', false, false, true],
+    ['Dedicated point of contact', false, false, true],
+    ['Regular finance review meeting', false, false, true],
   ];
   const cell = (v) => v
     ? <span className="svc-check"><Icon name="check" size={14} stroke={2.5} /></span>
@@ -3239,8 +3241,8 @@ function WhatWeDoPage() {
         <div className="container">
           <span className="eyebrow dot">What we do</span>
           <h1 className="hb-title page-h1" style={{marginTop:20}}>
-            Two stages, and a<br/>
-            <span className="hb-title-emph">partner network for<br/>everything beyond them.</span>
+            We build your finance function,<br/>
+            <span className="hb-title-emph">then we run it.</span>
           </h1>
         </div>
       </section>
@@ -3252,7 +3254,7 @@ function WhatWeDoPage() {
       <FinalCTA
         eyebrow="Not sure which one you need?"
         title={<>That&rsquo;s what the<br/>scoping call is for.</>}
-        lead="Fifteen minutes. We’ll listen, look at where you are, and give you a fixed price to sort it properly."
+        lead="Fifteen minutes. We’ll listen, look at where you are, and show you exactly what we'd do and what it costs."
       />
     </>
   );
@@ -3351,7 +3353,7 @@ function ConstructionFinancePage() {
       <FinalCTA
         eyebrow="Want us to look at yours?"
         title={<>A free 15-minute<br/>scoping call.</>}
-        lead="We look at where you are and give you a fixed price to sort it properly. No obligation, no sales pitch."
+        lead="We look at where you are and show you exactly what we'd do and what it costs. No obligation, no sales pitch."
       />
     </>
   );
