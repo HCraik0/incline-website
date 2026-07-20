@@ -249,19 +249,19 @@
       margin: 32px 0 0;
     }
     .services-track {
-      display: flex; gap: 40px; align-items: center;
+      display: flex; gap: 48px; align-items: center;
       white-space: nowrap;
-      animation: services-scroll 20s linear infinite;
+      animation: services-scroll 40s linear infinite;
       will-change: transform;
     }
     .services-track:hover { animation-play-state: paused; }
     .services-item {
       display: inline-flex; align-items: center; gap: 8px;
       flex-shrink: 0;
-      font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+      font-size: 13px; font-weight: 600;
       color: var(--body-gray);
     }
-    .services-item .tick { color: var(--accent); font-weight: 700; }
+    .services-item svg { color: #000; }
     @keyframes services-scroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
@@ -437,15 +437,22 @@
 
     <section class="services-strip" aria-label="What we do">
       <div class="services-track" id="servicesTrack">
-        <!-- items are duplicated at runtime for a seamless marquee -->
-        <span class="services-item"><span class="tick">✓</span> Bookkeeping</span>
-        <span class="services-item"><span class="tick">✓</span> CIS returns</span>
-        <span class="services-item"><span class="tick">✓</span> Reverse charge VAT</span>
-        <span class="services-item"><span class="tick">✓</span> Retention register</span>
-        <span class="services-item"><span class="tick">✓</span> Applications for payment</span>
-        <span class="services-item"><span class="tick">✓</span> Payment runs</span>
-        <span class="services-item"><span class="tick">✓</span> Credit control</span>
-        <span class="services-item"><span class="tick">✓</span> Payroll</span>
+        <!-- items match the main site's SocialProof list; duplicated at runtime for a seamless loop -->
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> CIS Verification &amp; Deductions</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Monthly CIS Returns</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Domestic Reverse Charge VAT</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Retention Register</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Applications for Payment</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Payment Runs Prepared</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Credit Control</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Subcontractor Ledger</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Purchase &amp; Sales Ledger</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Bank Reconciliations</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Payroll</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Xero &amp; Dext</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Live Cash Position</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Historical Clean-Up</span>
+        <span class="services-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg> Written Processes</span>
       </div>
     </section>
 
