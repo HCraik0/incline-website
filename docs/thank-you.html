@@ -17,6 +17,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
 <style>
+/* Font loading — mirror index.html's @import in addition to the
+   <link> above, so Inter loads via the same mechanism the SPA uses. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 /* Design tokens — mirrored from docs/index.html */
 :root {
   --accent: #b8893a;
@@ -68,20 +72,29 @@ a { color: inherit; }
   background: var(--accent);
 }
 
-/* Heading — matches .hb-title scale/weight */
+/* Heading — matches .hb-title exactly (font-family, weight,
+   letter-spacing, line-height, size) so this two-part heading
+   reads the same as the site's page headings. */
 h1 {
-  font-size: clamp(40px, 5.4vw, 68px);
+  font-family: var(--font-body);
+  font-size: clamp(40px, 5.4vw, 76px);
   font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: -0.035em;
+  line-height: 1.0;
   color: #000;
   margin-bottom: 12px;
   text-wrap: balance;
 }
+/* .sub carries the same font/weight/letter-spacing as the h1
+   so "Thank you." and "We'll be in touch." read as one heading;
+   size is smaller for hierarchy. */
 .sub {
-  font-size: clamp(18px, 2.2vw, 22px);
-  font-weight: 500;
-  color: var(--accent-deep);
+  font-family: var(--font-body);
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.0;
+  color: var(--accent);
   margin-bottom: 40px;
 }
 
@@ -120,6 +133,7 @@ h1 {
   letter-spacing: 0.04em;
 }
 .step-text {
+  font-family: var(--font-body);
   font-size: 15px;
   color: #1a1a1a;
   line-height: 1.6;
