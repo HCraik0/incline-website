@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Incline Financial — Book a free scoping call</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="The outsourced finance function for growing construction subcontractors. CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control — built properly and run for you.">
+  <meta name="description" content="The outsourced finance function for growing construction subcontractors. CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control. Built properly and run for you.">
   <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
@@ -15,6 +15,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* Font loading — mirror index.html's @import in addition to the
+       <link> above, so Inter loads via the same mechanism the SPA uses. */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
     /* Design tokens mirrored from docs/index.html */
     :root {
       --incline-black: #000000;
@@ -178,8 +182,8 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus {
-      border-color: #000;
-      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(184,137,58,0.16);
     }
     .field.error input,
     .field.error select,
@@ -214,6 +218,25 @@
       margin-top: 18px;
       font-size: 12px; color: var(--muted-gray);
       text-align: center; letter-spacing: 0.02em;
+    }
+
+    /* Quiet alt-contact row for people who'd rather message than
+       fill in the form. Sits under the response promise. */
+    .alt-contact {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted-gray);
+    }
+    .alt-contact a {
+      color: #1a1a1a;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .alt-contact a:hover { color: var(--accent-deep); }
+    .alt-contact .sep {
+      margin: 0 8px;
+      color: rgba(0,0,0,0.25);
     }
 
     /* ---------- Services strip (proof-bar tone) ---------- */
@@ -338,11 +361,11 @@
             <span class="hb-title-emph">for growing construction subcontractors.</span>
           </h1>
           <p class="hb-lead">
-            CIS, reverse charge VAT, retentions, applications for payment, payment runs, credit control &mdash; built properly and run for you.
+            CIS, reverse charge VAT, retentions, applications for payment, payment runs and credit control, run for you.
           </p>
           <div class="hb-trust">
             <span class="hb-trust-dots"><span></span><span></span><span></span></span>
-            <span>Construction only &middot; Fixed monthly fees &middot; You approve every payment</span>
+            <span>Construction finance specialists &middot; One fixed monthly fee &middot; No hourly billing</span>
           </div>
         </div>
 
@@ -402,6 +425,10 @@
                 <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
               </button>
               <p class="response-promise">We come back to every enquiry within one working hour.</p>
+              <p class="alt-contact">
+                Or reach out directly:
+                <a href="tel:+442080640366">Call</a><span class="sep">&middot;</span><a href="https://wa.me/44XXXXXXXXXX">WhatsApp</a><span class="sep">&middot;</span><a href="mailto:hello@inclinefinancial.co.uk">Email</a>
+              </p>
             </div>
           </form>
         </div>
@@ -428,11 +455,13 @@
     <div>
       <a href="tel:+442080640366">0208 064 0366</a>
       &middot;
+      <a href="https://wa.me/44XXXXXXXXXX">WhatsApp</a>
+      &middot;
       <a href="mailto:hello@inclinefinancial.co.uk">hello@inclinefinancial.co.uk</a>
       &middot;
       <a href="https://inclinefinancial.co.uk/">inclinefinancial.co.uk</a>
     </div>
-    <div class="footer-legal">&copy; 2025 Incline Financial. All rights reserved.</div>
+    <div class="footer-legal">&copy; 2026 Incline Financial. All rights reserved.</div>
   </footer>
 
   <script>
