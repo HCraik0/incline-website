@@ -17,159 +17,59 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 
 <style>
-/* Design tokens — mirrored from index.html */
+/* Design tokens — mirrored from docs/index.html */
 :root {
   --accent: #b8893a;
   --accent-deep: #8d6724;
   --body-gray: #4b4b4b;
   --muted-gray: #afafaf;
   --bg-page: #ececec;
-  --bg-shell: #f5f5f5;
   --font-body: 'Inter', system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
+  min-height: 100vh;
   background: var(--bg-page);
   color: #000;
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; }
-h1, h2, h3, h4, p { margin: 0; }
-ul { margin: 0; padding: 0; list-style: none; }
-
-/* Page shell — same wrapper as the SPA */
-.page-shell {
-  max-width: 1280px;
-  margin: 0 auto;
-  background: var(--bg-shell);
-}
-
-/* Topbar */
-.topbar {
-  background: #000;
-  color: #fff;
-  font-size: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.topbar-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 10px 32px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-.topbar-tag { color: rgba(255,255,255,0.7); letter-spacing: 0.01em; }
-.topbar-phone {
-  display: inline-flex; align-items: center; gap: 6px;
-  color: #fff; text-decoration: none; font-weight: 600;
-}
-.topbar-phone:hover { color: rgba(255,255,255,0.85); }
-@media (max-width: 720px) {
-  .topbar-tag { display: none; }
-  .topbar-inner { justify-content: center; }
-}
-
-/* Sticky nav */
-.nav-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--bg-shell);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 32px;
-  gap: 24px;
-  border-bottom: 1px solid transparent;
-}
-.nav-brand {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: #000; font-weight: 700;
-  font-size: 19px; letter-spacing: -0.02em;
-}
-.nav-brand .brand-mark {
-  width: 32px; height: 32px; background: #000; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-}
-.nav-brand .brand-mark svg path { fill: #fff; }
-.nav-links { display: flex; gap: 4px; }
-.nav-link {
-  padding: 8px 14px; font-size: 14px; font-weight: 500;
-  color: #4b4b4b; text-decoration: none; border-radius: 999px;
-}
-.nav-link:hover { color: #000; }
-.nav-actions { display: flex; align-items: center; gap: 8px; }
-.nav-phone {
-  font-size: 13px; color: #4b4b4b; text-decoration: none;
-  padding: 8px 12px; border-radius: 999px; font-weight: 500;
-}
-.nav-phone:hover { color: #000; background: rgba(0,0,0,0.04); }
-@media (max-width: 980px) {
-  .nav-links, .nav-phone { display: none; }
-}
-
-/* Buttons — dark-filled pill, matches the site */
-.btn {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border: none;
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  padding: 40px 24px;
 }
-.btn.lg { padding: 16px 24px; font-size: 15px; font-weight: 600; }
-.btn-primary {
-  background: #0A0F1E;
-  color: #ffffff;
-}
-.btn-primary:hover { background: #1a2540; }
-.btn-secondary {
-  background: transparent;
-  color: #000;
-  box-shadow: inset 0 0 0 1px #000;
-}
-.btn-secondary:hover { background: rgba(0,0,0,0.04); }
+a { color: inherit; }
 
-/* Thank-you main content */
-.ty-main {
-  padding: 64px 32px 96px;
-}
-.ty-wrap {
-  max-width: 720px;
-  margin: 0 auto;
+.wrap {
+  max-width: 560px;
+  width: 100%;
   text-align: center;
 }
-.ty-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
+
+/* Eyebrow — gold, with a gold dot, matching .eyebrow.dot on the site */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
-.ty-eyebrow::before {
+.eyebrow::before {
   content: "";
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--accent);
 }
-.ty-title {
+
+/* Heading — matches .hb-title scale/weight */
+h1 {
   font-size: clamp(40px, 5.4vw, 68px);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -178,40 +78,40 @@ ul { margin: 0; padding: 0; list-style: none; }
   margin-bottom: 12px;
   text-wrap: balance;
 }
-.ty-sub {
-  font-size: clamp(20px, 2.4vw, 26px);
+.sub {
+  font-size: clamp(18px, 2.2vw, 22px);
   font-weight: 500;
   color: var(--body-gray);
-  margin-bottom: 48px;
-}
-
-/* Steps panel */
-.ty-panel {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 40px;
-  text-align: left;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.04);
   margin-bottom: 40px;
 }
-.ty-panel-label {
+
+/* White step panel */
+.panel {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.04);
+  margin-bottom: 32px;
+}
+.panel-label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted-gray);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
-.ty-step {
+.step {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   align-items: flex-start;
-  padding: 14px 0;
+  padding: 12px 0;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
-.ty-step:first-of-type { border-top: none; padding-top: 0; }
-.ty-step:last-of-type { padding-bottom: 0; }
-.ty-step-num {
+.step:first-of-type { border-top: none; padding-top: 0; }
+.step:last-of-type { padding-bottom: 0; }
+.step-num {
   font-size: 12px;
   font-weight: 700;
   color: var(--accent);
@@ -219,262 +119,94 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding-top: 3px;
   letter-spacing: 0.04em;
 }
-.ty-step-text {
+.step-text {
   font-size: 15px;
   color: #1a1a1a;
   line-height: 1.6;
-  font-weight: 400;
 }
 
-/* CTA row */
-.ty-ctas {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 48px;
-}
-
-/* Contact avenues row — matches FinalCTA .fc-contact-links pattern,
-   adapted for a light background. */
-.ty-contact-intro {
-  font-size: 14px;
-  color: var(--body-gray);
-  margin-bottom: 14px;
-}
-.ty-contact-links {
-  display: flex;
-  justify-content: center;
+/* Buttons — dark-filled pill, matches site's .btn.btn-primary / .btn-secondary */
+.actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  font-size: 14px;
-  color: var(--muted-gray);
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
 }
-.ty-contact-links a {
-  color: #1a1a1a;
+.btn-primary { background: #0A0F1E; color: #ffffff; }
+.btn-primary:hover { background: #1a2540; }
+.btn-secondary {
+  background: transparent;
+  color: #000;
+  box-shadow: inset 0 0 0 1px #000;
+}
+.btn-secondary:hover { background: rgba(0,0,0,0.04); }
+
+/* Foot line — subtle grey with gold link */
+.foot {
+  margin-top: 32px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.45);
+}
+.foot a {
+  color: var(--accent);
   text-decoration: none;
   font-weight: 600;
-  transition: color 180ms ease;
 }
-.ty-contact-links a:hover { color: var(--accent-deep); }
-.ty-contact-links .sep {
-  margin: 0 12px;
-  color: rgba(0,0,0,0.25);
-}
-@media (max-width: 520px) {
-  .ty-contact-links { flex-direction: column; gap: 10px; }
-  .ty-contact-links .sep { display: none; }
-  .ty-panel { padding: 28px 22px; }
-  .ty-main { padding: 48px 20px 72px; }
-}
+.foot a:hover { color: var(--accent-deep); }
 
-/* Footer */
-.footer { padding: 80px 32px 32px; background: #000; color: #fff; }
-.footer-inner { max-width: 1232px; margin: 0 auto; padding: 0 24px; }
-.footer-cols {
-  display: grid;
-  grid-template-columns: 1.6fr repeat(3, 1fr);
-  gap: 48px;
-}
-.footer-brand .nav-brand { color: #fff; margin-bottom: 18px; font-size: 19px; }
-.footer-brand .nav-brand .brand-mark { background: #fff; }
-.footer-brand .nav-brand .brand-mark svg path { fill: #000; }
-.footer-tag {
-  font-size: 14px;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.6;
-  max-width: 280px;
-}
-.footer-cols h4 {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 16px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.footer-cols ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-cols a {
-  color: rgba(255,255,255,0.65);
-  text-decoration: none;
-  font-size: 14px;
-  line-height: 1.4;
-}
-.footer-cols a:hover { color: #fff; }
-.footer-bot {
-  border-top: 1px solid rgba(255,255,255,0.12);
-  padding-top: 24px;
-  margin-top: 56px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: rgba(255,255,255,0.55);
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.footer-social { display: flex; gap: 10px; }
-.footer-social a {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff;
-}
-.footer-social a:hover { background: rgba(255,255,255,0.16); }
-@media (max-width: 980px) {
-  .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .footer-brand { grid-column: span 2; }
-}
-@media (max-width: 640px) {
-  .footer-cols { grid-template-columns: 1fr; }
-  .footer-brand { grid-column: span 1; }
-  .footer { padding: 56px 20px 24px; }
-  .footer-inner { padding: 0 8px; }
+@media (max-width: 520px) {
+  .panel { padding: 24px 20px; }
+  .actions .btn { width: 100%; }
 }
 </style>
 </head>
 <body>
-<div class="page-shell">
-
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <span class="topbar-tag">The outsourced finance function · for growing construction subcontractors</span>
-      <div>
-        <a href="tel:02080640366" class="topbar-phone">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          0208 064 0366
-        </a>
-      </div>
+<div class="wrap">
+  <div class="eyebrow">Booked</div>
+  <h1>Thank you.</h1>
+  <p class="sub">We&rsquo;ll be in touch.</p>
+  <div class="panel">
+    <div class="panel-label">What happens next</div>
+    <div class="step">
+      <span class="step-num">01</span>
+      <span class="step-text">We will come back to you within one working hour.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <span class="step-text">We will spend 15 minutes on the phone understanding your setup and what is prompting the call.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <span class="step-text">We will look at where you are and show you exactly what we would do and what it costs.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <span class="step-text">The proposal lands in writing within two working days. No moving parts.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">05</span>
+      <span class="step-text">No commitment required. No follow-ups if you decide it is not for you.</span>
     </div>
   </div>
-
-  <!-- Sticky nav -->
-  <nav class="nav-sticky">
-    <a class="nav-brand" href="/">
-      <span class="brand-mark">
-        <svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true">
-          <path d="M8 52 L40 16 L40 52 Z" fill="#fff"/>
-          <path d="M44 52 L44 32 L56 32 L56 52 Z" fill="#fff" opacity=".55"/>
-        </svg>
-      </span>
-      <span>Incline.</span>
-    </a>
-    <div class="nav-links">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/#/what-we-do">What We Do</a>
-      <a class="nav-link" href="/#/construction-finance">Construction Finance</a>
-      <a class="nav-link" href="/#/about">About</a>
-      <a class="nav-link" href="/#/contact">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-phone" href="tel:02080640366">0208 064 0366</a>
-      <a class="btn btn-primary" href="/#/contact">Book a free scoping call</a>
-    </div>
-  </nav>
-
-  <!-- Main content -->
-  <main class="ty-main">
-    <div class="ty-wrap">
-      <div class="ty-eyebrow">Booked</div>
-      <h1 class="ty-title">Thank you.</h1>
-      <p class="ty-sub">We&rsquo;ll be in touch.</p>
-
-      <div class="ty-panel">
-        <div class="ty-panel-label">What happens next</div>
-        <div class="ty-step">
-          <span class="ty-step-num">01</span>
-          <span class="ty-step-text">We will come back to you within one working hour.</span>
-        </div>
-        <div class="ty-step">
-          <span class="ty-step-num">02</span>
-          <span class="ty-step-text">We will spend 15 minutes on the phone understanding your setup and what is prompting the call.</span>
-        </div>
-        <div class="ty-step">
-          <span class="ty-step-num">03</span>
-          <span class="ty-step-text">We will look at where you are and show you exactly what we would do and what it costs.</span>
-        </div>
-        <div class="ty-step">
-          <span class="ty-step-num">04</span>
-          <span class="ty-step-text">The proposal lands in writing within two working days. No moving parts.</span>
-        </div>
-        <div class="ty-step">
-          <span class="ty-step-num">05</span>
-          <span class="ty-step-text">No commitment required. No follow-ups if you decide it is not for you.</span>
-        </div>
-      </div>
-
-      <div class="ty-ctas">
-        <a href="/" class="btn btn-primary lg">Back to home</a>
-        <a href="/#/what-we-do" class="btn btn-secondary lg">See what we do</a>
-      </div>
-
-      <p class="ty-contact-intro">Would rather talk now? Call, WhatsApp or email us &mdash; Mon&ndash;Fri, 9am&ndash;6pm.</p>
-      <div class="ty-contact-links">
-        <a href="tel:+442080640366">Call</a>
-        <span class="sep">·</span>
-        <a href="https://wa.me/44XXXXXXXXXX">WhatsApp</a>
-        <span class="sep">·</span>
-        <a href="mailto:hello@inclinefinancial.co.uk">Email</a>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-cols">
-        <div class="footer-brand">
-          <a class="nav-brand" href="/">
-            <span class="brand-mark">
-              <svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true">
-                <path d="M8 52 L40 16 L40 52 Z" fill="#000"/>
-                <path d="M44 52 L44 32 L56 32 L56 52 Z" fill="#000" opacity=".55"/>
-              </svg>
-            </span>
-            <span>Incline.</span>
-          </a>
-          <p class="footer-tag">The outsourced finance function for growing construction subcontractors. CIS, reverse charge VAT, retentions, payment runs. Built properly and run for you.</p>
-        </div>
-        <div>
-          <h4>Navigate</h4>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/#/what-we-do">What We Do</a></li>
-            <li><a href="/#/construction-finance">Construction Finance</a></li>
-            <li><a href="/#/about">About</a></li>
-            <li><a href="/#/contact">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="tel:02080640366">0208 064 0366</a></li>
-            <li><a href="https://wa.me/44XXXXXXXXXX">WhatsApp</a></li>
-            <li><a href="mailto:hello@inclinefinancial.co.uk">hello@inclinefinancial.co.uk</a></li>
-            <li><a href="/#/contact">Book a free scoping call</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="/privacy.html">Privacy policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bot">
-        <span>© 2026 Incline Financial. All rights reserved.</span>
-        <div class="footer-social">
-          <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM8.3 18H5.7v-8.5h2.6V18zM7 8.4c-.8 0-1.5-.7-1.5-1.5S6.2 5.4 7 5.4s1.5.7 1.5 1.5S7.8 8.4 7 8.4zM18.3 18h-2.6v-4.6c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1-.1.2-.1.5-.1.7V18H10s0-7.5 0-8.5h2.6v1.2c.4-.6 1-1.4 2.5-1.4 1.8 0 3.2 1.2 3.2 3.7V18z"/></svg></a>
-          <a href="#" aria-label="Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8c-.7.3-1.5.5-2.4.6.9-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1-1.6-1.7-4.2-1.7-5.8-.1-1 1-1.5 2.5-1.2 4-3.3-.2-6.4-1.7-8.4-4.3-1.1 1.9-.5 4.3 1.3 5.5-.6 0-1.3-.2-1.9-.5 0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.8.1.5 1.7 2.1 2.8 3.8 2.9-1.6 1.2-3.6 1.8-5.6 1.6 1.8 1.1 3.9 1.7 6 1.7 7.2 0 11.2-6.1 11-11.5.8-.6 1.5-1.3 2-2.1z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.1 1.1 0 1.8.2 2.4.5.7.2 1.2.6 1.7 1.1s.9 1 1.1 1.7c.3.6.4 1.4.5 2.4 0 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 1-.2 1.8-.5 2.4-.3.7-.6 1.2-1.1 1.7s-1 .9-1.7 1.1c-.6.3-1.4.4-2.4.5-1.1 0-1.4.1-4.1.1s-3 0-4.1-.1c-1.1 0-1.8-.2-2.4-.5-.7-.2-1.2-.6-1.7-1.1s-.9-1-1.1-1.7c-.3-.6-.4-1.4-.5-2.4 0-1.1-.1-1.4-.1-4.1s0-3 .1-4.1c.1-1 .2-1.8.5-2.4.3-.7.6-1.2 1.1-1.7s1-.9 1.7-1.1c.6-.3 1.4-.4 2.4-.5C9 2 9.3 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.8a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0zM12 9a3 3 0 110 6 3 3 0 010-6z"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+  <div class="actions">
+    <a href="https://inclinefinancial.co.uk" class="btn btn-primary">Back to home</a>
+    <a href="https://inclinefinancial.co.uk/#/what-we-do" class="btn btn-secondary">See what we do</a>
+  </div>
+  <p class="foot">
+    If you would rather speak to someone now &mdash;
+    <a href="tel:02080640366">0208 064 0366</a>
+    &middot; Mon&ndash;Fri, 9am&ndash;6pm
+  </p>
 </div>
 </body>
 </html>
