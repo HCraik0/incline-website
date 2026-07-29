@@ -2331,6 +2331,28 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   font-size: 18px;
   font-weight: 800;
 }
+.svc-th-sub {
+  display: block;
+  margin: 6px auto 0;
+  max-width: 180px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #6b6b6b;
+  line-height: 1.4;
+}
+.svc-price-note {
+  display: block;
+  margin: 6px auto 0;
+  max-width: 200px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: #6b6b6b;
+  line-height: 1.4;
+  text-transform: none;
+}
 
 /* "Managed" — the recommended middle tier — visually emphasised
    with a soft tint and a subtle gold outline down the column. */
@@ -3100,8 +3122,9 @@ function StageOperations() {
     ['Credit control', false, true, true],
     ['Retention & application tracking', false, true, true],
     ['Weekly cash position', false, true, true],
-    ['Higher transaction & subcontractor volume', false, false, true],
     ['Dedicated point of contact', false, false, true],
+    ['Multi-contract / multi-entity handling', false, false, true],
+    ['Monthly management reporting prepared', false, false, true],
     ['Regular finance review meeting', false, false, true],
   ];
   const cell = (v) => v
@@ -3122,7 +3145,7 @@ function StageOperations() {
             <p className="td-desc">Once the system&rsquo;s in place, we run your day-to-day finance function so you never have to think about it.</p>
             <div className="td-best">
               <div className="td-best-label">Fixed monthly fee</div>
-              <p className="td-best-body">The tiers above are a guide. On the scoping call we agree one fixed monthly fee for your business, shaped by your transaction volume, the subcontractors you engage, and the contracts you&rsquo;re running. Fixed up front. No hourly billing. No surprises.</p>
+              <p className="td-best-body">The tiers above are a guide. Core and Managed start from their stated monthly prices. Full Function is scoped to the size and complexity of your operation, with larger, multi-contract and multi-entity firms priced accordingly. Every fee is agreed up front on the scoping call. No hourly billing. No surprises.</p>
             </div>
           </div>
           <div className="td-right">
@@ -3133,7 +3156,10 @@ function StageOperations() {
                     <th className="svc-feature"></th>
                     <th>Core</th>
                     <th>Managed</th>
-                    <th>Full Function</th>
+                    <th>
+                      Full Function
+                      <span className="svc-th-sub">Your complete finance function, run end to end.</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -3149,7 +3175,10 @@ function StageOperations() {
                     <td className="svc-feature">From</td>
                     <td>£850/mo</td>
                     <td>£1,400/mo</td>
-                    <td>£2,200/mo</td>
+                    <td>
+                      £2,200/mo
+                      <span className="svc-price-note">Scoped to your operation &mdash; larger and multi-entity firms priced accordingly.</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
