@@ -2573,6 +2573,21 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
    in the Finance Function Build price row, independent of flex gap. */
 .td-period-phrase { margin-left: 4px; }
 
+/* Strategic Advisory on What We Do — override the centered .section-head
+   and asymmetric .why-grid so the heading, body copy and partner list
+   share the same left/right edges and column widths as Stage One. */
+.wwd-advisory .section-head {
+  text-align: left;
+  max-width: none;
+  margin: 0 0 40px 0;
+}
+.wwd-advisory .section-head .h1 {
+  text-wrap: pretty;
+}
+.wwd-advisory .why-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
 @media (max-width: 640px) {
   .svc-table-wrap { display: none; }
   .svc-tier-cards {
@@ -3442,7 +3457,7 @@ function AdvisoryBandWWD() {
     'Board-level reporting',
   ];
   return (
-    <section id="advisory" className="why-section" style={{paddingTop:32, paddingBottom:96}}>
+    <section id="advisory" className="why-section wwd-advisory" style={{paddingTop:32, paddingBottom:96}}>
       <div className="container">
         <div className="section-head" style={{marginBottom:48}}>
           <span className="eyebrow dot">Through our partner network</span>
