@@ -2331,10 +2331,36 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   font-size: 18px;
   font-weight: 800;
 }
+
+/* Title row: names sit on the same baseline across the three tiers. */
+.svc-table thead tr.svc-title-row th {
+  vertical-align: bottom;
+  padding-bottom: 6px;
+  border-bottom: none;
+}
+/* Sub row: reserves a consistent vertical band under every tier name so
+   the tag ("Most popular") and the Full Function descriptor never push
+   the title row out of alignment. Cell heights match across columns. */
+.svc-table thead tr.svc-sub-row th {
+  vertical-align: top;
+  padding-top: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  min-height: 44px;
+  height: 44px;
+}
+.svc-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
 .svc-th-sub {
-  display: block;
-  margin: 6px auto 0;
-  max-width: 180px;
+  display: inline-block;
+  max-width: 200px;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0;
@@ -2342,10 +2368,24 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   color: #6b6b6b;
   line-height: 1.4;
 }
+
+/* Price-note row: keeps the £ figures aligned across all three tiers,
+   with any scoping note dropping below the aligned price row. */
+.svc-table tr.svc-price-note-row td {
+  padding-top: 0;
+  padding-bottom: 18px;
+  border-top: none;
+  border-bottom: none;
+  vertical-align: top;
+  background: #fafafa;
+  font-weight: 500;
+}
+.svc-table tr.svc-price-note-row td:nth-child(3) {
+  background: #f6efe1;
+}
 .svc-price-note {
-  display: block;
-  margin: 6px auto 0;
-  max-width: 200px;
+  display: inline-block;
+  max-width: 220px;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0;
@@ -2361,16 +2401,6 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   color: var(--accent-deep);
   position: relative;
 }
-.svc-table thead th:nth-child(3)::after {
-  content: "Most popular";
-  display: block;
-  margin-top: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--accent-deep);
-  text-transform: uppercase;
-}
 .svc-table tbody td:nth-child(3) {
   background: rgba(184,137,58,0.05);
   box-shadow:
@@ -2379,6 +2409,132 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
 }
 .svc-table tr.svc-price-row td:nth-child(3) {
   background: #f6efe1;
+}
+
+/* =========================================================
+   Mobile stacked tier cards — replaces the comparison table
+   on narrow viewports so nothing forces horizontal page scroll.
+   Each card is internally consistent; cards stack vertically
+   with even spacing.
+   ========================================================= */
+.svc-tier-cards { display: none; }
+.svc-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 22px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+.svc-card-featured {
+  background: linear-gradient(180deg, #f6efe1 0%, #ffffff 55%);
+  box-shadow: inset 0 0 0 1px rgba(184,137,58,0.45);
+}
+.svc-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.svc-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  margin: 0;
+}
+.svc-card-featured .svc-card-title { color: var(--accent-deep); }
+.svc-card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  background: #f6efe1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.svc-card-featured .svc-card-tag { background: #fff; }
+.svc-card-sub-slot { min-height: 20px; margin-top: 6px; }
+.svc-card-sub {
+  font-size: 12px;
+  color: #6b6b6b;
+  line-height: 1.45;
+  margin: 0;
+}
+.svc-card-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 18px;
+}
+.svc-card-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #1a1a1a;
+  line-height: 1.45;
+}
+.svc-card-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.svc-card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 16px;
+  margin-top: auto;
+}
+.svc-card-from {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4b4b4b;
+}
+.svc-card-price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+.svc-card-price-note {
+  font-size: 11px;
+  color: #6b6b6b;
+  line-height: 1.45;
+  margin: 8px 0 0 0;
+}
+
+/* Prevent grid children from forcing horizontal page scroll on mobile —
+   min-width:0 lets the flex/grid child shrink below its intrinsic content
+   width, so the table (min-width:560px) can be contained by its wrapper
+   rather than pushing the section wider than the viewport. */
+.td-right { min-width: 0; }
+
+@media (max-width: 640px) {
+  .svc-table-wrap { display: none; }
+  .svc-tier-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
   </style>
@@ -3127,6 +3283,11 @@ function StageOperations() {
     ['Monthly management reporting prepared', false, false, true],
     ['Regular finance review meeting', false, false, true],
   ];
+  const tiers = [
+    { name: 'Core',          idx: 1, price: '£850/mo',   tag: null,             sub: null, priceNote: null },
+    { name: 'Managed',       idx: 2, price: '£1,400/mo', tag: 'Most popular',   sub: null, priceNote: null },
+    { name: 'Full Function', idx: 3, price: '£2,200/mo', tag: null,             sub: 'Your complete finance function, run end to end.', priceNote: 'Scoped to your operation — larger and multi-entity firms priced accordingly.' },
+  ];
   const cell = (v) => v
     ? <span className="svc-check"><Icon name="check" size={14} stroke={2.5} /></span>
     : <span className="svc-dash">&mdash;</span>;
@@ -3152,14 +3313,18 @@ function StageOperations() {
             <div className="svc-table-wrap">
               <table className="svc-table">
                 <thead>
-                  <tr>
+                  <tr className="svc-title-row">
                     <th className="svc-feature"></th>
-                    <th>Core</th>
-                    <th>Managed</th>
-                    <th>
-                      Full Function
-                      <span className="svc-th-sub">Your complete finance function, run end to end.</span>
-                    </th>
+                    {tiers.map((t) => <th key={t.name}>{t.name}</th>)}
+                  </tr>
+                  <tr className="svc-sub-row">
+                    <th className="svc-feature"></th>
+                    {tiers.map((t) => (
+                      <th key={t.name}>
+                        {t.tag && <span className="svc-tag">{t.tag}</span>}
+                        {t.sub && <span className="svc-th-sub">{t.sub}</span>}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
@@ -3173,15 +3338,44 @@ function StageOperations() {
                   ))}
                   <tr className="svc-price-row">
                     <td className="svc-feature">From</td>
-                    <td>£850/mo</td>
-                    <td>£1,400/mo</td>
-                    <td>
-                      £2,200/mo
-                      <span className="svc-price-note">Scoped to your operation &mdash; larger and multi-entity firms priced accordingly.</span>
-                    </td>
+                    {tiers.map((t) => <td key={t.name}>{t.price}</td>)}
+                  </tr>
+                  <tr className="svc-price-note-row">
+                    <td className="svc-feature"></td>
+                    {tiers.map((t) => (
+                      <td key={t.name}>
+                        {t.priceNote && <span className="svc-price-note">{t.priceNote}</span>}
+                      </td>
+                    ))}
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div className="svc-tier-cards" aria-hidden="false">
+              {tiers.map((t) => (
+                <div key={t.name} className={"svc-card" + (t.tag ? " svc-card-featured" : "")}>
+                  <div className="svc-card-head">
+                    <h3 className="svc-card-title">{t.name}</h3>
+                    {t.tag && <span className="svc-card-tag">{t.tag}</span>}
+                  </div>
+                  <div className="svc-card-sub-slot">
+                    {t.sub && <p className="svc-card-sub">{t.sub}</p>}
+                  </div>
+                  <ul className="svc-card-list">
+                    {rows.filter((r) => r[t.idx]).map((r, i) => (
+                      <li key={i}>
+                        <span className="svc-card-check"><Icon name="check" size={12} stroke={2.5} /></span>
+                        <span>{r[0]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="svc-card-price-row">
+                    <span className="svc-card-from">From</span>
+                    <span className="svc-card-price">{t.price}</span>
+                  </div>
+                  {t.priceNote && <p className="svc-card-price-note">{t.priceNote}</p>}
+                </div>
+              ))}
             </div>
           </div>
         </div>
