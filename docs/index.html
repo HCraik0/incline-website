@@ -2332,22 +2332,31 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   font-weight: 800;
 }
 
-/* Title row: names sit on the same baseline across the three tiers. */
-.svc-table thead tr.svc-title-row th {
-  vertical-align: bottom;
-  padding-bottom: 6px;
-  border-bottom: none;
+/* Header cell stack: tag (Most popular) → tier name → sub descriptor.
+   Reserved slots keep tier names and any tags visually anchored at the
+   top of every column, so "Managed / Most popular" sits together at the
+   top of its column and lines up with Core and Full Function. */
+.svc-table thead th { vertical-align: top; }
+.svc-th-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
-/* Sub row: reserves a consistent vertical band under every tier name so
-   the tag ("Most popular") and the Full Function descriptor never push
-   the title row out of alignment. Cell heights match across columns. */
-.svc-table thead tr.svc-sub-row th {
-  vertical-align: top;
-  padding-top: 0;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(0,0,0,0.12);
-  min-height: 44px;
-  height: 44px;
+.svc-th-tag-slot {
+  min-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.svc-th-name {
+  /* inherits th typography: 11px uppercase, gold on Managed */
+}
+.svc-th-sub-slot {
+  min-height: 34px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 .svc-tag {
   display: inline-block;
@@ -2356,7 +2365,7 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   letter-spacing: 0.06em;
   color: var(--accent-deep);
   text-transform: uppercase;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 .svc-th-sub {
   display: inline-block;
@@ -2369,20 +2378,27 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
   line-height: 1.4;
 }
 
-/* Price-note row: keeps the £ figures aligned across all three tiers,
-   with any scoping note dropping below the aligned price row. */
-.svc-table tr.svc-price-note-row td {
-  padding-top: 0;
-  padding-bottom: 18px;
-  border-top: none;
-  border-bottom: none;
-  vertical-align: top;
-  background: #fafafa;
-  font-weight: 500;
+/* Price cell stack: £ figure → optional scoping note. Slot reserves
+   space so all three £ figures sit on the same horizontal line. */
+.svc-price-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
-.svc-table tr.svc-price-note-row td:nth-child(3) {
-  background: #f6efe1;
+.svc-price-fig {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.01em;
 }
+.svc-price-note-slot {
+  min-height: 42px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.svc-table tr.svc-price-row td { vertical-align: top; }
 .svc-price-note {
   display: inline-block;
   max-width: 220px;
@@ -2528,6 +2544,35 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
    rather than pushing the section wider than the viewport. */
 .td-right { min-width: 0; }
 
+/* =========================================================
+   Ongoing Operations section — stacked layout
+   Header block sits above a full-width comparison table,
+   with the "Fixed monthly fee" note below the table.
+   ========================================================= */
+.ops-detail .ops-head {
+  margin: 0 0 40px 0;
+}
+.ops-detail .ops-head .td-price-row {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  max-width: 640px;
+}
+.ops-detail .ops-head .td-desc {
+  max-width: 640px;
+  margin-bottom: 0;
+}
+.ops-detail .svc-table-wrap {
+  margin: 0 0 8px 0;
+}
+.ops-detail .ops-best {
+  margin: 28px 0 0 0;
+  max-width: 720px;
+}
+
+/* Ensure clear visual space between "£1,500" and the "fixed price" phrase
+   in the Finance Function Build price row, independent of flex gap. */
+.td-period-phrase { margin-left: 4px; }
+
 @media (max-width: 640px) {
   .svc-table-wrap { display: none; }
   .svc-tier-cards {
@@ -2535,6 +2580,7 @@ a:hover .accent-on-hover { color: var(--accent-deep); }
     flex-direction: column;
     gap: 16px;
   }
+  .ops-detail .ops-head { margin-bottom: 28px; }
 }
 
   </style>
@@ -3242,7 +3288,7 @@ function StageBuild() {
             <div className="td-price-row">
               <span className="td-from">From</span>
               <span className="td-price">£1,500</span>
-              <span className="td-period">fixed price</span>
+              <span className="td-period td-period-phrase">fixed price</span>
             </div>
             <p className="td-desc">We build the finance function your business needs for the next stage of growth: set up around how construction actually works, starting from wherever you are today.</p>
             <div className="td-best">
@@ -3292,92 +3338,95 @@ function StageOperations() {
     ? <span className="svc-check"><Icon name="check" size={14} stroke={2.5} /></span>
     : <span className="svc-dash">&mdash;</span>;
   return (
-    <section className="tier-detail tier-reverse">
+    <section className="tier-detail ops-detail">
       <div className="container">
-        <div className="td-grid">
-          <div className="td-left">
-            <div className="td-badge">Stage two · Monthly retainer</div>
-            <h2 className="td-name">Ongoing Operations</h2>
-            <div className="td-price-row">
-              <span className="td-from">From</span>
-              <span className="td-price">£850</span>
-              <span className="td-period">/month</span>
-            </div>
-            <p className="td-desc">Once the system&rsquo;s in place, we run your day-to-day finance function so you never have to think about it.</p>
-            <div className="td-best">
-              <div className="td-best-label">Fixed monthly fee</div>
-              <p className="td-best-body">The tiers above are a guide. Core and Managed start from their stated monthly prices. Full Function is scoped to the size and complexity of your operation, with larger, multi-contract and multi-entity firms priced accordingly. Every fee is agreed up front on the scoping call. No hourly billing. No surprises.</p>
-            </div>
+        <div className="ops-head">
+          <div className="td-badge">Stage two · Monthly retainer</div>
+          <h2 className="td-name">Ongoing Operations</h2>
+          <div className="td-price-row">
+            <span className="td-from">From</span>
+            <span className="td-price">£850</span>
+            <span className="td-period">/month</span>
           </div>
-          <div className="td-right">
-            <div className="svc-table-wrap">
-              <table className="svc-table">
-                <thead>
-                  <tr className="svc-title-row">
-                    <th className="svc-feature"></th>
-                    {tiers.map((t) => <th key={t.name}>{t.name}</th>)}
-                  </tr>
-                  <tr className="svc-sub-row">
-                    <th className="svc-feature"></th>
-                    {tiers.map((t) => (
-                      <th key={t.name}>
+          <p className="td-desc">Once the system&rsquo;s in place, we run your day-to-day finance function so you never have to think about it.</p>
+        </div>
+
+        <div className="svc-table-wrap">
+          <table className="svc-table">
+            <thead>
+              <tr>
+                <th className="svc-feature"></th>
+                {tiers.map((t) => (
+                  <th key={t.name}>
+                    <div className="svc-th-stack">
+                      <div className="svc-th-tag-slot">
                         {t.tag && <span className="svc-tag">{t.tag}</span>}
+                      </div>
+                      <div className="svc-th-name">{t.name}</div>
+                      <div className="svc-th-sub-slot">
                         {t.sub && <span className="svc-th-sub">{t.sub}</span>}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map((r, i) => (
-                    <tr key={i}>
-                      <td className="svc-feature">{r[0]}</td>
-                      <td>{cell(r[1])}</td>
-                      <td>{cell(r[2])}</td>
-                      <td>{cell(r[3])}</td>
-                    </tr>
-                  ))}
-                  <tr className="svc-price-row">
-                    <td className="svc-feature">From</td>
-                    {tiers.map((t) => <td key={t.name}>{t.price}</td>)}
-                  </tr>
-                  <tr className="svc-price-note-row">
-                    <td className="svc-feature"></td>
-                    {tiers.map((t) => (
-                      <td key={t.name}>
-                        {t.priceNote && <span className="svc-price-note">{t.priceNote}</span>}
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="svc-tier-cards" aria-hidden="false">
-              {tiers.map((t) => (
-                <div key={t.name} className={"svc-card" + (t.tag ? " svc-card-featured" : "")}>
-                  <div className="svc-card-head">
-                    <h3 className="svc-card-title">{t.name}</h3>
-                    {t.tag && <span className="svc-card-tag">{t.tag}</span>}
-                  </div>
-                  <div className="svc-card-sub-slot">
-                    {t.sub && <p className="svc-card-sub">{t.sub}</p>}
-                  </div>
-                  <ul className="svc-card-list">
-                    {rows.filter((r) => r[t.idx]).map((r, i) => (
-                      <li key={i}>
-                        <span className="svc-card-check"><Icon name="check" size={12} stroke={2.5} /></span>
-                        <span>{r[0]}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="svc-card-price-row">
-                    <span className="svc-card-from">From</span>
-                    <span className="svc-card-price">{t.price}</span>
-                  </div>
-                  {t.priceNote && <p className="svc-card-price-note">{t.priceNote}</p>}
-                </div>
+                      </div>
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((r, i) => (
+                <tr key={i}>
+                  <td className="svc-feature">{r[0]}</td>
+                  <td>{cell(r[1])}</td>
+                  <td>{cell(r[2])}</td>
+                  <td>{cell(r[3])}</td>
+                </tr>
               ))}
+              <tr className="svc-price-row">
+                <td className="svc-feature">From</td>
+                {tiers.map((t) => (
+                  <td key={t.name}>
+                    <div className="svc-price-stack">
+                      <div className="svc-price-fig">{t.price}</div>
+                      <div className="svc-price-note-slot">
+                        {t.priceNote && <span className="svc-price-note">{t.priceNote}</span>}
+                      </div>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="svc-tier-cards">
+          {tiers.map((t) => (
+            <div key={t.name} className={"svc-card" + (t.tag ? " svc-card-featured" : "")}>
+              <div className="svc-card-head">
+                <h3 className="svc-card-title">{t.name}</h3>
+                {t.tag && <span className="svc-card-tag">{t.tag}</span>}
+              </div>
+              <div className="svc-card-sub-slot">
+                {t.sub && <p className="svc-card-sub">{t.sub}</p>}
+              </div>
+              <ul className="svc-card-list">
+                {rows.filter((r) => r[t.idx]).map((r, i) => (
+                  <li key={i}>
+                    <span className="svc-card-check"><Icon name="check" size={12} stroke={2.5} /></span>
+                    <span>{r[0]}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="svc-card-price-row">
+                <span className="svc-card-from">From</span>
+                <span className="svc-card-price">{t.price}</span>
+              </div>
+              {t.priceNote && <p className="svc-card-price-note">{t.priceNote}</p>}
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="td-best ops-best">
+          <div className="td-best-label">Fixed monthly fee</div>
+          <p className="td-best-body">The tiers above are a guide. Core and Managed start from their stated monthly prices. Full Function is scoped to the size and complexity of your operation, with larger, multi-contract and multi-entity firms priced accordingly. Every fee is agreed up front on the scoping call. No hourly billing. No surprises.</p>
         </div>
       </div>
     </section>
