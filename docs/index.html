@@ -3626,6 +3626,8 @@ function ContactPage() {
     name: '', company: '', turnover: '', trade: '', phone: '', email: '', problem: '',
   });
   const [errors, setErrors] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(null);
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
 
   const validate = () => {
@@ -3640,29 +3642,45 @@ function ContactPage() {
 
   const submit = async (ev) => {
     ev.preventDefault();
+    if (submitting) return;
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
+    setSubmitError(null);
+    setSubmitting(true);
     try {
-      await fetch('https://formspree.io/f/xaqkjppr', {
+      const payload = {
+        Name: form.name,
+        Company: form.company,
+        'Annual turnover': form.turnover || '(not provided)',
+        Trade: form.trade || '(not provided)',
+        Phone: form.phone,
+        Email: form.email,
+        email: form.email,
+        "What's the problem?": form.problem,
+        _subject: `New enquiry from ${form.name} (${form.company})`,
+        source: 'Contact page',
+        submitted: new Date().toISOString(),
+      };
+      const res = await fetch('https://formspree.io/f/xaqkjppr', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          company: form.company,
-          'Annual turnover': form.turnover,
-          trade: form.trade,
-          phone: form.phone,
-          email: form.email,
-          problem: form.problem,
-          source: 'Contact page',
-          submitted: new Date().toISOString(),
-        }),
+        body: JSON.stringify(payload),
       });
+      if (!res.ok) {
+        let detail = '';
+        try {
+          const data = await res.json();
+          detail = data && (data.error || (data.errors && JSON.stringify(data.errors))) || '';
+        } catch (_) { /* body not JSON */ }
+        throw new Error(`Formspree responded ${res.status}${detail ? ': ' + detail : ''}`);
+      }
+      if (window.fbq) window.fbq('track', 'Lead');
+      window.location.href = '/thank-you.html';
     } catch (err) {
-      console.error('Formspree error:', err);
+      console.error('Contact form submission failed:', err);
+      setSubmitError("Sorry — we couldn't send your enquiry. Please call 0208 064 0366 or email hello@inclinefinancial.co.uk.");
+      setSubmitting(false);
     }
-    if (window.fbq) window.fbq('track', 'Lead');
-    window.location.href = '/thank-you.html';
   };
 
   return (
@@ -3757,10 +3775,13 @@ function ContactPage() {
                 <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="Tell us what's going on with your finances right now." />
               </div>
               <div className="full">
-                <button type="submit" className="btn btn-primary lg form-submit">
-                  Book my free scoping call
-                  <Icon name="arrow-right" size={14} stroke={2} />
+                <button type="submit" className="btn btn-primary lg form-submit" disabled={submitting}>
+                  {submitting ? 'Sending…' : 'Book my free scoping call'}
+                  {!submitting && <Icon name="arrow-right" size={14} stroke={2} />}
                 </button>
+                {submitError && (
+                  <p role="alert" style={{marginTop:12, fontSize:14, color:'#b00020', textAlign:'center'}}>{submitError}</p>
+                )}
                 <p style={{marginTop:12, fontSize:13, color:'var(--body-gray)', textAlign:'center'}}>We come back to every enquiry within one working hour.</p>
               </div>
             </form>
