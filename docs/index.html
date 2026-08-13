@@ -3627,7 +3627,6 @@ function ContactPage() {
   });
   const [errors, setErrors] = React.useState({});
   const [submitting, setSubmitting] = React.useState(false);
-  const [submitError, setSubmitError] = React.useState(null);
   const set = (k, v) => { setForm({ ...form, [k]: v }); if (errors[k]) setErrors({ ...errors, [k]: null }); };
 
   const validate = () => {
@@ -3640,46 +3639,17 @@ function ContactPage() {
     return e;
   };
 
-  const submit = async (ev) => {
-    ev.preventDefault();
-    if (submitting) return;
+  const submit = (ev) => {
+    if (submitting) { ev.preventDefault(); return; }
     const e = validate();
-    if (Object.keys(e).length) { setErrors(e); return; }
-    setSubmitError(null);
-    setSubmitting(true);
-    try {
-      const payload = {
-        Name: form.name,
-        Company: form.company,
-        Turnover: form.turnover || '(not provided)',
-        Trade: form.trade || '(not provided)',
-        Phone: form.phone,
-        email: form.email,
-        Message: form.problem,
-      };
-      const res = await fetch('https://formspree.io/f/xaqkjppr', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) {
-        let detail = '';
-        try {
-          const data = await res.json();
-          detail = data && (data.error || (data.errors && JSON.stringify(data.errors))) || '';
-        } catch (_) { /* body not JSON */ }
-        throw new Error(`Formspree responded ${res.status}${detail ? ': ' + detail : ''}`);
-      }
-      if (window.fbq) window.fbq('track', 'Lead');
-      window.location.href = '/thank-you.html';
-    } catch (err) {
-      console.error('Contact form submission failed:', err);
-      setSubmitError("Sorry — we couldn't send your enquiry. Please call 0208 064 0366 or email hello@inclinefinancial.co.uk.");
-      setSubmitting(false);
+    if (Object.keys(e).length) {
+      ev.preventDefault();
+      setErrors(e);
+      return;
     }
+    if (window.fbq) window.fbq('track', 'Lead');
+    setSubmitting(true);
+    // No preventDefault — let the browser POST natively to Formspree.
   };
 
   return (
@@ -3724,20 +3694,28 @@ function ContactPage() {
             <h2 className="form-heading">Or send us the details</h2>
             <p className="form-sub">A few quick details so we can prepare for the call.</p>
 
-            <form className="form" onSubmit={submit} noValidate>
+            <form
+              className="form"
+              action="https://formspree.io/f/xaqkjppr"
+              method="POST"
+              onSubmit={submit}
+              noValidate
+            >
+              <input type="hidden" name="_next" value="https://inclinefinancial.co.uk/thank-you.html" />
+              <input type="hidden" name="_subject" value="New enquiry — Incline Financial website" />
               <div className={"field full" + (errors.name ? ' error' : '')}>
                 <label>Name</label>
-                <input value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Your name" />
+                <input name="name" value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Your name" />
                 {errors.name && <div className="err">{errors.name}</div>}
               </div>
               <div className={"field full" + (errors.company ? ' error' : '')}>
                 <label>Company</label>
-                <input value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Company name" />
+                <input name="company" value={form.company} onChange={(e) => set('company', e.target.value)} placeholder="Company name" />
                 {errors.company && <div className="err">{errors.company}</div>}
               </div>
               <div className="field full">
                 <label>Turnover</label>
-                <select value={form.turnover} onChange={(e) => set('turnover', e.target.value)}>
+                <select name="turnover" value={form.turnover} onChange={(e) => set('turnover', e.target.value)}>
                   <option value="">Select a range</option>
                   <option>Under £500k</option>
                   <option>£500k – £1m</option>
@@ -3748,7 +3726,7 @@ function ContactPage() {
               </div>
               <div className="field full">
                 <label>Trade</label>
-                <select value={form.trade} onChange={(e) => set('trade', e.target.value)}>
+                <select name="trade" value={form.trade} onChange={(e) => set('trade', e.target.value)}>
                   <option value="">Select your trade</option>
                   <option>Groundworks / Civils</option>
                   <option>Electrical</option>
@@ -3761,26 +3739,23 @@ function ContactPage() {
               </div>
               <div className={"field" + (errors.phone ? ' error' : '')}>
                 <label>Phone</label>
-                <input type="tel" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
+                <input type="tel" name="phone" value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="Your phone number" />
                 {errors.phone && <div className="err">{errors.phone}</div>}
               </div>
               <div className={"field" + (errors.email ? ' error' : '')}>
                 <label>Email</label>
-                <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
+                <input type="email" name="email" value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="you@company.co.uk" />
                 {errors.email && <div className="err">{errors.email}</div>}
               </div>
               <div className="field full">
                 <label>What&rsquo;s the problem?</label>
-                <textarea value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="Tell us what's going on with your finances right now." />
+                <textarea name="message" value={form.problem} onChange={(e) => set('problem', e.target.value)} placeholder="Tell us what's going on with your finances right now." />
               </div>
               <div className="full">
                 <button type="submit" className="btn btn-primary lg form-submit" disabled={submitting}>
                   {submitting ? 'Sending…' : 'Book my free scoping call'}
                   {!submitting && <Icon name="arrow-right" size={14} stroke={2} />}
                 </button>
-                {submitError && (
-                  <p role="alert" style={{marginTop:12, fontSize:14, color:'#b00020', textAlign:'center'}}>{submitError}</p>
-                )}
                 <p style={{marginTop:12, fontSize:13, color:'var(--body-gray)', textAlign:'center'}}>We come back to every enquiry within one working hour.</p>
               </div>
             </form>
