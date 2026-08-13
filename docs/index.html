@@ -3651,19 +3651,18 @@ function ContactPage() {
       const payload = {
         Name: form.name,
         Company: form.company,
-        'Annual turnover': form.turnover || '(not provided)',
+        Turnover: form.turnover || '(not provided)',
         Trade: form.trade || '(not provided)',
         Phone: form.phone,
-        Email: form.email,
         email: form.email,
-        "What's the problem?": form.problem,
-        _subject: `New enquiry from ${form.name} (${form.company})`,
-        source: 'Contact page',
-        submitted: new Date().toISOString(),
+        Message: form.problem,
       };
       const res = await fetch('https://formspree.io/f/xaqkjppr', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
